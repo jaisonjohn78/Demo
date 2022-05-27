@@ -1,3 +1,15 @@
+<?php
+include '../../config.php';
+
+if(!isset($_SESSION["id"])){
+  header("Location: ../../index/login.php");
+}
+
+$id = $_SESSION['id']->id;
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

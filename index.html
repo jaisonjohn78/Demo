@@ -7,13 +7,13 @@
     <meta name="author" content="Mosaddek">
 
     <!--favicon icon-->
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <!-- <link rel="icon" type="image/png" href="assets/img/logo.png"> -->
 
     <title> Landing Page </title>
 
     <!--google fonts-->
-    <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
 
     <!--common style-->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,6 +25,11 @@
 
     <!--custom css-->
     <link href="assets/css/main.css" rel="stylesheet">
+    <style>
+        .navbar-brand {
+            margin-right: 0px !important;
+        }
+    </style>
 
 </head>
 <body class="dark-theme">
@@ -36,9 +41,10 @@
             <div class="col-12">
                 <nav class="navbar navbar-expand-md" id="mainNav">
                     <!--logo-->
-                    <a class="navbar-brand mr-5" href="#">
-                        <img class="" src="assets/img/logo.png" srcset="assets/img/logo@2x.png 2x" alt=""/>
+                    <a class="navbar-brand" href="#">
+                        <img class="" src="assets/img/logo.png" width="50" alt=""/>
                     </a>
+                    <h5 class="mr-5" id="logo">Peradot</h5>
                     <!--logo-->
 
                     <!--responsive toggle icon-->
@@ -71,11 +77,11 @@
                                 <a class="nav-link js-scroll-trigger" href="#faq">FAQ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger btn-pill buy-token btn mr-2" href="index/login.html">Login</a>
+                                <a class="nav-link js-scroll-trigger btn-pill buy-token btn mr-2" href="index/login.php">Login</a>
                             </li>
                         
                             <li class="nav-item">
-                                <a class="nav-link btn btn-pill buy-token js-scroll-trigger" href="index/login.html">Register</a>
+                                <a class="nav-link btn btn-pill buy-token js-scroll-trigger" href="index/login.php">Register</a>
                             </li>
                         </ul>
                     </div>
