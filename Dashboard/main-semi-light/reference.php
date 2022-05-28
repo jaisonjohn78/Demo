@@ -1,7 +1,15 @@
 <?php 
 include '../../config.php';
 
-    $ref_code=mysqli_query($con,"SELECT reference_id from users where id = 1");
+session_start();
+
+if(!isset($_SESSION["id"])){
+  header("Location: ../../index/login.php");
+}
+
+$id = $_SESSION['id'];
+
+    $ref_code=mysqli_query($con,"SELECT reference_id from users where id = $id");
     $ref_result =mysqli_fetch_assoc($ref_code);
     $ref_code = $ref_result['reference_id'];
     $msg = '';
@@ -11,11 +19,11 @@ include '../../config.php';
         $today = date("F j, Y, g:i a"); 
 
         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
-        $sql1 = mysqli_query($con,"SELECT * from reference WHERE user_id = 1 AND reference_id = '$reference_code'");
+        $sql1 = mysqli_query($con,"SELECT * from reference WHERE user_id = $id AND reference_id = '$reference_code'");
         if(mysqli_num_rows($sql)){
             if(mysqli_num_rows($sql1) == 0){
               if($reference_code != $ref_code){
-                mysqli_query($con,"INSERT INTO `reference`(`user_id`,`reference_id`,`timestamp`) VALUES (1,'$reference_code','$today')");
+                mysqli_query($con,"INSERT INTO `reference`(`user_id`,`reference_id`,`timestamp`) VALUES ('$id','$reference_code','$today')");
               }
               else{
                 $msg = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
@@ -79,28 +87,23 @@ include '../../config.php';
         <div id="loader"></div>
 
         <header class="main-header">
-            <div class="d-flex align-items-center logo-box justify-content-start">
-              <!-- Logo -->
-              <a href="index.html" class="logo">
-                <!-- logo-->
-                <div class="logo-mini w-30">
-                  <span class="light-logo"
-                    ><img src="../images/logo-letter.png" alt="logo"
-                  /></span>
-                  <span class="dark-logo"
-                    ><img src="../images/logo-letter.png" alt="logo"
-                  /></span>
-                </div>
-                <div class="logo-lg">
-                  <span class="light-logo"
-                    ><img src="../images/logo-dark-text.png" alt="logo"
-                  /></span>
-                  <span class="dark-logo"
-                    ><img src="../images/logo-light-text.png" alt="logo"
-                  /></span>
-                </div>
-              </a>
+        <div class="d-flex align-items-center logo-box justify-content-start">
+          <!-- Logo -->
+          <a href="index.php" class="logo">
+            <!-- logo-->
+            <div class="logo-mini w-50 m-auto">
+              <span class="light-logo"
+                ><img src="../images/logo.png" alt="logo"
+              /></span>
+              <span class="dark-logo"
+                ><img src="../images/logo.png" alt="logo"
+              /></span>
             </div>
+            <div class="logo-lg align-items-center m-auto ">
+              <h3 class="title text-bold text-center" style="font-family: 'Montserrat' sans-serif !important;">Peradot</h3>
+            </div>
+          </a>
+        </div>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top">
               <!-- Sidebar toggle button-->
@@ -165,7 +168,7 @@ include '../../config.php';
                           ><i class="ti-settings text-muted me-2"></i> Settings</a
                         >
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"
+                        <a class="dropdown-item" href="../../index/logout.php"
                           ><i class="ti-lock text-muted me-2"></i> Logout</a
                         >
                       </li>

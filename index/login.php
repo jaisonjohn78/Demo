@@ -162,7 +162,6 @@ if(isset($_POST['sign-in']))
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-in">
                         <h2 class="register_login">SIGN IN</h2>
-						<h2><?php echo $_SESSION["id"];  ?></h2>
                         <hr>
 						<form method="POST">
 						<div class="input-group">
