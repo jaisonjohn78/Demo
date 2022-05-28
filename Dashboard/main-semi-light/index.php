@@ -12,7 +12,7 @@ $id = $_SESSION['id'];
 $user_sql = mysqli_query($con,"SELECT * FROM users WHERE id = $id");
 $user_row=mysqli_fetch_assoc($user_sql);
 if($user_row['admin'] == 1){
-  header("Location: ../../index/login1.php");
+  header("Location: admin.php");
 }
 
   date_default_timezone_set("Asia/Kolkata");
@@ -102,9 +102,9 @@ input::-webkit-inner-spin-button {
       <header class="main-header">
         <div class="d-flex align-items-center logo-box justify-content-start">
           <!-- Logo -->
-          <a href="index.php" class="logo">
+          <a href="index.php" class="logo" style="text-decoration: none;">
             <!-- logo-->
-            <div class="logo-mini w-50 m-auto">
+            <div class="logo-mini w-40 m-auto">
               <span class="light-logo"
                 ><img src="../images/logo.png" alt="logo"
               /></span>
@@ -113,7 +113,7 @@ input::-webkit-inner-spin-button {
               /></span>
             </div>
             <div class="logo-lg align-items-center m-auto ">
-              <h3 class="title text-bold text-center" style="font-family: 'Montserrat' sans-serif !important;">Peradot</h3>
+              <h3 class="title text-bold text-center" style="color: white; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'">Peradot</h3>
             </div>
           </a>
         </div>
@@ -307,7 +307,7 @@ input::-webkit-inner-spin-button {
                             class="nav-link active"
                             data-bs-toggle="tab"
                             aria-expanded="false"
-                            >Summary</a
+                            >Chart</a
                           >
                         </li>
                         <li class="nav-item">
@@ -343,7 +343,7 @@ input::-webkit-inner-spin-button {
                               <div>
                                 <div class="col-12">
                                   <div class="box">
-                                    <div class="box-body">
+                                    <div class="box-body" style="display: contents;">
                                       <div class="table-responsive">
                                         <table id="example1"
                                           class="table table-bordered no-margin"
@@ -425,90 +425,7 @@ input::-webkit-inner-spin-button {
                                 </div>
                               </div>
                             </div>
-                            <div id="Overview-5" class="tab-pane">
-                              <div>
-                                <div class="col-12">
-                                  <div class="box">
-                                    <div class="box-body">
-                                      <div class="table-responsive">
-                                        <table
-                                          class="table table-bordered no-margin"
-                                        >
-                                          <thead>
-                                            <tr>
-                                              <th>Id</th>
-                                              <th>Time</th>
-                                              <th>Sent</th>
-                                              <th>Fees</th>
-                                              <th>Block Size</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550171</a
-                                                >
-                                              </td>
-                                              <td>59&nbsp;seconds ago</td>
-                                              <td>2,122</td>
-                                              <td>0.852 BTC</td>
-                                              <td>745,123</td>
-                                            </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550172</a
-                                                >
-                                              </td>
-                                              <td>10&nbsp;minutes ago</td>
-                                              <td>1,837</td>
-                                              <td>1.745 BTC</td>
-                                              <td>159,789</td>
-                                            </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550173</a
-                                                >
-                                              </td>
-                                              <td>13&nbsp;minutes ago</td>
-                                              <td>8,741</td>
-                                              <td>2.741 BTC</td>
-                                              <td>852,456</td>
-                                            </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550174</a
-                                                >
-                                              </td>
-                                              <td>21&nbsp;minutes ago</td>
-                                              <td>1,731</td>
-                                              <td>45,009 BTC</td>
-                                              <td>4.852</td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </div>
-                                    </div>
-                                    <!-- /.box-body -->
-                                  </div>
-                                  <!-- /.box -->
-                                </div>
-                              </div>
-                            </div>
+                            
                           </div>
                         </div>
                       </div>
@@ -528,7 +445,7 @@ input::-webkit-inner-spin-button {
                     >
                       <div>
                         <h5 class="no-margin fw-500"><?php echo $user_row['username'] ?></h5>
-                        <span>@<?php echo $user_row['username'] ?></span>
+                        <span><?php echo $user_row['email'] ?></span>
                       </div>
                       <div class="text-center m-0">
                         <a href="#"><i class="cc XRP me-5" title="XRP"></i></a>
@@ -541,14 +458,14 @@ input::-webkit-inner-spin-button {
                     <div class="media align-items-center p-0">
                       <div class="m-0">
                         <h4 class="no-margin fw-500">My Total Balance</h4>
-                        <h1 class="fw-500">$246,789.20</h1>
+                        <h1 class="fw-500">$<?php echo number_format((float)$user_row['amount'], 2, '.', ''); ?></h1>
                         <div class="d-flex">
                           <p class="m-0">
                             <a
                               type="button"
-                              href="#"
+                              href="payment.php"
                               class="waves-effect waves-light btn btn-rounded btn-success-light fs-14 p-1 px-3 me-2"
-                              >+3.15%</a
+                              >Ready to invest ?</a
                             >
                             <i
                               class="mdi mdi-arrow-top-right btn-rounded btn-success down_box_2"
@@ -561,32 +478,36 @@ input::-webkit-inner-spin-button {
                   </div>
                   <div class="row py-40">
                     <h4 class="fw-500 mt-5">My Space</h4>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 main_item">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 main_item">
                       <div>
                         <div class="d-flex align-items-center gap-items-1">
                           <div
-                            class="bg-danger-light rounded20 l-h-80 text-center item_box"
+                            class="bg-success-light rounded20 l-h-80 text-center item_box"
                           >
                             <i
-                              class="mdi mdi-arrow-bottom-right btn-rounded btn-danger down_box_3"
+                              class="mdi mdi-arrow-bottom-right btn-rounded btn-info down_box_3"
                             ></i>
                           </div>
                           <div>
-                            <p class="mb-0">Deposite</p>
-                            <h3 class="my-0 text-dark fw-700">$<?php echo $deposite_row['d_amount']?></h3>
+                            <p class="mb-0">Deposit</p>
+                            <h3 class="my-0 text-dark fw-700">$<?php
+                            if($deposite_row['d_amount'] == NULL){
+                              echo "0.00";
+                            }else{
+                            echo $deposite_row['d_amount'];
+                            }
+                            ?></h3>
                           </div>
                         </div>
                         <div class="row pt-10">
-                          <div
-                            class="col-xl-5 col-lg-3 col-md-4 col-sm-3"
-                          ></div>
+ 
                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                             
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 sm-pt-20">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 sm-pt-20">
                       <div>
                         <div class="d-flex align-items-center gap-items-1">
                           <div
@@ -598,7 +519,13 @@ input::-webkit-inner-spin-button {
                           </div>
                           <div>
                             <p class="mb-0">Withdraw</p>
-                            <h3 class="my-0 text-dark fw-700">$<?php echo $withdraw_row['w_amount']?></h3>
+                            <h3 class="my-0 text-dark fw-700">$<?php 
+                            if($withdraw_row['w_amount'] == NULL){
+                              echo "0.00";
+                            }else{
+                            echo $withdraw_row['w_amount'];
+                            }
+                            ?></h3>
                           </div>
                         </div>
                         <div class="row pt-10">
@@ -732,7 +659,7 @@ input::-webkit-inner-spin-button {
           </ul>
         </div>
         &copy; 2022
-        <a href="">Multipurpose</a>.
+        <a href="">Peradot Pvt Ltd</a>.
         All Rights Reserved.
       </footer>
 

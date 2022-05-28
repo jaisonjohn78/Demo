@@ -30,9 +30,9 @@
         <header class="main-header">
         <div class="d-flex align-items-center logo-box justify-content-start">
           <!-- Logo -->
-          <a href="index.php" class="logo">
+          <a href="index.php" class="logo" style="text-decoration: none;">
             <!-- logo-->
-            <div class="logo-mini w-50 m-auto">
+            <div class="logo-mini w-40 m-auto">
               <span class="light-logo"
                 ><img src="../images/logo.png" alt="logo"
               /></span>
@@ -41,7 +41,7 @@
               /></span>
             </div>
             <div class="logo-lg align-items-center m-auto ">
-              <h3 class="title text-bold text-center" style="font-family: 'Montserrat' sans-serif !important;">Peradot</h3>
+              <h3 class="title text-bold text-center" style="color: white; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'">Peradot</h3>
             </div>
           </a>
         </div>
@@ -268,7 +268,7 @@
                 </ul>
             </div>
             &copy; 2022
-            <a href="">Multipurpose</a>.
+            <a href="">Peradot Pvt Ltd</a>.
             All Rights Reserved.
         </footer>
 
