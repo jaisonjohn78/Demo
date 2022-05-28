@@ -1,3 +1,15 @@
+<?php
+include '../../config.php';
+include '../../function.php';
+
+
+if(!isset($_SESSION["id"])){
+  header("Location: ../../index/login.php");
+}
+
+$id = $_SESSION['id'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -241,31 +253,46 @@
                                             
                                             <div class="">
                                             <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered table-hover" width="100vw !important">
+                                                    <table id="example" class="table table-striped table-bordered table-hover" width="100vw !important">
                                                         <thead>
                                                             <tr>
-                                                                <th>#</th>
-                                                                <th>Date</th>
+                                                                <th>ID</th>
+                                                                <th>User id</th>
+                                                                <th>Image</th>
                                                                 <th>Amount</th>
-                                                                <th>Status</th>
+                                                                <th>Transition Detail</th>
+                                                                <th>Timestamp</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                        <?php
+                                                        // $user_id= $_SESSION["user_id"];
+                                                        $res=mysqli_query($con,"SELECT * FROM deposite");                                    // die();
+                                                        $i=1;
+                                                        while($row=mysqli_fetch_assoc($res)){
+                                                        
+                                                    ?>
                                                             <tr>
-                                                                <td>1</td>
-                                                                <td>01/01/2019</td>
-                                                                <td>$56,456.11</td>
-                                                                <td>Pending</td>
+                                                            <td><?php echo $i++ ?></td>
+                                                            <td><?php echo $row['user_id']?></td>
+                                                            <?php $link = 'uploads/'.$row["image_path"] ?>
+                                                            <td><a style="font-size: 11px" href="<?php echo $link ?>">Open Image</a></td>
+                                                            <td><?php echo $row['d_amount']?></td>
+                                                            <td><?php echo $row['status']?></td>
+                                                            <td><?php echo $row['timestamp']?></td>
                                                                 <td>
-                                                                    <a href="#" class="btn btn-primary btn-md">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a>
-                                                                    <a href="#" class="btn btn-danger btn-md">
-                                                                        <i class="fa fa-trash"></i>
-                                                                    </a>
+                                                                  <?php
+                                                                    echo "<a href='./edit.php?user_id=".$row['user_id']."' class='btn btn-primary btn-md'>
+                                                                        <i class='fa fa-eye'></i>
+                                                                    </a>";
+                                                                    echo "<a href='#' class='btn btn-danger btn-md'>
+                                                                        <i class='fa fa-trash'></i>
+                                                                    </a>"
+                                                                    ?>
                                                                 </td>
                                                             </tr>
+                                                            <?php } ?>
                                                         </tbody>
                                                     </table>
                                             </div>

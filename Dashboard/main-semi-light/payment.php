@@ -1,3 +1,15 @@
+<?php
+include '../../config.php';
+include '../../function.php';
+
+
+if(!isset($_SESSION["id"])){
+  header("Location: ../../index/login.php");
+}
+
+$id = $_SESSION['id'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +33,8 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/skin_color.css" />
     <link rel="stylesheet" href="css/custom2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
@@ -216,9 +230,12 @@
                                         </div>
                                         <div class="card-body">
                                             <h2>Upload Your Transaction</h2>
+                                            <form action="upload.php" method="post" enctype="multipart/form-data">
                                             <div class="d-flex justify-content-between bg-light rounded p-40 mx-10 my-15">
-                                                <input type="file" onchange="loadFile(event)" />
+                                                <input type="file" name="file" onchange="loadFile(event)" />
+                                                <input type="submit" name="submit" value="Upload">
                                             </div>
+</form>
                                             <h5 class="my-3 text-muted">Upload the Screenshot of your Transaction once we verify we'll credit the balance into your account</h5>
                                             <img id="output"/>
                                             <hr>
@@ -252,9 +269,42 @@
                                </div>
                             </div>
                 </section>
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>User id</th>
+                                                            <th>Image</th>
+                                                            <th>Amount</th>
+                                                            <th>Transition Detail</th>
+                                                            <th>Timestamp</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php
+                                                        // $user_id= $_SESSION["user_id"];
+                                                        $res=mysqli_query($con,"SELECT * FROM deposite WHERE user_id = '$id'");                                    // die();
+                                                        $i=1;
+                                                        while($row=mysqli_fetch_assoc($res)){
+                                                        
+                                                    ?>
+                                                        <tr>
+                                                            <td><?php echo $i++ ?></td>
+                                                            <td><?php echo $row['user_id']?></td>
+                                                            <?php $link = 'uploads/'.$row["image_path"] ?>
+                                                            <td><a style="font-size: 11px" href="<?php echo $link ?>">Open Image</a></td>
+                                                            <td><?php echo $row['d_amount']?></td>
+                                                            <td><?php echo $row['status']?></td>
+                                                            <td><?php echo $row['timestamp']?></td>
+                                                        </tr>
+                                                       <?php } ?>
+                                                    </tbody>
+                                                  
+                                                </table>
                 <!-- /.content -->
             </div>
         </div>
+
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right d-none d-sm-inline-block">
@@ -303,6 +353,14 @@
         <script src="js/template.js"></script>
         <script src="js/pages/dashboard2.js"></script>
         <script src="js/pages/dashboard2-chart.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+    $('#example').DataTable({searching: false});
+});
+    </script>
 </body>
 
 </html>
