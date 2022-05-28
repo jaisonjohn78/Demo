@@ -1,5 +1,19 @@
 <?php
 include '../../config.php';
+include '../../function.php';
+
+
+if(!isset($_SESSION["id"])){
+  header("Location: ../../index/login.php");
+}
+
+$id = $_SESSION['id'];
+
+$user_sql = mysqli_query($con,"SELECT * FROM users WHERE id = $id");
+$user_row=mysqli_fetch_assoc($user_sql);
+if($user_row['admin'] == 1){
+  header("Location: ../../index/login1.php");
+}
 
   date_default_timezone_set("Asia/Kolkata");
 	$today = date("F j, Y, g:i a"); 
@@ -34,6 +48,11 @@ include '../../config.php';
   $sumup = intval($btc) + intval($usdt) + intval($eth) + intval($xrp) + intval($ltc) + intval($adcn);
   $sumup = substr($sumup, 0, 3);
 // } 
+  $deposite_sql = mysqli_query($con,"SELECT SUM(d_amount) AS d_amount FROM deposite WHERE user_id = $id");
+  $deposite_row=mysqli_fetch_assoc($deposite_sql);
+
+  $withdraw_sql = mysqli_query($con,"SELECT SUM(w_amount) AS w_amount FROM withdraw WHERE user_id = $id");
+  $withdraw_row=mysqli_fetch_assoc($withdraw_sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +81,8 @@ include '../../config.php';
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/skin_color.css" />
     <link rel="stylesheet" href="css/custom2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
     <style>
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -160,7 +181,7 @@ input::-webkit-inner-spin-button {
                       ><i class="ti-settings text-muted me-2"></i> Settings</a
                     >
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"
+                    <a class="dropdown-item" href="../../index/logout.php"
                       ><i class="ti-lock text-muted me-2"></i> Logout</a
                     >
                   </li>
@@ -180,7 +201,7 @@ input::-webkit-inner-spin-button {
             
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="active">
-                  <a href="index.html">
+                  <a href="index.php">
                     <i data-feather="monitor"></i>
                     <span>Dashboard</span>
                     <span class="pull-right-container">
@@ -191,7 +212,7 @@ input::-webkit-inner-spin-button {
                 <li class="">
                   <a href="payment.php">
                     <i data-feather="bar-chart-2"></i>
-                    <span>Other Page</span>
+                    <span>Transactions</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -324,79 +345,34 @@ input::-webkit-inner-spin-button {
                                   <div class="box">
                                     <div class="box-body">
                                       <div class="table-responsive">
-                                        <table
+                                        <table id="example1"
                                           class="table table-bordered no-margin"
                                         >
                                           <thead>
                                             <tr>
                                               <th>Id</th>
-                                              <th>Time</th>
-                                              <th>Transactions</th>
-                                              <th>Sent</th>
-                                              <th>Fees</th>
-                                              <th>Block Size</th>
+                                              <th>User Id</th>
+                                              <th>Deposite</th>
+                                              <th>Withdraw</th>
+                                              <!-- <th>Fees</th>
+                                              <th>Block Size</th> -->
                                             </tr>
                                           </thead>
                                           <tbody>
+                                          <?php
+                                                        // $user_id= $_SESSION["user_id"];
+                                                        $res=mysqli_query($con,"SELECT deposite.user_id,deposite.d_amount, withdraw.w_amount FROM deposite INNER JOIN withdraw ON deposite.user_id = withdraw.user_id");                                    // die();
+                                                        $i=1;
+                                                        while($row=mysqli_fetch_assoc($res)){
+                                                        
+                                                    ?>
                                             <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >8526369</a
-                                                >
-                                              </td>
-                                              <td>60&nbsp;seconds ago</td>
-                                              <td>2,122</td>
-                                              <td>22,819.638 BTC</td>
-                                              <td>1.496 BTC</td>
-                                              <td>975,573</td>
+                                              <td><?php echo $i++?></td>
+                                              <td><?php echo $row['user_id']?></td>
+                                              <td><?php echo $row['d_amount']?></td>
+                                              <td><?php echo $row['w_amount']?></td>
                                             </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >45687</a
-                                                >
-                                              </td>
-                                              <td>45&nbsp;minutes ago</td>
-                                              <td>1,837</td>
-                                              <td>8,410.154 BTC</td>
-                                              <td>0.982 BTC</td>
-                                              <td>950,027</td>
-                                            </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >789654</a
-                                                >
-                                              </td>
-                                              <td>80&nbsp;minutes ago</td>
-                                              <td>1,280</td>
-                                              <td>15,541.708 BTC</td>
-                                              <td>1.855 BTC</td>
-                                              <td>974,440</td>
-                                            </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >1236547</a
-                                                >
-                                              </td>
-                                              <td>45&nbsp;minutes ago</td>
-                                              <td>1,731</td>
-                                              <td>18,009.855 BTC</td>
-                                              <td>1.963 BTC</td>
-                                              <td>975,484</td>
-                                            </tr>
+                                            <?php } ?>
                                           </tbody>
                                         </table>
                                       </div>
@@ -413,74 +389,32 @@ input::-webkit-inner-spin-button {
                                   <div class="box">
                                     <div class="box-body">
                                       <div class="table-responsive">
-                                        <table
+                                        <table id="example"
                                           class="table table-bordered no-margin"
                                         >
                                           <thead>
                                             <tr>
                                               <th>Id</th>
-                                              <th>Time</th>
-                                              <th>Sent</th>
-                                              <th>Fees</th>
-                                              <th>Block Size</th>
+                                              <th>User Id</th>
+                                              <th>Deposite</th>
+                                              <th>Withdraw</th>
                                             </tr>
                                           </thead>
                                           <tbody>
+                                          <?php
+                                                        // $user_id= $_SESSION["user_id"];
+                                                        $result=mysqli_query($con,"SELECT deposite.user_id,deposite.d_amount, withdraw.w_amount FROM deposite INNER JOIN withdraw ON deposite.user_id = withdraw.user_id HAVING user_id = $id");                                    // die();
+                                                        $i=1;
+                                                        while($rows=mysqli_fetch_assoc($result)){
+                                                        
+                                                    ?>
                                             <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550171</a
-                                                >
-                                              </td>
-                                              <td>59&nbsp;seconds ago</td>
-                                              <td>2,122</td>
-                                              <td>2.496 USD</td>
-                                              <td>456,123</td>
+                                            <td><?php echo $i++?></td>
+                                              <td><?php echo $rows['user_id']?></td>
+                                              <td><?php echo $rows['d_amount']?></td>
+                                              <td><?php echo $rows['w_amount']?></td>
                                             </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550172</a
-                                                >
-                                              </td>
-                                              <td>10&nbsp;minutes ago</td>
-                                              <td>1,837</td>
-                                              <td>0.741 USD</td>
-                                              <td>963,987</td>
-                                            </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550173</a
-                                                >
-                                              </td>
-                                              <td>13&nbsp;minutes ago</td>
-                                              <td>1,280</td>
-                                              <td>2.741 USD</td>
-                                              <td>456,147</td>
-                                            </tr>
-
-                                            <tr>
-                                              <td>
-                                                <a
-                                                  href="#"
-                                                  class="hover-primary"
-                                                  >550174</a
-                                                >
-                                              </td>
-                                              <td>21&nbsp;minutes ago</td>
-                                              <td>1,731</td>
-                                              <td>4.852 USD</td>
-                                              <td>852,484</td>
-                                            </tr>
+                                            <?php } ?>
                                           </tbody>
                                         </table>
                                       </div>
@@ -593,8 +527,8 @@ input::-webkit-inner-spin-button {
                       class="media align-items-center p-0 justify-content-end"
                     >
                       <div>
-                        <h5 class="no-margin fw-500">Jaison</h5>
-                        <span>@Jaison</span>
+                        <h5 class="no-margin fw-500"><?php echo $user_row['username'] ?></h5>
+                        <span>@<?php echo $user_row['username'] ?></span>
                       </div>
                       <div class="text-center m-0">
                         <a href="#"><i class="cc XRP me-5" title="XRP"></i></a>
@@ -638,8 +572,8 @@ input::-webkit-inner-spin-button {
                             ></i>
                           </div>
                           <div>
-                            <p class="mb-0">Investment</p>
-                            <h3 class="my-0 text-dark fw-700">18.5k</h3>
+                            <p class="mb-0">Deposite</p>
+                            <h3 class="my-0 text-dark fw-700">$<?php echo $deposite_row['d_amount']?></h3>
                           </div>
                         </div>
                         <div class="row pt-10">
@@ -663,8 +597,8 @@ input::-webkit-inner-spin-button {
                             ></i>
                           </div>
                           <div>
-                            <p class="mb-0">Expense</p>
-                            <h3 class="my-0 text-dark fw-700">12.8k</h3>
+                            <p class="mb-0">Withdraw</p>
+                            <h3 class="my-0 text-dark fw-700">$<?php echo $withdraw_row['w_amount']?></h3>
                           </div>
                         </div>
                         <div class="row pt-10">
@@ -872,5 +806,17 @@ input::-webkit-inner-spin-button {
     <script src="js/template.js"></script>
     <script src="js/pages/dashboard2.js"></script>
     <script src="js/pages/dashboard2-chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+    $('#example').DataTable();
+});
+
+$(document).ready(function () {
+    $('#example1').DataTable();
+});
+    </script>
   </body>
 </html>

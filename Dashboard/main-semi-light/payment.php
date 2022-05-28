@@ -28,28 +28,23 @@
         <div id="loader"></div>
 
         <header class="main-header">
-            <div class="d-flex align-items-center logo-box justify-content-start">
-              <!-- Logo -->
-              <a href="index.html" class="logo">
-                <!-- logo-->
-                <div class="logo-mini w-30">
-                  <span class="light-logo"
-                    ><img src="../images/logo-letter.png" alt="logo"
-                  /></span>
-                  <span class="dark-logo"
-                    ><img src="../images/logo-letter.png" alt="logo"
-                  /></span>
-                </div>
-                <div class="logo-lg">
-                  <span class="light-logo"
-                    ><img src="../images/logo-dark-text.png" alt="logo"
-                  /></span>
-                  <span class="dark-logo"
-                    ><img src="../images/logo-light-text.png" alt="logo"
-                  /></span>
-                </div>
-              </a>
+        <div class="d-flex align-items-center logo-box justify-content-start">
+          <!-- Logo -->
+          <a href="index.php" class="logo">
+            <!-- logo-->
+            <div class="logo-mini w-50 m-auto">
+              <span class="light-logo"
+                ><img src="../images/logo.png" alt="logo"
+              /></span>
+              <span class="dark-logo"
+                ><img src="../images/logo.png" alt="logo"
+              /></span>
             </div>
+            <div class="logo-lg align-items-center m-auto ">
+              <h3 class="title text-bold text-center" style="font-family: 'Montserrat' sans-serif !important;">Peradot</h3>
+            </div>
+          </a>
+        </div>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top">
               <!-- Sidebar toggle button-->
@@ -114,7 +109,7 @@
                           ><i class="ti-settings text-muted me-2"></i> Settings</a
                         >
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"
+                        <a class="dropdown-item" href="../../index/logout.php"
                           ><i class="ti-lock text-muted me-2"></i> Logout</a
                         >
                       </li>
@@ -153,7 +148,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#">
+                                <a href="reference.php">
                                 <i data-feather="share-2" ></i>
                                     <span>Reference</span>
                                     <span class="pull-right-container">
