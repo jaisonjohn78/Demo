@@ -1,3 +1,38 @@
+<?php 
+include '../../config.php';
+
+    $ref_code=mysqli_query($con,"SELECT reference_id from users where id = 1");
+    $ref_result =mysqli_fetch_assoc($ref_code);
+    $ref_code = $ref_result['reference_id'];
+    $msg = '';
+
+    if(isset($_POST['refer'])){
+        $reference_code = $_POST['reference_code'];
+        $today = date("F j, Y, g:i a"); 
+
+        $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
+        $sql1 = mysqli_query($con,"SELECT * from reference WHERE user_id = 1 AND reference_id = '$reference_code'");
+        if(mysqli_num_rows($sql)){
+            if(mysqli_num_rows($sql1) == 0){
+              if($reference_code != $ref_code){
+                mysqli_query($con,"INSERT INTO `reference`(`user_id`,`reference_id`,`timestamp`) VALUES (1,'$reference_code','$today')");
+              }
+              else{
+                $msg = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
+                text-align:center;'>You can not use your reference code</p>";
+              }
+        }
+        else{
+            $msg = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
+            text-align:center;'>Already exist</p>";
+        }
+    }
+        else{
+            $msg ="<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
+            text-align:center;'>Please Enter Valid Reference Code!!!</p>";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +56,22 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/skin_color.css" />
     <link rel="stylesheet" href="css/custom2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <style>
+      #code {
+        cursor: pointer;
+      }
+      @media only screen and (max-width: 600px) {
+
+        .row {
+          --bs-gutter-x: 0 !important;
+          margin-right: -25px !important;
+          margin-left: -15px !important;
+        }
+        
+      }
+    </style>
 </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
@@ -135,7 +186,7 @@
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
                             <li class="">
-                                <a href="index.html">
+                                <a href="index.php">
                                     <i data-feather="monitor"></i>
                                     <span>Dashboard</span>
                                     <span class="pull-right-container">
@@ -143,8 +194,8 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="active">
-                                <a href="#">
+                            <li class="">
+                                <a href="payment.php">
                                     <i data-feather="bar-chart-2"></i>
                                     <span>Transactions</span>
                                     <span class="pull-right-container">
@@ -152,6 +203,15 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="active">
+                              <a href="reference.php">
+                                  <i data-feather="share-2" ></i>
+                                  <span>Reference</span>
+                                  <span class="pull-right-container">
+                                      <i class="fa fa-angle-right pull-right"></i>
+                                  </span>
+                              </a>
+                          </li>
                         </ul>
 
                         <div class="sidebar-widgets mt-5">
@@ -188,60 +248,82 @@
                         <div class="col-xl-12">
                             <div class="row">
                                 <div class="col-xl-6">
-                                    <div class="d-flex top_box">
-                                        <h3 class="m-0">Total Amount</h3>
+                                    <div class="d-flex top_box justify-content-center text-center my-2">
+                                        <h3 class="m-0">Your Reference Code: </h3>
 
                                     </div>
                                 </div>
                                 <div class="col-xl-6 text-center my-2">
 
-                                    <h1 class="fw-500 m-0">$56,456.11<i
-                                            class="mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box">
-                                        </i></h1>
+                                <h1 class="fw-500 m-0" id="code" ><?php echo $ref_code ?>
+                                <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box">
+                                        </i>
+                                      
+                                </h1>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mt-55">
-                            <div class="col-xl-12">
-                               <div class="row">
-                                   <div class="col-xl-6">
-                                    <div class="card vh-auto">
+                            <div class="col-xl-12 col-sm-12">
+                               <div class="row justify-content-center">
+                                   <div class="col-xl-6 col-sm-12">
+                                   <div class="card vh-auto">
                                         <div class="card-header">
-                                            <h1 class="card-title text-dark fw-500">Deposit</h1>
+                                            <h1 class="card-title text-dark fw-500">Refered Users</h1>
                                         </div>
-                                        <div class="card-body">
-                                            <h2>Upload Your Transaction</h2>
-                                            <div class="d-flex justify-content-between bg-light rounded p-40 mx-10 my-15">
-                                                <input type="file" onchange="loadFile(event)" />
-                                            </div>
-                                            <h5 class="my-3 text-muted">Upload the Screenshot of your Transaction once we verify we'll credit the balance into your account</h5>
-                                            <img id="output"/>
-                                            <hr>
-                                            <h3 class="text-center">How to find Metamask Address</h3>
-                                            <img src="../images/guide/metamask-02.png" >
-                                            <img src="../images/guide/metamask-03.png" >
+                                        <div class="card-body" style="overflow: scroll;">
+                                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>User id</th>
+                                                            <th>Reference Code</th>
+                                                            <th>Done</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php
+                                                        // $user_id= $_SESSION["user_id"];
+                                                        $res=mysqli_query($con,"SELECT * FROM reference WHERE user_id = 1");                                    // die();
+                                                        $i=1;
+                                                        while($row=mysqli_fetch_assoc($res)){
+                                                        
+                                                    ?>
+                                                        <tr>
+                                                            <td><?php echo $i++ ?></td>
+                                                            <td><?php echo $row['user_id']?></td>
+                                                            <td><?php echo $row['reference_id']?></td>
+                                                            <td><i
+                                            class="mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box">
+                                        </i></td>
+                                                        </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                  
+                                                </table>
                                         </div>
+                                        
                                     </div>
                                     </div>
                                     <div class="col-xl-6">
                                     <div class="card vh-auto">
-                                        <div class="card-header">
-                                            <h1 class="card-title text-dark fw-500">Withdraw</h1>
+                                    <div class="card-header">
+                                            <h1 class="card-title text-dark fw-500">Reference Code </h1>
                                         </div>
+                                        <form action="" method = "post">
                                         <div class="card-body">
-                                            <h2>Enter Your Metamask Address</h2>
+                                            <h5>Enter referral code</h5>
+                                            <h4 class="msg"><?php echo $msg ?></h4>
                                             <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
-                                                <input type="text" class="form-control" placeholder="Meta Mask Address">
-                                                <input type="submit" class="btn btn-primary" value="Withdraw">
+                                                <input type="text" class="form-control" name="reference_code"placeholder="referral code">
+                                                <input type="submit" class="btn btn-primary" name="refer" value="submit">
                                             </div>
                                             <hr>
-                                            <h3 class="text-center">How to find Metamask Address</h3>
-                                            <img src="../images/guide/metamask-02.png" >
-                                            <img src="../images/guide/metamask-03.png" >
 
                 
                                         </div>
+                                        </form>
                                     </div>
                                     
                                    </div>
@@ -278,15 +360,12 @@
         <!-- Page Content overlay -->
 
         <!-- Custom JS -->
+  
         <script>
-            var loadFile = function(event) {
-              var output = document.getElementById('output');
-              output.src = URL.createObjectURL(event.target.files[0]);
-              output.onload = function() {
-                URL.revokeObjectURL(output.src) // free memory
-              }
-            };
-        </script>
+		    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+        }
+	      </script>
         <!-- Vendor JS -->
         <script src="js/vendors.min.js"></script>
         <script src="js/pages/chat-popup.js"></script>
@@ -299,6 +378,14 @@
         <script src="js/template.js"></script>
         <script src="js/pages/dashboard2.js"></script>
         <script src="js/pages/dashboard2-chart.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+    $('#example').DataTable();
+});
+    </script>
 </body>
 
 </html>

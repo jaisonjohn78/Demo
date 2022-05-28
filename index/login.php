@@ -14,6 +14,17 @@ if(isset($_POST['sign-up']))
 	$phone = mysqli_real_escape_string($con, $_POST['phone']);
 	$password = mysqli_real_escape_string($con, $_POST['password']);
 	$cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
+	date_default_timezone_set("Asia/Kolkata");
+	$today = date("F j, Y, g:i a"); 
+
+	function random_strings($length_of_string) 
+        { 
+            $str_result = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz'; 
+            return substr(str_shuffle($str_result), 0, $length_of_string); 
+        } 
+    $reference_id =  random_strings(8);
+
+
 
 	$check = mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE email='$email' OR phone='$phone'"));
 
@@ -26,7 +37,7 @@ if(isset($_POST['sign-up']))
 	}
 	else {
 		$password = md5($password);
-		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password) VALUES ('$username', '$email', '$phone', '$password')");
+		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id')");
 		if($query) {
 			alert("Successfully registered");			
 		}
@@ -42,14 +53,17 @@ if(isset($_POST['sign-up']))
 if(isset($_POST['sign-in']))
 {
 	$input = mysqli_real_escape_string($con, $_POST['username']);
-	$password = mysqli_real_escape_string($con, $_POST['password']);
+	$password = mysqli_real_escape_string($con, md5($_POST['password']));
 
 	$check = mysqli_query($con, "SELECT id FROM users WHERE email='$input' OR phone='$input' AND password='$password' AND status='1'");
 	
 	if(mysqli_num_rows($check) > 0) {
 		$_SESSION['id'] = mysqli_fetch_assoc($check)['id'];
 		alert("Successfully logged in");
-	}
+		header('location: ../Dashboard/main-semi-light/index.php');
+	} else {
+    echo "<script>alert('Login details is incorrect. Please try again.');</script>";
+  }
 
 }
 
@@ -148,9 +162,9 @@ if(isset($_POST['sign-in']))
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-in">
                         <h2 class="register_login">SIGN IN</h2>
-						<h2>Session ID <?php echo $_SESSION['id'] ?></h2>
+						<h2><?php echo $_SESSION["id"];  ?></h2>
                         <hr>
-						<form method="POST" name="sign-in">
+						<form method="POST">
 						<div class="input-group">
 							<i class='fa-solid fa-user'></i>
 							<input type="text" name="username" placeholder="Email or Phone no." required>

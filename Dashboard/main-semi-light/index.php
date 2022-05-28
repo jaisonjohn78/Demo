@@ -1,14 +1,39 @@
 <?php
 include '../../config.php';
 
-if(!isset($_SESSION["id"])){
-  header("Location: ../../index/login.php");
-}
-
-$id = $_SESSION['id']->id;
+  date_default_timezone_set("Asia/Kolkata");
+	$today = date("F j, Y, g:i a"); 
 
 
+// API from Coinlayer.com 
+// $key = "53e1d737e84c49af9a618033520546af";
+// $link = "http://api.coinlayer.com/api/live?access_key=".$key;
 
+// $ch = curl_init();
+// curl_setopt($ch, CURLOPT_URL, $link);
+
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// $result = curl_exec($ch);
+// curl_close($ch);
+
+// $result = json_decode($result, true);
+
+// if(isset($result['success'])) {
+  // $btc = $result['rates']['BTC'];
+  $btc = 28863.81;
+  // $usdt = $result['rates']['USDT'];
+  $usdt = 1.027;
+  // $eth = $result['rates']['ETH'];
+  $eth = 1786.743;
+  // $xrp = $result['rates']['XRP'];
+  $xrp = 0.3917;
+  // $ltc = $result['rates']['LTC'];
+  $ltc = 63.235;
+  // $adcn = $result['rates']['ADCN'];
+  $adcn = 0.00013;
+  $sumup = intval($btc) + intval($usdt) + intval($eth) + intval($xrp) + intval($ltc) + intval($adcn);
+  $sumup = substr($sumup, 0, 3);
+// } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,11 +56,22 @@ $id = $_SESSION['id']->id;
       rel="stylesheet"
       type="text/css"
     />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- Style-->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/skin_color.css" />
     <link rel="stylesheet" href="css/custom2.css" />
+    <style>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+      </style>
   </head>
 
   <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
@@ -45,23 +81,18 @@ $id = $_SESSION['id']->id;
       <header class="main-header">
         <div class="d-flex align-items-center logo-box justify-content-start">
           <!-- Logo -->
-          <a href="index.html" class="logo">
+          <a href="index.php" class="logo">
             <!-- logo-->
-            <div class="logo-mini w-30">
+            <div class="logo-mini w-50 m-auto">
               <span class="light-logo"
-                ><img src="../images/logo-letter.png" alt="logo"
+                ><img src="../images/logo.png" alt="logo"
               /></span>
               <span class="dark-logo"
-                ><img src="../images/logo-letter.png" alt="logo"
+                ><img src="../images/logo.png" alt="logo"
               /></span>
             </div>
-            <div class="logo-lg">
-              <span class="light-logo"
-                ><img src="../images/logo-dark-text.png" alt="logo"
-              /></span>
-              <span class="dark-logo"
-                ><img src="../images/logo-light-text.png" alt="logo"
-              /></span>
+            <div class="logo-lg align-items-center m-auto ">
+              <h3 class="title text-bold text-center" style="font-family: 'Montserrat' sans-serif !important;">Peradot</h3>
             </div>
           </a>
         </div>
@@ -143,11 +174,10 @@ $id = $_SESSION['id']->id;
       </header>
 
       <aside class="main-sidebar">
-        <!-- sidebar-->
         <section class="sidebar position-relative">
           <div class="multinav">
             <div class="multinav-scroll" style="height: 100%">
-              <!-- sidebar menu-->
+            
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="active">
                   <a href="index.html">
@@ -159,9 +189,18 @@ $id = $_SESSION['id']->id;
                   </a>
                 </li>
                 <li class="">
-                  <a href="payment.html">
+                  <a href="payment.php">
                     <i data-feather="bar-chart-2"></i>
                     <span>Other Page</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="reference.php">
+                  <i data-feather="share-2" ></i>
+                    <span>Reference Code</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -210,25 +249,33 @@ $id = $_SESSION['id']->id;
                 <div class="row">
                   <div class="col-xl-6">
                     <div class="d-flex top_box">
-                      <h1 class="fw-500 m-0">$56,456.11</h1>
-                      <p class="m-0">
-                        <a
-                          type="button"
-                          href="#"
-                          class="waves-effect waves-light btn btn-rounded btn-danger-light mb-5 fs-14 p-1 px-3 mx-2 mt-1"
-                          >-150.15%</a
-                        >
-                        <i
-                          class="mdi mdi-arrow-bottom-right btn-rounded btn-danger down_box"
-                        >
-                        </i>
-                      </p>
+                      <h1 class="fw-500 m-0" id="stock-price">$1644.29</h1>
+                      
                     </div>
                   </div>
                   <div class="col-xl-6 text-end my-2">
-                    <h3 class="m-0">Bitcoin USD(BTC-USD)</h3>
+                    <h3 class="m-0">Live Bitcoin Transactions (BTC)</h3>
                   </div>
                 </div>
+                <div class="col-12">
+                    <div class="box">
+                      <div class="box-body text-center">
+                      
+                        <h1 class="text-bold">Claim $60 in ..</h1>
+
+                    <!-- claim button  -->
+
+                        <div>
+                          <h2 >24 : 00 : 00</h2>
+                          <h5>hr : min: sec</h5>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                </div>
+                
                 <div class="col-xl-12 col-12">
                   <div class="box">
                     <div class="customhtab box-header with-border">
@@ -244,20 +291,11 @@ $id = $_SESSION['id']->id;
                         </li>
                         <li class="nav-item">
                           <a
-                            href="#Overview-2"
-                            class="nav-link"
-                            data-bs-toggle="tab"
-                            aria-expanded="false"
-                            >Chart</a
-                          >
-                        </li>
-                        <li class="nav-item">
-                          <a
                             href="#Overview-3"
                             class="nav-link"
                             data-bs-toggle="tab"
                             aria-expanded="true"
-                            >Conversations</a
+                            >Peradot Transactions</a
                           >
                         </li>
                         <li class="nav-item">
@@ -266,45 +304,19 @@ $id = $_SESSION['id']->id;
                             class="nav-link"
                             data-bs-toggle="tab"
                             aria-expanded="true"
-                            >Historical Data</a
+                            >My Historical Data</a
                           >
                         </li>
                       </ul>
-                      <ul class="box-controls pull-right">
-                        <div class="toolbar">
-                          <button id="one_month" class="btn btn-primary btn-sm">
-                            1M
-                          </button>
-                          <button
-                            id="six_months"
-                            class="btn btn-primary btn-sm"
-                          >
-                            6M
-                          </button>
-                          <button
-                            id="one_year"
-                            class="btn active btn-primary btn-sm"
-                          >
-                            1Y
-                          </button>
-                          <button id="ytd" class="btn btn-primary btn-sm">
-                            YTD
-                          </button>
-                          <button id="all" class="btn btn-primary btn-sm">
-                            ALL
-                          </button>
-                        </div>
-                      </ul>
+                      
                     </div>
                     <div class="box">
                       <div class="box-body">
                         <div id="chart">
                           <div class="tab-content">
                             <div id="Overview-1" class="tab-pane active">
-                              <div id="chart-timeline"></div>
-                            </div>
-                            <div id="Overview-2" class="tab-pane">
-                              <div id="summary-chart"></div>
+                              <!-- <div id="chart-timeline"></div> -->
+                              <center><div class="btcwdgt-chart" bw-cash="true" bw-theme="dark" style="width:100% !important; "></div></center>
                             </div>
                             <div id="Overview-3" class="tab-pane">
                               <div>
@@ -570,238 +582,7 @@ $id = $_SESSION['id']->id;
                     <!-- /.box-body -->
                   </div>
                 </div>
-                <div class="col-xl-12">
-                  <div class="row">
-                    <div class="col-xl-12">
-                      <div class="row">
-                        <div class="col-md-12 col-xl-6">
-                          <div class="box pull-up">
-                            <div class="box-body bg-success-light">
-                              <div class="media align-items-center p-0">
-                                <div class="text-center m-0">
-                                  <a href="#"
-                                    ><i
-                                      class="cc BSD-alt me-0 fs-50 hover-primary"
-                                      title="BSD"
-                                    ></i
-                                  ></a>
-                                </div>
-                                <div>
-                                  <h3 class="no-margin fw-500 text-dark">
-                                    BSD-USD
-                                  </h3>
-                                  <span class="text-fade">Bahamian USD</span>
-                                </div>
-                              </div>
-
-                              <div class="flexbox">
-                                <div>
-                                  <div class="d-flex">
-                                    <p class="m-0">
-                                      <a
-                                        type="button"
-                                        href="#"
-                                        class="waves-effect waves-light btn btn-rounded btn-success-light fs-14 p-1 px-0 me-1 mt-4"
-                                        >+3.15%</a
-                                      >
-                                      <i
-                                        class="mdi mdi-arrow-top-right btn-rounded btn-success down_box_1"
-                                      >
-                                      </i>
-                                    </p>
-                                  </div>
-                                  <h3 class="countnm mb-5 fw-500 text-dark">
-                                    <span>$</span>821.85
-                                  </h3>
-                                </div>
-                                <div id="sparkline0">
-                                  <canvas
-                                    width="100"
-                                    height="100"
-                                    style="
-                                      display: inline-block;
-                                      width: 100px;
-                                      height: 100px;
-                                      vertical-align: top;
-                                    "
-                                  ></canvas>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-xl-6">
-                          <div class="box pull-up">
-                            <div class="box-body bg-danger-light">
-                              <div class="media align-items-center p-0">
-                                <div class="text-center m-0">
-                                  <a href="#"
-                                    ><i
-                                      class="cc BTC me-0 text-dark hover-primary fs-50"
-                                      title="BTC"
-                                    ></i
-                                  ></a>
-                                </div>
-                                <div>
-                                  <h3 class="no-margin fw-500 text-dark">
-                                    BTC-USD
-                                  </h3>
-                                  <span class="text-fade">Bitcoin USD</span>
-                                </div>
-                              </div>
-
-                              <div class="flexbox">
-                                <div>
-                                  <div class="d-flex">
-                                    <p class="m-0">
-                                      <a
-                                        type="button"
-                                        href="#"
-                                        class="waves-effect waves-light btn btn-rounded btn-danger-light fs-14 p-1 px-0 me-1 mt-4"
-                                        >+3.15%</a
-                                      >
-                                      <i
-                                        class="mdi mdi-arrow-bottom-right btn-rounded btn-danger down_box_1"
-                                      >
-                                      </i>
-                                    </p>
-                                  </div>
-                                  <h3 class="countnm mb-5 fw-500 text-dark">
-                                    <span>$</span>455.81
-                                  </h3>
-                                </div>
-                                <div id="sparkline1">
-                                  <canvas
-                                    width="100"
-                                    height="100"
-                                    style="
-                                      display: inline-block;
-                                      width: 100px;
-                                      height: 100px;
-                                      vertical-align: top;
-                                    "
-                                  ></canvas>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-xl-6">
-                          <div class="box pull-up">
-                            <div class="box-body bg-success-light">
-                              <div class="media align-items-center p-0">
-                                <div class="text-center m-0">
-                                  <a href="#"
-                                    ><i
-                                      class="cc SDC-alt me-0 fs-50 hover-primary"
-                                      title="SOL"
-                                    ></i
-                                  ></a>
-                                </div>
-                                <div>
-                                  <h3 class="no-margin fw-500 text-dark">
-                                    SOL-USD
-                                  </h3>
-                                  <span class="text-fade">Solana USD</span>
-                                </div>
-                              </div>
-
-                              <div class="flexbox">
-                                <div>
-                                  <div class="d-flex">
-                                    <p class="m-0">
-                                      <a
-                                        type="button"
-                                        href="#"
-                                        class="waves-effect waves-light btn btn-rounded btn-success-light fs-14 p-1 px-0 me-1 mt-4"
-                                        >+3.15%</a
-                                      >
-                                      <i
-                                        class="mdi mdi-arrow-top-right btn-rounded btn-success down_box_1"
-                                      >
-                                      </i>
-                                    </p>
-                                  </div>
-                                  <h3 class="countnm mb-5 fw-500 text-dark">
-                                    <span>$</span>581.85
-                                  </h3>
-                                </div>
-                                <div id="sparkline2">
-                                  <canvas
-                                    width="100"
-                                    height="100"
-                                    style="
-                                      display: inline-block;
-                                      width: 100px;
-                                      height: 100px;
-                                      vertical-align: top;
-                                    "
-                                  ></canvas>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-xl-6">
-                          <div class="box pull-up">
-                            <div class="box-body bg-success-light">
-                              <div class="media align-items-center p-0">
-                                <div class="text-center m-0">
-                                  <a href="#"
-                                    ><i
-                                      class="cc ETC-alt me-0 fs-50 hover-primary"
-                                      title="ETH"
-                                    ></i
-                                  ></a>
-                                </div>
-                                <div>
-                                  <h3 class="no-margin fw-500 text-dark">
-                                    ETH-USD
-                                  </h3>
-                                  <span class="text-fade">Etherium USD</span>
-                                </div>
-                              </div>
-
-                              <div class="flexbox">
-                                <div>
-                                  <div class="d-flex">
-                                    <p class="m-0">
-                                      <a
-                                        type="button"
-                                        href="#"
-                                        class="waves-effect waves-light btn btn-rounded btn-success-light fs-14 p-1 px-0 me-1 mt-4"
-                                        >+3.15%</a
-                                      >
-                                      <i
-                                        class="mdi mdi-arrow-top-right btn-rounded btn-success down_box_1"
-                                      >
-                                      </i>
-                                    </p>
-                                  </div>
-                                  <h3 class="countnm mb-5 fw-500 text-dark">
-                                    <span>$</span>758.21
-                                  </h3>
-                                </div>
-                                <div id="sparkline3">
-                                  <canvas
-                                    width="100"
-                                    height="100"
-                                    style="
-                                      display: inline-block;
-                                      width: 100px;
-                                      height: 100px;
-                                      vertical-align: top;
-                                    "
-                                  ></canvas>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
 
               <div class="col-xl-3 col-lg-12 side-bar">
@@ -825,7 +606,7 @@ $id = $_SESSION['id']->id;
                   <div class="pt-30">
                     <div class="media align-items-center p-0">
                       <div class="m-0">
-                        <h4 class="no-margin fw-500">Total Balance</h4>
+                        <h4 class="no-margin fw-500">My Total Balance</h4>
                         <h1 class="fw-500">$246,789.20</h1>
                         <div class="d-flex">
                           <p class="m-0">
@@ -845,7 +626,7 @@ $id = $_SESSION['id']->id;
                     </div>
                   </div>
                   <div class="row py-40">
-                    <h4 class="fw-500 mt-5">My items</h4>
+                    <h4 class="fw-500 mt-5">My Space</h4>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 main_item">
                       <div>
                         <div class="d-flex align-items-center gap-items-1">
@@ -866,12 +647,7 @@ $id = $_SESSION['id']->id;
                             class="col-xl-5 col-lg-3 col-md-4 col-sm-3"
                           ></div>
                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                            <a
-                              type="button"
-                              href="#"
-                              class="waves-effect waves-light btn btn-rounded btn-danger-light fs-14 p-1 px-3 me-2"
-                              >-13.15%</a
-                            >
+                            
                           </div>
                         </div>
                       </div>
@@ -895,14 +671,7 @@ $id = $_SESSION['id']->id;
                           <div
                             class="col-xl-5 col-lg-3 col-md-4 col-sm-3"
                           ></div>
-                          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                            <a
-                              type="button"
-                              href="#"
-                              class="waves-effect waves-light btn btn-rounded btn-success-light fs-14 p-1 px-3 me-2"
-                              >+5.10%</a
-                            >
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -912,28 +681,22 @@ $id = $_SESSION['id']->id;
                     <div
                       class="d-flex justify-content-between bg-light rounded p-10 mx-10 my-15"
                     >
-                      <p class="mb-0">$2000</p>
-                      <p class="mb-0">4.85</p>
+                    <label style="margin-right: 20px;">BTC</label>
+                      <input type="number" name="btc" class="currencyField form-control" placeholder="BTC" />
                     </div>
                     <div
                       class="d-flex justify-content-between bg-light rounded p-10 mx-10 mb-15"
                     >
-                      <p class="mb-0">0.1254</p>
-                      <p class="mb-0">10.00</p>
+                    <label style="margin-right: 20px;">USD</label>
+
+                    <input type="number" name="usd" class="currencyField form-control" placeholder="USD"/>
+
                     </div>
                     <div class="d-flex justify-content-between mb-20">
-                      <a
-                        href="#"
-                        class="btn btn-primary"
-                        data-bs-toggle="tab"
-                        aria-expanded="false"
-                        >Convert <i class="mdi mdi-arrow-right"> </i
-                      ></a>
+                      
                       <div class="text-end">
-                        <p class="fw-500 m-0 fs-16">$123,456</p>
-                        <p class="fs-14 text-fade fw-500 m-0 text-right">
-                          Sanshu
-                        </p>
+                        <p class="fw-500 ms-50 fs-16"><?php echo $today ?></p>
+  
                       </div>
                     </div>
                   </div>
@@ -942,47 +705,47 @@ $id = $_SESSION['id']->id;
                       class="box box-inverse bg-dark3 bg-hexagons-white pull-up"
                     >
                       <div class="box-body text-center">
-                        <h2 class="mb-0 text-bold">XRP</h2>
-                        <h4>Ripple</h4>
+                        <h2 class="mb-0 text-bold">Live Stats</h2>
+                        <h4>Total Evaluation : $<?php echo $sumup; ?>M</h4>
                         <ul
                           class="flexbox flex-justified text-center mt-30 bb-1 border-gray pb-20"
                         >
                           <li class="be-1 border-gray">
-                            <div>USD</div>
-                            <small class="fs-16">11.153</small>
+                            <div>USDT</div>
+                            <small class="fs-16"><?php echo round($usdt, 3); ?></small>
                           </li>
 
                           <li class="be-1 border-gray">
-                            <div>EUR</div>
-                            <small class="fs-16">1.9232</small>
+                            <div>BTC</div>
+                            <small class="fs-16"><?php echo round($btc, 2); ?></small>
                           </li>
 
                           <li>
-                            <div>GBP</div>
-                            <small class="fs-16">1.8202</small>
+                            <div>ETH</div>
+                            <small class="fs-16"><?php echo round($eth, 3); ?></small>
                           </li>
                         </ul>
                         <ul
                           class="flexbox flex-justified text-center mt-30 bb-1 border-gray pb-30"
                         >
                           <li class="be-1 border-gray">
-                            <div>ETH</div>
-                            <small class="fs-16">2.426</small>
+                            <div>XRP</div>
+                            <small class="fs-16"><?php echo round($xrp, 4); ?></small>
                           </li>
 
                           <li class="be-1 border-gray">
-                            <div>SOL</div>
-                            <small class="fs-16">10.159</small>
+                            <div>LTC</div>
+                            <small class="fs-16"><?php echo round($ltc, 3); ?></small>
                           </li>
 
                           <li>
-                            <div>BTC</div>
-                            <small class="fs-16">0.456</small>
+                            <div>ADCN</div>
+                            <small class="fs-16"><?php echo $adcn; ?></small>
                           </li>
                         </ul>
                         <ul class="flexbox flex-justified text-center mt-20">
                           <li class="be-1 border-gray">
-                            <div>% 1h</div>
+                            <div>% 24h</div>
                             <small class="fs-16"
                               ><i class="fa fa-arrow-up text-success pe-5"></i
                               >1.4</small
@@ -990,7 +753,7 @@ $id = $_SESSION['id']->id;
                           </li>
 
                           <li class="be-1 border-gray">
-                            <div>% 24h</div>
+                            <div>% 30d</div>
                             <small class="fs-16"
                               ><i class="fa fa-arrow-up text-success pe-5"></i
                               >3.29</small
@@ -998,7 +761,7 @@ $id = $_SESSION['id']->id;
                           </li>
 
                           <li>
-                            <div>% 7d</div>
+                            <div>% 1y</div>
                             <small class="fs-16"
                               ><i class="fa fa-arrow-up text-success pe-5"></i
                               >54.7</small
@@ -1047,6 +810,57 @@ $id = $_SESSION['id']->id;
 
     <!-- Vendor JS -->
     <!-- Vendor JS -->
+    <script>
+       (function(b,i,t,C,O,I,N) {
+    window.addEventListener('load',function() {
+      if(b.getElementById(C))return;
+      I=b.createElement(i),N=b.getElementsByTagName(i)[0];
+      I.src=t;I.id=C;N.parentNode.insertBefore(I, N);
+    },false)
+  })(document,'script','https://widgets.bitcoin.com/widget.js','btcwdgt');
+
+    // let ws = new WebSocket('wss://ws.blockchain.info/inv');
+    let ws = new WebSocket('wss://stream.binance.com:9443/ws/etheur@trade');
+    let stockPriceElement = document.getElementById('stock-price');
+    let lastPrice = null;
+
+    ws.onmessage = (event) => {
+      let stockObject = JSON.parse(event.data);
+      let price = parseFloat(stockObject.p).toFixed(2)
+      stockPriceElement.innerText = '$' + price;
+
+      stockPriceElement.style.color = !lastPrice || lastPrice === price ? 'black' : price > lastPrice ? 'green' : 'red';
+
+      lastPrice = price;
+
+    }
+
+    </script>
+    <script>
+      $(".currencyField").keyup(function(){ //input[name='calc']
+ let convFrom;
+ if($(this).prop("name") == "btc") {
+       convFrom = "btc";
+       convTo = "usd";
+ }
+ else {
+       convFrom = "usd";
+       convTo = "btc";
+ }
+ $.getJSON( "https://api.coindesk.com/v1/bpi/currentprice/usd.json", 
+    function( data) {
+    var origAmount = parseFloat($("input[name='" + convFrom + "']").val());        
+    var exchangeRate = parseInt(data.bpi.USD.rate_float);
+    let amount;
+    if(convFrom == "btc")
+       amount = parseFloat(origAmount * exchangeRate);
+    else
+       amount = parseFloat(origAmount/ exchangeRate); 
+    $("input[name='" + convTo + "']").val(amount.toFixed(2));
+    });
+});
+    </script>
+   
     <script src="js/vendors.min.js"></script>
     <script src="js/pages/chat-popup.js"></script>
     <script src="../assets/icons/feather-icons/feather.min.js"></script>
