@@ -214,48 +214,6 @@ $id = $_SESSION['id'];
                                                     <table class="table table-striped table-bordered table-hover" width="100vw !important">
                                                         <thead>
                                                             <tr>
-                                                                <th>#</th>
-                                                                <th>Date</th>
-                                                                <th>Amount</th>
-                                                                <th>Status</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>01/01/2019</td>
-                                                                <td>$56,456.11</td>
-                                                                <td>Pending</td>
-                                                                <td>
-                                                                    <a href="#" class="btn btn-primary btn-md">
-                                                                        <i class="fa fa-eye"></i>
-                                                                    </a>
-                                                                    <a href="#" class="btn btn-danger btn-md">
-                                                                        <i class="fa fa-trash"></i>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                            </div>
-                                            
-                                
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="col-xl-12">
-                                    <div class="card vh-auto">
-                                        <div class="card-header">
-                                            <h1 class="card-title text-dark fw-500">Withdrawals</h1>
-                                        </div>
-                                        <div class="card-body">
-                                            
-                                            <div class="">
-                                            <div class="table-responsive">
-                                                    <table id="example" class="table table-striped table-bordered table-hover" width="100vw !important">
-                                                        <thead>
-                                                            <tr>
                                                                 <th>ID</th>
                                                                 <th>User id</th>
                                                                 <th>Image</th>
@@ -283,16 +241,58 @@ $id = $_SESSION['id'];
                                                             <td><?php echo $row['timestamp']?></td>
                                                                 <td>
                                                                   <?php
-                                                                    echo "<a href='./edit.php?user_id=".$row['user_id']."' class='btn btn-primary btn-md'>
-                                                                        <i class='fa fa-eye'></i>
+                                                                    echo "<a href='./update_status.php?id=".$row['user_id']."' class='btn btn-primary btn-md'>
+                                                                        <i class='fa fa-pencil'></i>
                                                                     </a>";
                                                                     echo "<a href='#' class='btn btn-danger btn-md'>
                                                                         <i class='fa fa-trash'></i>
                                                                     </a>"
-                                                                    ?>
+                                                                  ?>
                                                                 </td>
                                                             </tr>
                                                             <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                            
+                                
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                    <div class="card vh-auto">
+                                        <div class="card-header">
+                                            <h1 class="card-title text-dark fw-500">Withdrawals</h1>
+                                        </div>
+                                        <div class="card-body">
+                                            
+                                            <div class="">
+                                            <div class="table-responsive">
+                                                    <table id="example" class="table table-striped table-bordered table-hover" width="100vw !important">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Date</th>
+                                                                <th>Amount</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>01/01/2019</td>
+                                                                <td>$56,456.11</td>
+                                                                <td>Pending</td>
+                                                                <td>
+                                                                    <a href="#" class="btn btn-primary btn-md">
+                                                                        <i class="fa fa-pencil"></i>
+                                                                    </a>
+                                                                    <a href="#" class="btn btn-danger btn-md">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                             </div>
