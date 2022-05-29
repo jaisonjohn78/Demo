@@ -30,10 +30,10 @@ if(isset($_POST['sign-up']))
 
 
 	if($password !== $cpassword) {
-		$error = "Password does not match";
+		alert("Password and confirm passwords are not matched !! ");
 	}
 	else if($check > 0) {
-		$error = "Email or Phone already exists";
+		alert("Email or Phone already exists");
 	}
 	else {
 		$password = md5($password);
@@ -42,7 +42,7 @@ if(isset($_POST['sign-up']))
 			alert("Successfully registered");			
 		}
 		else {
-			$error = "Something went wrong";
+			alert("Something went wrong");
 		}
 	}
 	
@@ -127,7 +127,7 @@ if(isset($_POST['sign-in']))
 
 						<div class="input-group">
 						<i class="fa-solid fa-phone"></i>
-							<input type="tel" name="phone" placeholder="Phone Number" required>
+							<input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
 						</div>
         
 						<div class="input-group">
