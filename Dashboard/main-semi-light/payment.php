@@ -123,7 +123,7 @@ $id = $_SESSION['id'];
                           ><i class="ti-settings text-muted me-2"></i> Settings</a
                         >
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../../index/logout.php"
+                        <a class="dropdown-item" href="logout.php"
                           ><i class="ti-lock text-muted me-2"></i> Logout</a
                         >
                       </li>
@@ -187,7 +187,7 @@ $id = $_SESSION['id'];
                             </div>
                             <div class="copyright text-center m-25">
                                 <p>
-                                    <strong class="d-block"> Comapny Name</strong> ©
+                                    <strong class="d-block"> Peradot</strong> ©
                                     2022 All Rights Reserved
                                 </p>
                             </div>
@@ -233,15 +233,17 @@ $id = $_SESSION['id'];
                                             <form action="upload.php" method="post" enctype="multipart/form-data">
                                             <div class="d-flex justify-content-between bg-light rounded p-40 mx-10 my-15">
                                                 <input type="file" name="file" onchange="loadFile(event)" />
-                                                <input type="submit" name="submit" value="Upload">
+                                                <input type="submit" class="btn btn-primary" name="submit" value="Upload">
                                             </div>
 </form>
                                             <h5 class="my-3 text-muted">Upload the Screenshot of your Transaction once we verify we'll credit the balance into your account</h5>
                                             <img id="output"/>
                                             <hr>
                                             <h3 class="text-center">How to find Metamask Address</h3>
-                                            <img src="../images/guide/metamask-02.png" >
-                                            <img src="../images/guide/metamask-03.png" >
+                                            <h4 class="text-center">Public Address to Receive (USDT) <br/><br/> <span class="bg-info mx-2 my-5 p-1 bg-light rounded">TPpGx8ghSuzVLxiR28Y6vpW3gx5krVUdjB</span></h4>
+                                            <p class="text-center">
+                                            <img class="center mt-50 " src="../images/guide/qrcode.png" width="200">
+                                            </p>
                                         </div>
                                     </div>
                                     </div>

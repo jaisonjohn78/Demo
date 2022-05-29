@@ -31,7 +31,7 @@ function alert($alert)
 {
     ?>
     <script>
-    alert('<?php echo $alert; ?>');
+    alertify.alert('<?php echo $alert; ?>');
     </script>
     <?php 
     

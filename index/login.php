@@ -55,7 +55,7 @@ if(isset($_POST['sign-in']))
 	$input = mysqli_real_escape_string($con, $_POST['username']);
 	$password = mysqli_real_escape_string($con, md5($_POST['password']));
 
-	$check = mysqli_query($con, "SELECT id FROM users WHERE email='$input' OR phone='$input' AND password='$password' AND status='1'");
+	$check = mysqli_query($con, "SELECT id FROM users WHERE email='$input' AND password='$password' AND status='1' OR phone='$input' AND password='$password' AND status='1'");
 	
 	if(mysqli_num_rows($check) > 0) {
 		$_SESSION['id'] = mysqli_fetch_assoc($check)['id'];
@@ -78,6 +78,7 @@ if(isset($_POST['sign-in']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
     <link rel="stylesheet" href="style.css">
 	<style> 
 		i {

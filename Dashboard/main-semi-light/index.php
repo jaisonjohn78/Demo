@@ -181,7 +181,7 @@ input::-webkit-inner-spin-button {
                       ><i class="ti-settings text-muted me-2"></i> Settings</a
                     >
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../../index/logout.php"
+                    <a class="dropdown-item" href="logout.php"
                       ><i class="ti-lock text-muted me-2"></i> Logout</a
                     >
                   </li>
@@ -250,7 +250,7 @@ input::-webkit-inner-spin-button {
                 </div>
                 <div class="copyright text-center m-25">
                   <p>
-                    <strong class="d-block"> Comapny Name</strong> ©
+                    <strong class="d-block"> Peradot</strong> ©
                     2022 All Rights Reserved
                   </p>
                 </div>
@@ -267,17 +267,7 @@ input::-webkit-inner-spin-button {
           <section class="content">
             <div class="row">
               <div class="col-xl-9">
-                <div class="row">
-                  <div class="col-xl-6">
-                    <div class="d-flex top_box">
-                      <h1 class="fw-500 m-0" id="stock-price">$1644.29</h1>
-                      
-                    </div>
-                  </div>
-                  <div class="col-xl-6 text-end my-2">
-                    <h3 class="m-0">Live Bitcoin Transactions (BTC)</h3>
-                  </div>
-                </div>
+                
                 <div class="col-12">
                     <div class="box">
                       <div class="box-body text-center">
@@ -296,7 +286,17 @@ input::-webkit-inner-spin-button {
                       </div>
                     </div>
                 </div>
-                
+                <div class="row mx-5">
+                  <div class="col-xl-6">
+                    <div class="d-flex top_box">
+                      <h1 class="fw-500 m-0" id="stock-price">$1644.29</h1>
+                      
+                    </div>
+                  </div>
+                  <div class="col-xl-6 text-end my-2">
+                    <h3 class="m-0">Live Bitcoin Transactions (BTC)</h3>
+                  </div>
+                </div>
                 <div class="col-xl-12 col-12">
                   <div class="box">
                     <div class="customhtab box-header with-border">

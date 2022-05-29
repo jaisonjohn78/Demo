@@ -121,7 +121,7 @@ $id = $_SESSION['id'];
                           ><i class="ti-settings text-muted me-2"></i> Settings</a
                         >
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../../index/logout.php"
+                        <a class="dropdown-item" href="logout.php"
                           ><i class="ti-lock text-muted me-2"></i> Logout</a
                         >
                       </li>

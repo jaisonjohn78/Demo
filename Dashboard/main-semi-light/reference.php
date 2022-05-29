@@ -168,7 +168,7 @@ $id = $_SESSION['id'];
                           ><i class="ti-settings text-muted me-2"></i> Settings</a
                         >
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../../index/logout.php"
+                        <a class="dropdown-item" href="logout.php"
                           ><i class="ti-lock text-muted me-2"></i> Logout</a
                         >
                       </li>
@@ -232,7 +232,7 @@ $id = $_SESSION['id'];
                             </div>
                             <div class="copyright text-center m-25">
                                 <p>
-                                    <strong class="d-block"> Comapny Name</strong> ©
+                                    <strong class="d-block"> Peradot</strong> ©
                                     2022 All Rights Reserved
                                 </p>
                             </div>
