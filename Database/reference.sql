@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2022 at 01:35 PM
+-- Generation Time: May 29, 2022 at 07:06 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.5
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bitcoin`
+-- Database: `peradot`
 --
 
 -- --------------------------------------------------------
@@ -33,6 +33,13 @@ CREATE TABLE `reference` (
   `reference_id` varchar(255) NOT NULL,
   `timestamp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reference`
+--
+
+INSERT INTO `reference` (`id`, `user_id`, `reference_id`, `timestamp`) VALUES
+(1, 1, 'isNmfqFQY0', 'May 27, 2022, 7:25 pm');
 
 --
 -- Indexes for dumped tables
@@ -52,7 +59,7 @@ ALTER TABLE `reference`
 -- AUTO_INCREMENT for table `reference`
 --
 ALTER TABLE `reference`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
