@@ -151,18 +151,18 @@ $id = $_SESSION['id'];
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#">
-                                    <i data-feather="bar-chart-2"></i>
-                                    <span>Transactions</span>
+                                <a href="user.php">
+                                    <i data-feather="user-check"></i>
+                                    <span>Users</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#">
-                                <i data-feather="share-2" ></i>
-                                    <span>Reference</span>
+                                <a href="history.php">
+                                <i data-feather="clock" ></i>
+                                    <span>History</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>
@@ -181,25 +181,18 @@ $id = $_SESSION['id'];
             <div class="container-full">
                 <!-- Main content -->
                 <section class="content">
+                  <div class="row">
+                              
+                              <div class="col-12 text-center my-2">
+
+                                  <h1 class="fw-500 m-0 text-center"><i
+                                          class="mx-3 mdi mdi-currency-usd btn-rounded btn-info down_box">
+                                      </i> Transactions</h1>
+                              </div>
+                          </div>
                     <div class="row">
-                        <div class="col-xl-12">
-                            <div class="row">
-                                <div class="col-xl-6">
-                                    <div class="d-flex top_box">
-                                        <h3 class="m-0">Total Amount</h3>
 
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 text-center my-2">
-
-                                    <h1 class="fw-500 m-0">$56,456.11<i
-                                            class="mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box">
-                                        </i></h1>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-55">
+                        <div class="row mt-5">
                             <div class="col-xl-12">
                                <div class="row">
                                    <div class="col-xl-12">
@@ -215,7 +208,7 @@ $id = $_SESSION['id'];
                                                         <thead>
                                                             <tr>
                                                                 <th>ID</th>
-                                                                <th>User id</th>
+                                                                <th>User</th>
                                                                 <th>Image</th>
                                                                 <th>Amount</th>
                                                                 <th>Transition Detail</th>
@@ -233,20 +226,25 @@ $id = $_SESSION['id'];
                                                     ?>
                                                             <tr>
                                                             <td><?php echo $i++ ?></td>
-                                                            <td><?php echo $row['user_id']?></td>
+                                                            <td><?php 
+                                                            
+                                                            $user_rid = $row['user_id'];
+                                                            $sql_rid = "SELECT * FROM users WHERE id = '$user_rid'";
+                                                            $res_rid = mysqli_query($con,$sql_rid);
+                                                            $row_rid = mysqli_fetch_row($res_rid);
+                                                            echo "(".$user_rid.") " . $row_rid[1];
+                                                            ?></td>
                                                             <?php $link = 'uploads/'.$row["image_path"] ?>
-                                                            <td><a style="font-size: 11px" href="<?php echo $link ?>">Open Image</a></td>
+                                                            <td><a style="font-size: 11px" href="<?php echo $link ?>" target="_blank">Open Image</a></td>
                                                             <td><?php echo $row['d_amount']?></td>
                                                             <td><?php echo $row['status']?></td>
                                                             <td><?php echo $row['timestamp']?></td>
-                                                                <td>
+                                                                <td class="d-flex justify-content-around">
                                                                   <?php
                                                                     echo "<a href='./update_status.php?id=".$row['user_id']."' class='btn btn-primary btn-md'>
-                                                                        <i class='fa fa-pencil'></i>
+                                                                        <i class='fa fa-eye'></i>
                                                                     </a>";
-                                                                    echo "<a href='#' class='btn btn-danger btn-md'>
-                                                                        <i class='fa fa-trash'></i>
-                                                                    </a>"
+
                                                                   ?>
                                                                 </td>
                                                             </tr>

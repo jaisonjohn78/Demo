@@ -395,7 +395,7 @@ input::-webkit-inner-spin-button {
                                           <thead>
                                             <tr>
                                               <th>Id</th>
-                                              <th>User Id</th>
+                                              <th>Timestamp</th>
                                               <th>Deposite</th>
                                               <th>Withdraw</th>
                                             </tr>

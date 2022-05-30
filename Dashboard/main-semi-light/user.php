@@ -7,58 +7,8 @@ if(!isset($_SESSION["id"])){
   header("Location: ../../index/login.php");
 }
 
-                  
-
-
-$error = "";
 $id = $_SESSION['id'];
 
-
-if(isset($_GET['id']) && $_GET['id'] != ''){
-    $user_id= mysqli_real_escape_string($con,$_GET['id']);
-    $res=mysqli_query($con,"SELECT * FROM deposite WHERE user_id='$user_id'");
-    $check=mysqli_num_rows($res);
-    if($check>0){
-     
-        $row=mysqli_fetch_assoc($res);
-        $amount = $row['d_amount'];
-        $status = $row['status'];
-        $img = $row['image_path'];
-        $time = $row['timestamp'];
-        $user_rid = $row['user_id'];
-                  $sql_rid = "SELECT * FROM users WHERE id = '$user_rid'";
-                  $res_rid = mysqli_query($con,$sql_rid);
-                  $row_rid = mysqli_fetch_row($res_rid);
-                  $new_username = $user_rid." - " . $row_rid[1];
-    }else {
-      $error = "<h2 class='text-warning'>Something went wrong <br> Please go back and try again</h2>";
-  }
-} 
-
-if(isset($_POST['submit'])){
-    $new_amount = mysqli_real_escape_string($con, $_POST["amount"]);
-    $new_status = mysqli_real_escape_string($con, $_POST["status"]);
-
-    $user_id= mysqli_real_escape_string($con,$_GET['id']);
-    $sql = "UPDATE deposite SET d_amount= '$new_amount',status = '$new_status' WHERE user_id = $user_id";
-    $result = mysqli_query($con, $sql);
-            if ($result) {
-                header('location: ./admin.php');
-                
-            } else {
-               alert("Opps Something went wrong, Unable to update... Try again later");
-            }
-
-    if($new_status == 'confirm') {
-        $user_sql = mysqli_query($con,"UPDATE `users` SET `amount`= amount + '$new_amount' WHERE id = $user_id");
-        unlink("uploads/$img");
-        $admin_sql = mysqli_query($con,"DELETE FROM `deposite` WHERE user_id = $user_id");
-        alert("Deposite has been confirmed");
-        $history_sql = mysqli_query($con,"INSERT INTO `history` (`user_id`,`user`, `timestamp`, `status`,`deposit` ) VALUES ('$user_rid','$row_rid[1]', '$time', '$new_status','$new_amount')");
-    } else {
-        
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +21,7 @@ if(isset($_POST['submit'])){
     <meta name="author" content="" />
 
     <title>
-        Payment
+        Peradot Users
     </title>
 
     <!-- Vendors Style-->
@@ -79,12 +29,21 @@ if(isset($_POST['submit'])){
     <!--amcharts -->
     <link href="https://www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css" />
 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    
+
+
     <!-- Style-->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/skin_color.css" />
     <link rel="stylesheet" href="css/custom2.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+    <style>
+        .dt-buttons {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
@@ -105,7 +64,7 @@ if(isset($_POST['submit'])){
               /></span>
             </div>
             <div class="logo-lg align-items-center m-auto ">
-              <h3 class="title text-bold text-center" style="color: white; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'">Peradot</h3>
+              <h3 class="title text-bold text-center" style="color: white; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'">Peradot Admin</h3>
             </div>
           </a>
         </div>
@@ -173,7 +132,7 @@ if(isset($_POST['submit'])){
                           ><i class="ti-settings text-muted me-2"></i> Settings</a
                         >
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../../index/logout.php"
+                        <a class="dropdown-item" href="logout.php"
                           ><i class="ti-lock text-muted me-2"></i> Logout</a
                         >
                       </li>
@@ -194,7 +153,7 @@ if(isset($_POST['submit'])){
                         <!-- sidebar menu-->
                         <ul class="sidebar-menu" data-widget="tree">
                             <li class="">
-                                <a href="index.php">
+                                <a href="admin.php">
                                     <i data-feather="monitor"></i>
                                     <span>Dashboard</span>
                                     <span class="pull-right-container">
@@ -203,18 +162,18 @@ if(isset($_POST['submit'])){
                                 </a>
                             </li>
                             <li class="active">
-                                <a href="#">
-                                    <i data-feather="bar-chart-2"></i>
-                                    <span>Transactions</span>
+                                <a href="user.php">
+                                    <i data-feather="user-check"></i>
+                                    <span>Users</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>
                                 </a>
                             </li>
                             <li class="">
-                                <a href="reference.php">
-                                <i data-feather="share-2" ></i>
-                                    <span>Reference</span>
+                                <a href="history.php">
+                                <i data-feather="clock" ></i>
+                                    <span>History</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>
@@ -222,26 +181,7 @@ if(isset($_POST['submit'])){
                             </li>
                         </ul>
 
-                        <div class="sidebar-widgets mt-5">
-                            <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
-                                <img src="../images/trophy.png" alt="" />
-                                <h4 class="my-3 fw-500 text-uppercase text-primary">
-                                    Start Trading
-                                </h4>
-                                <span class="fs-12 d-block mb-3 text-black-50">Offering discounts for better online a
-                                    store can loyalty
-                                    weapon into driving</span>
-                                <button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
-                                    Invest Now
-                                </button>
-                            </div>
-                            <div class="copyright text-center m-25">
-                                <p>
-                                    <strong class="d-block"> Comapny Name</strong> ©
-                                    2022 All Rights Reserved
-                                </p>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
@@ -249,44 +189,64 @@ if(isset($_POST['submit'])){
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <div class="container">
-                <h2 class="title text-center my-50">Update Transaction Detail and Status <br> ( 
-                  <?php
-                  
-                  echo $new_username;
-
-                  ?>
-                  
-                  )</h2>
-                <?php echo $error; ?>
-                <hr>
+            <div class="container-full">
                 <!-- Main content -->
-                <form method="post" action="" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Amount:</label>
-                        <input type="text" name="amount" class="form-control" id="exampleInputEmail1" placeholder="Amount" required>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="row">
+                                
+                                <div class="col-12 text-center my-2">
+
+                                    <h1 class="fw-500 m-0 text-center"><i
+                                            class="mx-3 mdi mdi-account btn-rounded btn-info down_box">
+                                        </i> User List</h1>
+                                </div>
+                            </div>
+                            <div class="row mt-55">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="tablez">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Timestamp</th>
+                                            <th>Reference ID</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                    <?php
+                                                        $res=mysqli_query($con,"SELECT * FROM users WHERE admin = '0'");                                    // die();
+                                                        $i=1;
+                                                        while($row=mysqli_fetch_assoc($res)){
+                                                        
+                                                    ?>
+                                                        <tr>
+                                                            <td><?php echo $i++ ?></td>
+                                                            <td><?php echo $row['username']?></td>
+                                                            <td><?php echo $row['email']?></td>
+                                                            <td><?php echo $row["phone"] ?></td>
+                                                            <td><?php echo $row['timestamp']?></td>
+                                                            <td><?php echo $row['reference_id']?></td>
+                                                            <td><?php echo $row['amount']?></td>
+                                                        </tr>
+                                                       <?php } ?>
+                                                    </tbody>
+                                </table>   
+
+                            </div>    
+                        </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <select name="status" style="width:72vw;padding:7px;border-radius:5px;border:1px solid #86a4c3;" required>
-                            <option selected disabled value="">Pending</option>
-                            <option>Reject</option>
-                            <option>confirm</option>
-                        </select>
-                    </div>
-                    <div class="d-flex mx-5 bg-light rounded justify-content-center">
-                        <img src="uploads/<?php echo $img  ?>" width="500">
-                    </div>
-                    
-                    <button type="submit" name="submit" class="btn btn-primary btn-lg mx-5 mt-5 mb-0">Submit</button>
-                    
-                  </form>
-                  <a href="admin.php"><button name="cancel" class="btn btn-secondary btn-lg mx-5 mt-1 mt-0">Cancel</button></a>
-                  
-                
+
+                            
+                </section>
                 <!-- /.content -->
             </div>
         </div>
-
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right d-none d-sm-inline-block">
@@ -313,30 +273,45 @@ if(isset($_POST['submit'])){
 
         <!-- Page Content overlay -->
 
-        <!-- Custom JS -->
-        <script>
-            
-        </script>
+        
         <!-- Vendor JS -->
         <script src="js/vendors.min.js"></script>
-        <script src="js/pages/chat-popup.js"></script>
+       
         <script src="../assets/icons/feather-icons/feather.min.js"></script>
 
         <script src="../assets/vendor_components/Web-Ticker-master/jquery.webticker.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
         <!-- Crypto Admin App -->
+        
         <script src="js/template.js"></script>
         <script src="js/pages/dashboard2.js"></script>
         <script src="js/pages/dashboard2-chart.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-    $('#example').DataTable({searching: false});
-});
-    </script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+ 
+
+
+        <!-- Custom JS -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#tablez').DataTable({
+        dom: 'Bfrtip',
+        dom: 'Blfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+            });
+        </script>
 </body>
 
 </html>
