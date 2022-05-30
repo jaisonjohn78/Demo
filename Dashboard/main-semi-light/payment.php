@@ -314,8 +314,8 @@ body.special:before{
                                                         <tr>
                                                             <th>ID</th>
                                                             <th>User id</th>
-                                                            <th>Image</th>
-                                                            <th>Amount</th>
+                                                            <th>Withdraw</th>
+                                                            <th>Deposit</th>
                                                             <th>Transition Detail</th>
                                                             <th>Timestamp</th>
                                                         </tr>
@@ -326,7 +326,7 @@ body.special:before{
                                                         $res=mysqli_query($con,"SELECT * FROM deposite WHERE user_id = '$id'");
                                                         $res2=mysqli_query($con, "SELECT * FROM withdraw WHERE user_id = '$id'"); 
                                                         $res3=mysqli_query($con, "SELECT * FROM history WHERE user_id = '$id'"); 
-                                                                                          // die();
+                                        
                                                         $i=1;
                                                         while($row=mysqli_fetch_assoc($res)){
                                                         
@@ -360,9 +360,9 @@ body.special:before{
                                                                 <tr>
                                                                     <td><?php echo $i++ ?></td>
                                                                     <td><?php echo $row['user']?></td>
-                                                                    <td>--</td>
-                                                                    <td></td>
-                                                                    <td>Withdrawal <?php echo $row['status'] ?></td>
+                                                                    <td><?php echo $row['withdraw'] ?></td>
+                                                                    <td><?php echo $row['deposit'] ?></td>
+                                                                    <td>Payment Approved</td>
                                                                     <td><?php echo $row['timestamp']?></td>
                                                                 </tr>
                                                                <?php } ?>

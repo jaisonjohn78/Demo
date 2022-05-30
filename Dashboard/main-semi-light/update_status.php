@@ -50,7 +50,15 @@ if(isset($_POST['submit'])){
             }
 
     if($new_status == 'confirm') {
-        $user_sql = mysqli_query($con,"UPDATE `users` SET `amount`= amount + '$new_amount' WHERE id = $user_id");
+        if($new_amount <= 1000) {
+          $reward = (10/ 100) * $new_amount - 40;
+          $day = 30;
+        $user_sql = mysqli_query($con,"UPDATE `users` SET `deposit`= $new_amount, `reward` = $reward, `days`= $day , `amount`= amount + '$new_amount' WHERE id = $user_id");
+
+        } else {
+        
+          $user_sql = mysqli_query($con,"UPDATE `users` SET `deposit`= $new_amount , `amount`= amount + '$new_amount' WHERE id = $user_id");
+        }
         unlink("uploads/$img");
         $admin_sql = mysqli_query($con,"DELETE FROM `deposite` WHERE user_id = $user_id");
         alert("Deposite has been confirmed");
