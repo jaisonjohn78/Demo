@@ -241,7 +241,7 @@ $id = $_SESSION['id'];
                                                             <td><?php echo $row['timestamp']?></td>
                                                                 <td class="d-flex justify-content-around">
                                                                   <?php
-                                                                    echo "<a href='./update_status.php?id=".$row['user_id']."' class='btn btn-primary btn-md'>
+                                                                    echo "<a href='./update_deposits_status.php?id=".$row['user_id']."' class='btn btn-primary btn-md'>
                                                                         <i class='fa fa-eye'></i>
                                                                     </a>";
 
@@ -303,7 +303,7 @@ $id = $_SESSION['id'];
                                                             <td><?php echo $row['timestamp']?></td>
                                                                 <td class="d-flex justify-content-around">
                                                                   <?php
-                                                                    echo "<a href='' class='btn btn-primary btn-md'>
+                                                                    echo "<a href='./update_withdraw_status.php?id=".$row['user_id']."' class='btn btn-primary btn-md'>
                                                                         <i class='fa fa-eye'></i>
                                                                     </a>";
 
