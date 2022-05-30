@@ -270,27 +270,47 @@ $id = $_SESSION['id'];
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Date</th>
+                                                                <th>user</th>
+                                                                <th>MetamaskID</th>
                                                                 <th>Amount</th>
                                                                 <th>Status</th>
+                                                                <th>Timestamp</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                        <?php
+                                                        // $user_id= $_SESSION["user_id"];
+                                                        $res=mysqli_query($con,"SELECT * FROM withdraw");                                    // die();
+                                                        $i=1;
+                                                        while($row=mysqli_fetch_assoc($res)){
+                                                        
+                                                    ?>
                                                             <tr>
-                                                                <td>1</td>
-                                                                <td>01/01/2019</td>
-                                                                <td>$56,456.11</td>
-                                                                <td>Pending</td>
-                                                                <td>
-                                                                    <a href="#" class="btn btn-primary btn-md">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </a>
-                                                                    <a href="#" class="btn btn-danger btn-md">
-                                                                        <i class="fa fa-trash"></i>
-                                                                    </a>
+                                                            <td><?php echo $i++ ?></td>
+                                                            <td><?php 
+                                                            
+                                                            $user_rid = $row['user_id'];
+                                                            $sql_rid = "SELECT * FROM users WHERE id = '$user_rid'";
+                                                            $res_rid = mysqli_query($con,$sql_rid);
+                                                            $row_rid = mysqli_fetch_row($res_rid);
+                                                            echo "(".$user_rid.") " . $row_rid[1];
+                                                            ?></td>
+                                                            
+                                                            <td>$60</td>
+                                                            <td><?php echo $row['metamaskID']?></td>
+                                                            <td><?php echo $row['status']?></td>
+                                                            <td><?php echo $row['timestamp']?></td>
+                                                                <td class="d-flex justify-content-around">
+                                                                  <?php
+                                                                    echo "<a href='' class='btn btn-primary btn-md'>
+                                                                        <i class='fa fa-eye'></i>
+                                                                    </a>";
+
+                                                                  ?>
                                                                 </td>
                                                             </tr>
+                                                            <?php } ?>
                                                         </tbody>
                                                     </table>
                                             </div>

@@ -20,7 +20,7 @@ if(isset($_POST['withdraw'])){
   $meta_insert = $con->query("INSERT into withdraw (user_id,metamaskID,timestamp) VALUES ('$id','$metamask','$today')");
   if($meta_insert){
     $msg = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
-    text-align:center;'>Request sended...</p>";
+    text-align:center;'>Please Wait for your withdrawal request to be approved...</p>";
       // header('location: payment.php');
       
   }else{
@@ -372,7 +372,7 @@ body.special:before{
                                                                 <td><?php echo $row['user_id']?></td>
                                                                 <td><?php echo $row['metamaskID']?></td>
                                                                 <td><?php echo $row['w_amount']?></td>
-                                                                <td>Deposite <?php echo $row['status'] ?></td>
+                                                                <td>wITHDRAW <?php echo $row['status'] ?></td>
                                                                 <td><?php echo $row['timestamp']?></td>
                                                             </tr>
                                                            <?php }
