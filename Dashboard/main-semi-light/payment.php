@@ -8,10 +8,29 @@ if(!isset($_SESSION["id"])){
 }
 
 $id = $_SESSION['id'];
-
+$msg = '';
 
 $user_sql = mysqli_query($con,"SELECT * FROM users WHERE id = $id");
 $user_row=mysqli_fetch_assoc($user_sql);
+
+if(isset($_POST['withdraw'])){
+  $metamask = $_POST['metamask'];
+  $today = date("F j, Y, g:i a"); 
+
+  $meta_insert = $con->query("INSERT into withdraw (user_id,metamaskID,timestamp) VALUES ('$id','$metamask','$today')");
+  if($meta_insert){
+    $msg = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
+    text-align:center;'>Request sended...</p>";
+      // header('location: payment.php');
+      
+  }else{
+      $msg = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
+      text-align:center;'>Plese try again !!!</p>";
+      
+  } 
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -248,6 +267,7 @@ body.special:before{
                                         </div>
                                         <div class="card-body mb-5">
                                             <h2>Upload Your Transaction</h2>
+                                            
                                             <form action="upload.php" method="post" enctype="multipart/form-data">
                                             <div class="d-flex justify-content-between bg-light rounded p-40 mx-10 my-15">
                                                 <input type="file" name="file" onchange="loadFile(event)" required/>
@@ -273,10 +293,13 @@ body.special:before{
                                         </div>
                                         <div class="card-body">
                                             <h2>Enter Your Metamask Address</h2>
-                                            <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
-                                                <input type="text" class="form-control" placeholder="Meta Mask Address">
-                                                <input type="submit" class="btn btn-primary" value="Withdraw">
-                                            </div>
+                                            <h4 class="msg"><?php echo $msg ?></h4>
+                                            <form action="" method="post" enctype="multipart/form-data">
+                                              <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
+                                                  <input type="text" class="form-control" name="metamask" placeholder="Meta Mask Address">
+                                                  <input type="submit" class="btn btn-primary" name="withdraw" value="Withdraw">
+                                              </div>
+                                            </form>
                                             <h3 class="text-center">OR</h3>
                                             <div class="bg-light rounded p-30 mx-10 my-15">
                                               <div class="d-flex justify-center items-center">
@@ -349,7 +372,7 @@ body.special:before{
                                                                 <td><?php echo $row['user_id']?></td>
                                                                 <td><?php echo $row['metamaskID']?></td>
                                                                 <td><?php echo $row['w_amount']?></td>
-                                                                <td>Withdrawal <?php echo $row['status'] ?></td>
+                                                                <td>Deposite <?php echo $row['status'] ?></td>
                                                                 <td><?php echo $row['timestamp']?></td>
                                                             </tr>
                                                            <?php }

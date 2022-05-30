@@ -65,4 +65,5 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
 
 // Display status message
 // echo $statusMsg;
+
 ?>
