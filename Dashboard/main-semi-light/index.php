@@ -401,9 +401,10 @@ input::-webkit-inner-spin-button {
                                           <thead>
                                             <tr>
                                               <th>Id</th>
-                                              <th>User Id</th>
+                                              <th>User Name</th>
                                               <th>Deposite</th>
                                               <th>Withdraw</th>
+                                              <th>Timestamp</th>
                                               <!-- <th>Fees</th>
                                               <th>Block Size</th> -->
                                             </tr>
@@ -411,16 +412,17 @@ input::-webkit-inner-spin-button {
                                           <tbody>
                                           <?php
                                                         // $user_id= $_SESSION["user_id"];
-                                                        $res=mysqli_query($con,"SELECT deposite.user_id,deposite.d_amount, withdraw.w_amount FROM deposite INNER JOIN withdraw ON deposite.user_id = withdraw.user_id");                                    // die();
+                                                        $res=mysqli_query($con,"SELECT * FROM history");                                    // die();
                                                         $i=1;
                                                         while($row=mysqli_fetch_assoc($res)){
                                                         
                                                     ?>
                                             <tr>
                                               <td><?php echo $i++?></td>
-                                              <td><?php echo $row['user_id']?></td>
-                                              <td><?php echo $row['d_amount']?></td>
-                                              <td><?php echo $row['w_amount']?></td>
+                                              <td><?php echo $row['user']?></td>
+                                              <td><?php echo $row['deposit']?></td>
+                                              <td><?php echo $row['withdraw']?></td>
+                                              <td><?php echo $row['timestamp']?></td>
                                             </tr>
                                             <?php } ?>
                                           </tbody>
@@ -453,16 +455,16 @@ input::-webkit-inner-spin-button {
                                           <tbody>
                                           <?php
                                                         // $user_id= $_SESSION["user_id"];
-                                                        $result=mysqli_query($con,"SELECT deposite.user_id,deposite.d_amount, withdraw.w_amount FROM deposite INNER JOIN withdraw ON deposite.user_id = withdraw.user_id HAVING user_id = $id");                                    // die();
+                                                        $result=mysqli_query($con,"SELECT timestamp,withdraw,deposit FROM history WHERE user_id = $id");                                    // die();
                                                         $i=1;
                                                         while($rows=mysqli_fetch_assoc($result)){
                                                         
                                                     ?>
                                             <tr>
                                             <td><?php echo $i++?></td>
-                                              <td><?php echo $rows['user_id']?></td>
-                                              <td><?php echo $rows['d_amount']?></td>
-                                              <td><?php echo $rows['w_amount']?></td>
+                                              <td><?php echo $rows['timestamp']?></td>
+                                              <td><?php echo $rows['deposit']?></td>
+                                              <td><?php echo $rows['withdraw']?></td>
                                             </tr>
                                             <?php } ?>
                                           </tbody>
