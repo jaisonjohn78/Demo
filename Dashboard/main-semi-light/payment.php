@@ -356,7 +356,7 @@ body.special:before{
                                                     ?>
                                                         <tr>
                                                             <td><?php echo $i++ ?></td>
-                                                            <td><?php echo $row['user_id']?></td>
+                                                            <td><?php echo $user_row['username']?></td>
                                                             <?php $link = 'uploads/'.$row["image_path"] ?>
                                                             <td><a style="font-size: 11px" href="<?php echo $link ?>">Open Image</a></td>
                                                             <td><?php echo $row['d_amount']?></td>
@@ -369,7 +369,7 @@ body.special:before{
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $i++ ?></td>
-                                                                <td><?php echo $row['user_id']?></td>
+                                                                <td><?php echo $user_row['username']?></td>
                                                                 <td><?php echo $row['metamaskID']?></td>
                                                                 <td><?php echo $row['w_amount']?></td>
                                                                 <td>wITHDRAW <?php echo $row['status'] ?></td>
