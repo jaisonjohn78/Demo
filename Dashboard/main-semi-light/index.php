@@ -686,8 +686,8 @@ if(isset($_POST['package5'])){
                                                                     <span class="h2">$360</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal" name="package1">Select</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                         <li>$12/day for 30Days = $360</li>
@@ -697,6 +697,26 @@ if(isset($_POST['package5'])){
                                                                 </div>
                                                             </div>
 
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package1">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <!-- </form> -->
                                                         <!-- <form action="" method="POST"> -->
@@ -711,18 +731,34 @@ if(isset($_POST['package5'])){
                                                                     <span class="h2">$900</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-dark btn-block" name="package2">Select</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal1">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                         <li>$30/day for 30Days = $900</li>
                                                                         <li>$400 Profit</li>
-
-
                                                                     </ul>
                                                                 </div>
-
-
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <p><b>$500</b> will be deducted from your account and <b>package 2</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package2">Confirm</button>
+                                                                </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     <!-- </form> -->
@@ -738,8 +774,8 @@ if(isset($_POST['package5'])){
                                                                     <span class="h2">$1800</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-dark btn-block" name="package3">Select</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal2">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                     <li>$60/day for 30Days = $1800</li>
@@ -750,6 +786,26 @@ if(isset($_POST['package5'])){
                                                                 </div>
 
 
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <p><b>$1000</b> will be deducted from your account and <b>package 3</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package3">Confirm</button>
+                                                                </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     <!-- </form> -->
@@ -767,8 +823,8 @@ if(isset($_POST['package5'])){
                                                                     <span class="h2">$3600</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-dark btn-block" name="package4">Select</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal3">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                     <li>$120/day for 30Days = $3600</li>
@@ -781,6 +837,26 @@ if(isset($_POST['package5'])){
                                                                 </div>
 
 
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <p><b>$2000</b> will be deducted from your account and <b>package 4</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package4">Confirm</button>
+                                                                </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     <!-- </form> -->
@@ -796,8 +872,8 @@ if(isset($_POST['package5'])){
                                                                     <span class="h2">$7200</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-dark btn-block" name="package5">Select</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal4">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                     <li>$240/day for 30Days = $7200</li>
@@ -809,7 +885,26 @@ if(isset($_POST['package5'])){
 
                                                             </div>
                                                         </div> 
-                                                   
+                                                        <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <p><b>$4000</b> will be deducted from your account and <b>package 5</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package5">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         </div>
                                                     </form>
                                                     </div>
