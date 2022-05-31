@@ -337,6 +337,8 @@ body.special:before{
                                                         <tr>
                                                             <th>ID</th>
                                                             <th>User id</th>
+                                                            <th>Image Path</th>
+                                                            <th>MetamaskID</th>
                                                             <th>Withdraw</th>
                                                             <th>Deposit</th>
                                                             <th>Transition Detail</th>
@@ -359,6 +361,8 @@ body.special:before{
                                                             <td><?php echo $user_row['username']?></td>
                                                             <?php $link = 'uploads/'.$row["image_path"] ?>
                                                             <td><a style="font-size: 11px" href="<?php echo $link ?>">Open Image</a></td>
+                                                            <td>--</td>
+                                                            <td>--</td>
                                                             <td><?php echo $row['d_amount']?></td>
                                                             <td>Deposit <?php echo $row['status']?></td>
                                                             <td><?php echo $row['timestamp']?></td>
@@ -370,25 +374,33 @@ body.special:before{
                                                             <tr>
                                                                 <td><?php echo $i++ ?></td>
                                                                 <td><?php echo $user_row['username']?></td>
+                                                                <th>--</th>
+                                                                <!-- <th>--</th> -->
                                                                 <td><?php echo $row['metamaskID']?></td>
                                                                 <td><?php echo $row['w_amount']?></td>
-                                                                <td>wITHDRAW <?php echo $row['status'] ?></td>
+                                                                <th>--</th>
+                                                                <td>Withdraw <?php echo $row['status'] ?></td>
                                                                 <td><?php echo $row['timestamp']?></td>
                                                             </tr>
                                                            <?php }
                                                            
                                                            while($row=mysqli_fetch_assoc($res3)){
-                                                        
+                                    
                                                             ?>
                                                                 <tr>
                                                                     <td><?php echo $i++ ?></td>
                                                                     <td><?php echo $row['user']?></td>
+                                                                    <th>--</th>
+                                                                    <td><?php echo $row['metamaskid']?></td>
                                                                     <td><?php echo $row['withdraw'] ?></td>
                                                                     <td><?php echo $row['deposit'] ?></td>
-                                                                    <td>Payment Approved</td>
+                                                                    <td>Payment <?php echo $row['status'] ?></td>
                                                                     <td><?php echo $row['timestamp']?></td>
+
                                                                 </tr>
-                                                               <?php } ?>
+                            
+                                                            <?php
+                                                                }?>
                                                        
                                                        
                                                     </tbody>

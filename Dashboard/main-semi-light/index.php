@@ -546,10 +546,10 @@ input::-webkit-inner-spin-button {
                           <div>
                             <p class="mb-0">Deposit</p>
                             <h3 class="my-0 text-dark fw-700">$<?php
-                            if($deposite_row['d_amount'] == NULL){
+                            if($user_row['deposit'] == NULL){
                               echo "0.00";
                             }else{
-                            echo $deposite_row['d_amount'];
+                            echo $user_row['deposit'];
                             }
                             ?></h3>
                           </div>
@@ -575,10 +575,10 @@ input::-webkit-inner-spin-button {
                           <div>
                             <p class="mb-0">Withdraw</p>
                             <h3 class="my-0 text-dark fw-700">$<?php 
-                            if($withdraw_row['w_amount'] == NULL){
+                            if($user_row['withdraw'] == NULL){
                               echo "0.00";
                             }else{
-                            echo $withdraw_row['w_amount'];
+                            echo $user_row['withdraw'];
                             }
                             ?></h3>
                           </div>

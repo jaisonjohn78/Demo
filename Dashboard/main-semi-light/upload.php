@@ -24,40 +24,43 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
             // Insert image file name into database
             $insert = $con->query("INSERT into deposite (user_id,image_path,timestamp) VALUES ('$id','".$fileName."','$today')");
             if($insert){
-                alert("The file ".$fileName. " has been uploaded successfully.");
                 ?>
                 <script>
+                    alert("The file has been uploaded successfully.");
                     window.location.href='payment.php';
                 </script>
                 <?php
             }else{
-                alert("File upload failed, please try again.");
                 ?>
                 <script>
+                    alert("File upload failed, please try again.");
                     window.location.href='payment.php';
                 </script>
                 <?php
             } 
         }else{
-            alert("Sorry, there was an error uploading your file.");
+            
             ?>
                 <script>
+                    alert("Sorry, there was an error uploading your file.");
                     window.location.href='payment.php';
                 </script>
                 <?php
         }
     }else{
-        alert('Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.');
+        
         ?>
                 <script>
+                    alert('Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.');
                     window.location.href='payment.php';
                 </script>
                 <?php
     }
 }else{
-    alert('Please select a file to upload.');
+    
     ?>
                 <script>
+                    alert('Please select a file to upload.');
                     window.location.href='payment.php';
                 </script>
                 <?php
