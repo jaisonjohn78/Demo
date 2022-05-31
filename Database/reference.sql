@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2022 at 01:29 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: May 31, 2022 at 06:32 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,9 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `reference` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `reference_id` varchar(255) NOT NULL,
   `timestamp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reference`
+--
+
+INSERT INTO `reference` (`id`, `user_id`, `username`, `reference_id`, `timestamp`) VALUES
+(6, 3, 'test1', 'DdGv4wZX', 'May 31, 2022, 6:30 pm'),
+(7, 3, 'test2', 'CUwEWTkA', 'May 31, 2022, 6:30 pm');
 
 --
 -- Indexes for dumped tables
@@ -52,7 +61,7 @@ ALTER TABLE `reference`
 -- AUTO_INCREMENT for table `reference`
 --
 ALTER TABLE `reference`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

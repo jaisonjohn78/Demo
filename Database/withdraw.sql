@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2022 at 01:27 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: May 31, 2022 at 06:32 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `withdraw` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `metamaskID` varchar(255) NOT NULL,
-  `w_amount` int(11) NOT NULL,
+  `w_amount` int(11) NOT NULL DEFAULT 0,
   `status` varchar(100) NOT NULL DEFAULT 'pending',
   `timestamp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -54,7 +54,7 @@ ALTER TABLE `withdraw`
 -- AUTO_INCREMENT for table `withdraw`
 --
 ALTER TABLE `withdraw`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
