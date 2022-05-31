@@ -11,6 +11,7 @@ $id = $_SESSION['id'];
 
 $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
 $user_row = mysqli_fetch_assoc($user_sql);
+$deposit = $user_row['deposit'];
 if ($user_row['admin'] == 1) {
   header("Location: admin.php");
 }
@@ -53,6 +54,163 @@ $deposite_row = mysqli_fetch_assoc($deposite_sql);
 
 $withdraw_sql = mysqli_query($con, "SELECT SUM(w_amount) AS w_amount FROM withdraw WHERE user_id = $id");
 $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
+$today = date("F j, Y, g:i a"); 
+
+if(isset($_POST['package1'])){
+    if($deposit >= 200){
+        $new_deposite_amount = $deposit - 200;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 1','200','$today')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+if(isset($_POST['package2'])){
+    if($deposit >= 500){
+        $new_deposite_amount = $deposit - 500;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 2','500','$today')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+if(isset($_POST['package3'])){
+    if($deposit >= 1000){
+        $new_deposite_amount = $deposit - 1000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 3','1000','$today')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+if(isset($_POST['package4'])){
+    if($deposit >= 2000){
+        $new_deposite_amount = $deposit - 2000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 4','2000','$today')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+if(isset($_POST['package5'])){
+    if($deposit >= 4000){
+        $new_deposite_amount = $deposit - 4000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 5','4000','$today')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -514,11 +672,13 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
                                         <section id="price">
                                             <div class="container-fluid">
                                                 <div class="container p-1">
+                                                <form action="" method="POST">
                                                     <div class="row">
+                                                    
                                                         <div class="col-lg-4 col-md-12 mb-4">
                                                             <div class="card card1 h-100">
                                                                 <div class="card-body">
-
+                                                                   
                                                                     <h5 class="card-title">Basic</h5>
                                                                     <small class='text-muted'>Package 1</small>
                                                                     <br><br>
@@ -526,8 +686,8 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
                                                                     <span class="h2">$360</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button
-                                                                            class="btn btn-outline-dark btn-block">Select</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal" name="package1">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                         <li>$12/day for 30Days = $360</li>
@@ -535,10 +695,11 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
 
                                                                     </ul>
                                                                 </div>
-
-
                                                             </div>
+
                                                         </div>
+                                                        <!-- </form> -->
+                                                        <!-- <form action="" method="POST"> -->
                                                         <div class="col-lg-4 col-md-12 mb-4">
                                                             <div class="card card2 h-100">
                                                                 <div class="card-body">
@@ -550,8 +711,8 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
                                                                     <span class="h2">$900</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button
-                                                                            class="btn btn-outline-dark btn-block">Select</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-dark btn-block" name="package2">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                         <li>$30/day for 30Days = $900</li>
@@ -564,6 +725,8 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
 
                                                             </div>
                                                         </div>
+                                                    <!-- </form> -->
+                                                    <!-- <form action="" method="POST"> -->
                                                         <div class="col-lg-4 col-md-12 mb-4">
                                                             <div class="card card3 h-100">
                                                                 <div class="card-body">
@@ -575,8 +738,8 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
                                                                     <span class="h2">$1800</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button
-                                                                            class="btn btn-outline-dark btn-block">Select</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-dark btn-block" name="package3">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                     <li>$60/day for 30Days = $1800</li>
@@ -589,8 +752,10 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
 
                                                             </div>
                                                         </div>
-
+                                                    <!-- </form> -->
+                                                    
                                                         <div class="row align-items-center">
+                                                    <!-- <form action="" method="POST"> -->
                                                         <div class="col-lg-6 col-md-12 mb-4">
                                                             <div class="card card1 h-100">
                                                                 <div class="card-body">
@@ -602,8 +767,8 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
                                                                     <span class="h2">$3600</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button
-                                                                            class="btn btn-outline-dark btn-block">Select</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-dark btn-block" name="package4">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                     <li>$120/day for 30Days = $3600</li>
@@ -618,6 +783,8 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
 
                                                             </div>
                                                         </div>
+                                                    <!-- </form> -->
+                                                    <!-- <form action="" method="POST"> -->
                                                         <div class="col-lg-6 col-md-12 mb-4">
                                                             <div class="card card3 h-100">
                                                                 <div class="card-body">
@@ -629,8 +796,8 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
                                                                     <span class="h2">$7200</span>/month
                                                                     <br><br>
                                                                     <div class="d-grid my-3">
-                                                                        <button
-                                                                            class="btn btn-outline-dark btn-block">Select</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-outline-dark btn-block" name="package5">Select</button>
                                                                     </div>
                                                                     <ul>
                                                                     <li>$240/day for 30Days = $7200</li>
@@ -641,9 +808,10 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
 
 
                                                             </div>
+                                                        </div> 
+                                                   
                                                         </div>
-                                                        </div>
-
+                                                    </form>
                                                     </div>
                                                 </div>
 
@@ -681,9 +849,21 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
                                             <h1 class="fw-500">
                                                 $<?php echo number_format((float)$user_row['amount'], 2, '.', ''); ?>
                                             </h1>
+                                            <?php
+                                                $package_status = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
+                                                while($package_row=mysqli_fetch_assoc($package_status)){
+                                                    if($package_row['status'] == 0){
+                                            ?>
                                             <!-- <p class="text-center p-1 px-5 bg-primary fw-500">Pacakge 1 Activated</p> -->
-                                            <p class="text-center p-1 px-5 bg-warning fw-500">No Pacakge is Activated !
-                                            </p>
+                                            <p class="text-center p-1 px-5 bg-warning fw-500"><?php echo $package_row['package_name']?> is Not Activated !</p>
+                                            <?php } 
+                                                else {
+                                                    ?>
+                                                <p class="text-center p-1 px-5 bg-primary fw-500"><?php echo $package_row['package_name']?> is Activated</p>
+                                                    <?php
+                                                }
+                                            }
+                                                ?>
                                             <div class="d-flex">
                                                 <p class="m-0">
                                                     <a type="button" href="payment.php"
@@ -959,6 +1139,9 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
         $(document).ready(function() {
             $('#example').DataTable();
