@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2022 at 01:29 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: May 31, 2022 at 06:32 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,6 +31,7 @@ CREATE TABLE `history` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `user` varchar(255) NOT NULL,
+  `metamaskid` varchar(255) NOT NULL DEFAULT '--',
   `timestamp` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `withdraw` varchar(255) NOT NULL DEFAULT '--',
@@ -41,10 +42,10 @@ CREATE TABLE `history` (
 -- Dumping data for table `history`
 --
 
-INSERT INTO `history` (`id`, `user_id`, `user`, `timestamp`, `status`, `withdraw`, `deposit`) VALUES
-(1, 3, 'hardik', 'May 28, 2022, 6:31 pm', 'confirm', '--', '50'),
-(2, 5, 'test2', 'May 29, 2022, 11:09 pm', 'confirm', '--', '500'),
-(3, 4, 'test1', 'May 30, 2022, 12:44 pm', 'confirm', '--', '100');
+INSERT INTO `history` (`id`, `user_id`, `user`, `metamaskid`, `timestamp`, `status`, `withdraw`, `deposit`) VALUES
+(1, 3, 'hardik', '--', 'May 30, 2022, 7:59 pm', 'confirm', '--', '1000'),
+(2, 3, 'hardik', 'slc', 'May 30, 2022, 7:59 pm', 'confirm', '1000', '--'),
+(3, 3, 'hardik', '--', 'May 30, 2022, 8:00 pm', 'Reject', '--', '477');
 
 --
 -- Indexes for dumped tables

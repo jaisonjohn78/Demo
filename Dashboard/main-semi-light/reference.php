@@ -19,11 +19,17 @@ $id = $_SESSION['id'];
         $today = date("F j, Y, g:i a"); 
 
         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
+        $result =mysqli_fetch_assoc($sql);
+        $username=$result['username'];
+        $total_balance = $result['amount'];
         $sql1 = mysqli_query($con,"SELECT * from reference WHERE user_id = $id AND reference_id = '$reference_code'");
         if(mysqli_num_rows($sql)){
             if(mysqli_num_rows($sql1) == 0){
               if($reference_code != $ref_code){
-                mysqli_query($con,"INSERT INTO `reference`(`user_id`,`reference_id`,`timestamp`) VALUES ('$id','$reference_code','$today')");
+                mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`reference_id`,`timestamp`) VALUES ('$id','$username','$reference_code','$today')");
+                $ref_profit = ($total_balance*10)/100;
+                $new_total_balance = $total_balance + $ref_profit;
+                mysqli_query($con,"UPDATE users SET amount = '$new_total_balance' where reference_id = '$reference_code'");
               }
               else{
                 $msg = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
@@ -280,7 +286,7 @@ $id = $_SESSION['id'];
                                                     <thead>
                                                         <tr>
                                                             <th>ID</th>
-                                                            <th>User id</th>
+                                                            <th>User Name</th>
                                                             <th>Reference Code</th>
                                                             <th>Done</th>
                                                         </tr>
@@ -295,7 +301,7 @@ $id = $_SESSION['id'];
                                                     ?>
                                                         <tr>
                                                             <td><?php echo $i++ ?></td>
-                                                            <td><?php echo $row['user_id']?></td>
+                                                            <td><?php echo $row['username']?></td>
                                                             <td><?php echo $row['reference_id']?></td>
                                                             <td><i
                                             class="mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box">
