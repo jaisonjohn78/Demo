@@ -17,7 +17,28 @@ if ($user_row['admin'] == 1) {
 }
 
 date_default_timezone_set("Asia/Kolkata");
-$today = date("F j, Y, g:i:s");
+$today = date("F j, Y, G:i:s");
+$next_claim = date("F j, Y G:i:s", strtotime("+1 day"));
+
+$check_package = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
+$check_package_id = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id");
+
+$package_row = mysqli_fetch_assoc($check_package);
+$check_time = $package_row['timestamp'];
+$reward = $package_row['reward'];
+
+
+// claim reward system 
+if(isset($_POST['claim'])){
+    mysqli_query($con, "UPDATE package SET timestamp = '$next_claim' where user_id = $id");
+    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where user_id = $id");
+
+}
+ 
+
+
+
+
 
 
 // API from Coinlayer.com 
@@ -157,7 +178,7 @@ if(isset($_POST['package4'])){
         if($update_deposite_sql){
             ?>
             <script>
-                alert("Successfully activated your paln");
+                alert("Successfully activated your plan");
                 window.location.href='index.php';
             </script>
             <?php
@@ -509,27 +530,36 @@ if(isset($_POST['package5'])){
                                         <div>
                     
                                             <?php
-                                                $check_package = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id");
-                                                // while($package_rows = mysqli_fetch_assoc($check_package)){
-                                                if(mysqli_num_rows($check_package)){
+                                                
+                                                if(mysqli_num_rows($check_package_id)){
+                                                    
+                                                    if(strtotime($today) >= strtotime($check_time) ) {
+                                                    
                                             ?>
-                                                <form action="" method="post">
+                                                    <form method="POST">
                                                     <center><button type="submit" name="claim" class="button-64" id="claim"
                                                         role="button" ><span class="text">Claim now !</span></button>
                                                 </center>
-                                                </form>
+                                                    </form>
+                                                
+                                                <?php
+                                                } else {
+                                            
+                                                ?>
+                                            
                                                     <h2 id='demo'>24 : 00 : 00</h2>
                                                     <h5>hr : min: sec</h5>
                                             <?php 
-                                                }
+                                               } 
+                                            }
                                                 else{
                                                     ?>
                                                     <center><button type="submit" name="claim" class="button-64"
-                                                        role="button" style="cursor:none;"><span class="text">No Package Activated!</span></button>
+                                                        role="button" style="cursor:not-allowed;"><span class="text">No Package Activated!</span></button>
                                                     </center>
                                                     <?php
                                                 }
-                                            // }
+                                            
                                             ?>
                                         </div>
 
@@ -1205,22 +1235,14 @@ if(isset($_POST['package5'])){
                 });
         });
         </script>
-        <?php
-       
-            $timestamp_sql = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
-            $t_row=mysqli_fetch_assoc($timestamp_sql);
-            $timestamp = $t_row['timestamp'];
-            if($today <= $timestamp){
-                ?>
-                <script>
-                    document.getElementById("claim").style.cursor = "not-allowed";
-                </script>
-                    <?php
-                if(isset($_POST['claim'])){
-                        ?>
+
+
                     <script>
+                        if ( window.history.replaceState ) {
+                            window.history.replaceState( null, null, window.location.href );
+                        }
                     // Set the date we're counting down to
-                    var countDownDate = new Date("<?php echo $timestamp ?>").getTime();
+                    var countDownDate = new Date("<?php echo $check_time ?>").getTime();
 
                     // Update the count down every 1 second
                     var x = setInterval(function() {
@@ -1248,16 +1270,7 @@ if(isset($_POST['package5'])){
                         }
                     }, 1000);
                     </script>
-                <?php } 
-            }else{
-                $datetime = date("F j, Y G:i:s", strtotime("+1 day"));
-                mysqli_query($con, "UPDATE package SET timestamp = '$datetime' where user_id = $id");
-                ?>
-                <script>
-                    document.getElementById("claim").style.cursor = "allowed";
-                </script>
-                    <?php
-            }  ?>
+              
         <script src="js/vendors.min.js"></script>
         <script src="js/pages/chat-popup.js"></script>
         <script src="../assets/icons/feather-icons/feather.min.js"></script>
