@@ -510,7 +510,7 @@ if(isset($_POST['package5'])){
                     
                                             <?php
                                                 $check_package = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id");
-                                                while($package_rows = mysqli_fetch_assoc($check_package)){
+                                                // while($package_rows = mysqli_fetch_assoc($check_package)){
                                                 if(mysqli_num_rows($check_package)){
                                             ?>
                                                 <form action="" method="post">
@@ -529,7 +529,7 @@ if(isset($_POST['package5'])){
                                                     </center>
                                                     <?php
                                                 }
-                                            }
+                                            // }
                                             ?>
                                         </div>
 
