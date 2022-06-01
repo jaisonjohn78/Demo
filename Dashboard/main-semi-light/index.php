@@ -17,7 +17,7 @@ if ($user_row['admin'] == 1) {
 }
 
 date_default_timezone_set("Asia/Kolkata");
-$today = date("F j, Y, g:i a");
+$today = date("F j, Y, g:i:s");
 
 
 // API from Coinlayer.com 
@@ -54,7 +54,7 @@ $deposite_row = mysqli_fetch_assoc($deposite_sql);
 
 $withdraw_sql = mysqli_query($con, "SELECT SUM(w_amount) AS w_amount FROM withdraw WHERE user_id = $id");
 $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
-$today = date("F j, Y, g:i a"); 
+// $today = date("F j, Y, g:i a"); 
 
 if(isset($_POST['package1'])){
     if($deposit >= 200){
@@ -211,6 +211,7 @@ if(isset($_POST['package5'])){
         <?php
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -506,15 +507,30 @@ if(isset($_POST['package5'])){
                                         <!-- claim button  -->
 
                                         <div>
+                    
                                             <?php
-
-                      ?>
-                                            <center><button type="submit" name="claim" class="button-64"
-                                                    role="button"><span class="text">Claim now !</span></button>
-                                            </center>
-
-                                            <h2 id="demo">24 : 00 : 00</h2>
-                                            <h5>hr : min: sec</h5>
+                                                $check_package = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id");
+                                                // while($package_rows = mysqli_fetch_assoc($check_package)){
+                                                if(mysqli_num_rows($check_package)){
+                                            ?>
+                                                <form action="" method="post">
+                                                    <center><button type="submit" name="claim" class="button-64" id="claim"
+                                                        role="button" ><span class="text">Claim now !</span></button>
+                                                </center>
+                                                </form>
+                                                    <h2 id='demo'>24 : 00 : 00</h2>
+                                                    <h5>hr : min: sec</h5>
+                                            <?php 
+                                                }
+                                                else{
+                                                    ?>
+                                                    <center><button type="submit" name="claim" class="button-64"
+                                                        role="button" style="cursor:none;"><span class="text">No Package Activated!</span></button>
+                                                    </center>
+                                                    <?php
+                                                }
+                                            // }
+                                            ?>
                                         </div>
 
 
@@ -1189,37 +1205,59 @@ if(isset($_POST['package5'])){
                 });
         });
         </script>
-        <script>
-        // Set the date we're counting down to
-        var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
+        <?php
+       
+            $timestamp_sql = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
+            $t_row=mysqli_fetch_assoc($timestamp_sql);
+            $timestamp = $t_row['timestamp'];
+            if($today <= $timestamp){
+                ?>
+                <script>
+                    document.getElementById("claim").style.cursor = "not-allowed";
+                </script>
+                    <?php
+                if(isset($_POST['claim'])){
+                        ?>
+                    <script>
+                    // Set the date we're counting down to
+                    var countDownDate = new Date("<?php echo $timestamp ?>").getTime();
 
-        // Update the count down every 1 second
-        var x = setInterval(function() {
+                    // Update the count down every 1 second
+                    var x = setInterval(function() {
 
-            // Get today's date and time
-            var now = new Date().getTime();
+                        // Get today's date and time
+                        var now = new Date().getTime();
 
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
+                        // Find the distance between now and the count down date
+                        var distance = countDownDate - now;
 
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        // Time calculations for days, hours, minutes and seconds
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Output the result in an element with id="demo"
-            document.getElementById("demo").innerHTML = hours + "h " +
-                minutes + "m " + seconds + "s ";
+                        // Output the result in an element with id="demo"
+                        document.getElementById("demo").innerHTML = hours + "h " +
+                            minutes + "m " + seconds + "s ";
 
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("demo").innerHTML = "EXPIRED";
-            }
-        }, 1000);
-        </script>
-
+                        // If the count down is over, write some text 
+                        if (distance < 0) {
+                            clearInterval(x);
+                            document.getElementById("demo").innerHTML = "EXPIRED";
+                        }
+                    }, 1000);
+                    </script>
+                <?php } 
+            }else{
+                $datetime = date("F j, Y G:i:s", strtotime("+1 day"));
+                mysqli_query($con, "UPDATE package SET timestamp = '$datetime' where user_id = $id");
+                ?>
+                <script>
+                    document.getElementById("claim").style.cursor = "allowed";
+                </script>
+                    <?php
+            }  ?>
         <script src="js/vendors.min.js"></script>
         <script src="js/pages/chat-popup.js"></script>
         <script src="../assets/icons/feather-icons/feather.min.js"></script>
