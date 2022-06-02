@@ -384,7 +384,11 @@ if (isset($_POST['sign-in'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
+	<link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <link rel="stylesheet" href="style.css">
 	<style> 
 		i {
@@ -416,6 +420,15 @@ if (isset($_POST['sign-in'])) {
                 color:black;
             }
         }
+        .hide{
+         display: none;
+        }
+        .iti input, .iti input[type=text], .iti input[type=tel] {
+            width:157% !important;
+        }
+        #valid-msg{
+            color:white;
+        }
 	</style>
 </head>
 <body>
@@ -442,9 +455,11 @@ if (isset($_POST['sign-in'])) {
 							<input type="email" name="email" placeholder="Email" required>
 						</div>
 
-						<div class="input-group">
-						<i class="fa-solid fa-phone"></i>
-							<input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
+						<div class="input-group" style="width:64%;">
+						    <!-- <i class="fa-solid fa-phone"></i> -->
+							<input type="tel" name="phone" class="phone" required>
+                            <!-- <span id="valid-msg" class="hide">✓ Valid</span>
+                            <span id="error-msg" class="hide"></span> -->
 						</div>
         
 						<div class="input-group">
@@ -563,6 +578,42 @@ if (isset($_POST['sign-in'])) {
         window.history.replaceState( null, null, window.location.href );
     }
 	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script>
 
+var input = document.querySelector(".phone"),
+    errorMsg = document.querySelector("#error-msg"),
+    validMsg = document.querySelector("#valid-msg");
+
+var errorMap = [ "Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+var intl = window.intlTelInput(input, {
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+});
+
+var reset = function() {
+    input.classList.remove("error");
+    errorMsg.innerHTML = "";
+    errorMsg.classList.add("hide");
+    validMsg.classList.add("hide");
+};
+
+input.addEventListener('blur', function() {
+    reset();
+    if(input.value.trim()){
+        if(intl.isValidNumber()){
+            validMsg.classList.remove("hide");
+        }else{
+            input.classList.add("error");
+            var errorCode = intl.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            errorMsg.classList.remove("hide");
+        }
+    }
+});
+
+input.addEventListener('change', reset);
+input.addEventListener('keyup', reset);
+  </script>
 </body>
 </html>

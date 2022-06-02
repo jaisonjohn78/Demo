@@ -1207,8 +1207,9 @@ if(isset($_POST['package5'])){
         </script>
         <?php
        
-            $timestamp_sql = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
+            $timestamp_sql = mysqli_query($con, "SELECT sum(package_price) as package_price FROM package WHERE user_id = $id and days != 0");
             $t_row=mysqli_fetch_assoc($timestamp_sql);
+            $package_price = $t_row['package_price'];
             $timestamp = $t_row['timestamp'];
             if($today <= $timestamp){
                 ?>
