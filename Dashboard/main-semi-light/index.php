@@ -1249,8 +1249,6 @@ if(isset($_POST['package5'])){
                 });
         });
         </script>
-
-
                     <script>
                         if ( window.history.replaceState ) {
                             window.history.replaceState( null, null, window.location.href );
