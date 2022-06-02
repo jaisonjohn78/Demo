@@ -24,7 +24,7 @@
 html,
 body {
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: #323945;
 }
 
@@ -54,6 +54,7 @@ body {
 .form-wrapper {
   width: 100%;
   max-width: 28rem;
+  margin-bottom: 0px;
 }
 
 .form {
@@ -406,5 +407,8 @@ body {
   }
   #sign_up h2 {
     display: none;
+  }
+  .form-wrapper {
+    margin-bottom: 54px !important;
   }
 }

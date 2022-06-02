@@ -384,9 +384,15 @@ if (isset($_POST['sign-in'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
 	
     <link rel="stylesheet" href="style.css">
 	<style> 
+        
 		i {
 			font-size: 16px !important;
 		}
@@ -416,6 +422,16 @@ if (isset($_POST['sign-in'])) {
                 color:black;
             }
         }
+
+        .hide{
+         display: none;
+        }
+        .iti input, .iti input[type=text], .iti input[type=tel] {
+            width:157% !important;
+        }
+        #valid-msg{
+            color:white;
+        }
 	</style>
 </head>
 <body>
@@ -442,9 +458,11 @@ if (isset($_POST['sign-in'])) {
 							<input type="email" name="email" placeholder="Email" required>
 						</div>
 
-						<div class="input-group">
-						<i class="fa-solid fa-phone"></i>
-							<input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
+                        <div class="input-group" style="width:64%;">
+						    <!-- <i class="fa-solid fa-phone"></i> -->
+							<input type="tel" name="phone" class="phone" required>
+                            <!-- <span id="valid-msg" class="hide">✓ Valid</span>
+                            <span id="error-msg" class="hide"></span> -->
 						</div>
         
 						<div class="input-group">
@@ -461,7 +479,7 @@ if (isset($_POST['sign-in'])) {
 
 						</form>
 						
-						<p>
+						<p class="mb-5">
 							<span>
 								Already have an account?
 							</span>
@@ -475,7 +493,7 @@ if (isset($_POST['sign-in'])) {
 			</div>
 			<!-- END SIGN UP -->
 			<!-- SIGN IN -->
-			<div class="col align-items-center flex-col sign-in">
+			<div class="col align-items-center flex-col sign-in pb-5">
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-in">
                         <h2 class="register_login">SIGN IN</h2>
@@ -495,7 +513,7 @@ if (isset($_POST['sign-in'])) {
 
 
 						</form>
-						
+						<div class="mb-5">
 						<p>
 							<a href="forgot-password.php" class="link"><b>
 								Forgot password?
@@ -509,6 +527,7 @@ if (isset($_POST['sign-in'])) {
 								Sign up here
 							</b>
 						</p>
+                        </div>
 					</div>
 				</div>
 				<div class="form-wrapper">
@@ -521,7 +540,7 @@ if (isset($_POST['sign-in'])) {
 		<!-- CONTENT SECTION -->
 		<div class="row content-row">
 			<!-- SIGN IN CONTENT -->
-			<div class="col align-items-center flex-col">
+			<div class="col align-items-center flex-col pb-5">
 				<div class="text sign-in">
 					<h2>
 						<div class="bitcoin">
@@ -558,6 +577,43 @@ if (isset($_POST['sign-in'])) {
 		<!-- END CONTENT SECTION -->
 	</div>
     <script src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script>
+
+var input = document.querySelector(".phone"),
+    errorMsg = document.querySelector("#error-msg"),
+    validMsg = document.querySelector("#valid-msg");
+
+var errorMap = [ "Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+var intl = window.intlTelInput(input, {
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+});
+
+var reset = function() {
+    input.classList.remove("error");
+    errorMsg.innerHTML = "";
+    errorMsg.classList.add("hide");
+    validMsg.classList.add("hide");
+};
+
+input.addEventListener('blur', function() {
+    reset();
+    if(input.value.trim()){
+        if(intl.isValidNumber()){
+            validMsg.classList.remove("hide");
+        }else{
+            input.classList.add("error");
+            var errorCode = intl.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            errorMsg.classList.remove("hide");
+        }
+    }
+});
+
+input.addEventListener('change', reset);
+input.addEventListener('keyup', reset);
+  </script>
 	<script>
 		    if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
