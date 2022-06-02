@@ -23,15 +23,21 @@ $next_claim = date("F j, Y G:i:s", strtotime("+1 day"));
 $check_package = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
 $check_package_id = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id");
 
-$package_row = mysqli_fetch_assoc($check_package);
-$check_time = $package_row['timestamp'];
-$reward = $package_row['reward'];
+if (mysqli_num_rows($check_package) > 0) {
+    
+    $package_row = mysqli_fetch_assoc($check_package);
+    $check_time = $package_row['timestamp'];
+    $reward = $package_row['reward'];
+}
+
 
 
 // claim reward system 
 if(isset($_POST['claim'])){
-    mysqli_query($con, "UPDATE package SET timestamp = '$next_claim' where user_id = $id");
-    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where user_id = $id");
+    mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id");
+    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where id = $id");
+    redirect('index.php');
+
 
 }
  
@@ -77,11 +83,12 @@ $withdraw_sql = mysqli_query($con, "SELECT SUM(w_amount) AS w_amount FROM withdr
 $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
 // $today = date("F j, Y, g:i a"); 
 
+
 if(isset($_POST['package1'])){
     if($deposit >= 200){
         $new_deposite_amount = $deposit - 200;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 1','200','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 1','200', '12','$today')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -112,7 +119,7 @@ if(isset($_POST['package2'])){
     if($deposit >= 500){
         $new_deposite_amount = $deposit - 500;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 2','500','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 2','500','30','$today')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -143,7 +150,7 @@ if(isset($_POST['package3'])){
     if($deposit >= 1000){
         $new_deposite_amount = $deposit - 1000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 3','1000','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 3','1000','60','$today')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -174,7 +181,7 @@ if(isset($_POST['package4'])){
     if($deposit >= 2000){
         $new_deposite_amount = $deposit - 2000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 4','2000','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 4','2000','120','$today')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -205,7 +212,7 @@ if(isset($_POST['package5'])){
     if($deposit >= 4000){
         $new_deposite_amount = $deposit - 4000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`timestamp`)VALUES($id,'package 5','4000','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 5','4000', '240', '$today')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -523,7 +530,7 @@ if(isset($_POST['package5'])){
                                 <div class="box">
                                     <div class="box-body text-center">
 
-                                        <h1 class="text-bold">Claim $60 in ..</h1>
+                                        <h1 class="text-bold">Claim Daily reward</h1>
 
                                         <!-- claim button  -->
 
@@ -1134,19 +1141,19 @@ if(isset($_POST['package5'])){
                                                 <li class="be-1 border-gray">
                                                     <div>% 24h</div>
                                                     <small class="fs-16"><i
-                                                            class="fa fa-arrow-up text-success pe-5"></i>1.4</small>
+                                                            class="fa fa-arrow-up text-success pe-2"></i>1.4</small>
                                                 </li>
 
                                                 <li class="be-1 border-gray">
                                                     <div>% 30d</div>
                                                     <small class="fs-16"><i
-                                                            class="fa fa-arrow-up text-success pe-5"></i>3.29</small>
+                                                            class="fa fa-arrow-up text-success pe-2"></i>3.29</small>
                                                 </li>
 
                                                 <li>
                                                     <div>% 1y</div>
                                                     <small class="fs-16"><i
-                                                            class="fa fa-arrow-up text-success pe-5"></i>54.7</small>
+                                                            class="fa fa-arrow-up text-success pe-2"></i>54.7</small>
                                                 </li>
                                             </ul>
                                         </div>
