@@ -20,31 +20,87 @@ date_default_timezone_set("Asia/Kolkata");
 $today = date("F j, Y, G:i:s");
 $next_claim = date("F j, Y G:i:s", strtotime("+1 day"));
 
-$check_package = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
-$check_package_id = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id");
+$check_package = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+$check_package_id = mysqli_query($con, "SELECT id,timestamp FROM package WHERE user_id = $id AND status = 1 AND days != 0");
 
+// $check_time = array();
 if (mysqli_num_rows($check_package) > 0) {
-    
     $package_row = mysqli_fetch_assoc($check_package);
     $check_time = $package_row['timestamp'];
     $reward = $package_row['reward'];
+   
 }
+// $check_time_new = json_encode($check_time);
 
+$id1 = array();
 
-
+// timee code //
+$package_id_sql = mysqli_query($con, "SELECT id,timestamp FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+while($package_id = mysqli_fetch_assoc($package_id_sql)){
+    $id1[] =$package_id['id'];
+}
+if(mysqli_num_rows($package_id_sql) == 1){
+    $first_id = json_encode($id1[0]);
+}elseif(mysqli_num_rows($package_id_sql) == 2){
+    $first_id = json_encode($id1[0]);
+    $second_id = json_encode($id1[1]);
+}
+elseif(mysqli_num_rows($package_id_sql) == 3){
+    $first_id = json_encode($id1[0]);
+    $second_id = json_encode($id1[1]);
+    $third_id = json_encode($id1[2]);
+}
 // claim reward system 
-if(isset($_POST['claim'])){
-    mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id");
+if(isset($_POST['claim_10'])){
+    mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id AND id = $first_id");
     mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where id = $id");
     redirect('index.php');
 }
- 
+if(isset($_POST['claim_20'])){
+    mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id AND id = $second_id");
+    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where id = $id");
+    redirect('index.php');
+}
+if(isset($_POST['claim_30'])){
+    mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id AND id = $third_id");
+    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where id = $id");
+    redirect('index.php');
+}
 
+if(mysqli_num_rows($package_id_sql) == 1){
+$first_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $first_id AND days != 0");
+$first_timestamp_row = mysqli_fetch_assoc($first_timestamp_sql);
+$first_timestamp = $first_timestamp_row['timestamp'];
+$first_reward = $first_timestamp_row['reward'];
+}
+elseif(mysqli_num_rows($package_id_sql) == 2){
+$first_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $first_id AND days != 0");
+$first_timestamp_row = mysqli_fetch_assoc($first_timestamp_sql);
+$first_timestamp = $first_timestamp_row['timestamp'];
+$first_reward = $first_timestamp_row['reward'];
+$second_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $second_id AND days != 0");
+$second_timestamp_row = mysqli_fetch_assoc($second_timestamp_sql);
+$second_timestamp = $second_timestamp_row['timestamp'];
+$second_reward = $second_timestamp_row['reward'];
 
+}
+elseif(mysqli_num_rows($package_id_sql) == 3){
+$first_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $first_id AND days != 0");
+$first_timestamp_row = mysqli_fetch_assoc($first_timestamp_sql);
+$first_timestamp = $first_timestamp_row['timestamp'];
+$first_reward = $first_timestamp_row['reward'];
 
+$second_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $second_id days != 0");
+$second_timestamp_row = mysqli_fetch_assoc($second_timestamp_sql);
+$second_timestamp = $second_timestamp_row['timestamp'];
+$second_reward = $second_timestamp_row['reward'];
 
+$third_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $third_id days != 0");
+$third_timestamp_row = mysqli_fetch_assoc($third_timestamp_sql);
+$third_timestamp = $third_timestamp_row['timestamp'];
+$third_reward = $third_timestamp_row['reward'];
 
-
+}
 // API from Coinlayer.com 
 // $key = "53e1d737e84c49af9a618033520546af";
 // $link = "http://api.coinlayer.com/api/live?access_key=".$key;
@@ -83,10 +139,12 @@ $withdraw_row = mysqli_fetch_assoc($withdraw_sql);
 
 
 if(isset($_POST['package1'])){
+$package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
     if($deposit >= 200){
         $new_deposite_amount = $deposit - 200;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 1','200', '12','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 1','200', '12','$next_claim')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -113,11 +171,23 @@ if(isset($_POST['package1'])){
         <?php
     }
 }
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
+
 if(isset($_POST['package2'])){
+$package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
     if($deposit >= 500){
         $new_deposite_amount = $deposit - 500;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 2','500','30','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 2','500','30','$next_claim')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -144,11 +214,22 @@ if(isset($_POST['package2'])){
         <?php
     }
 }
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
 if(isset($_POST['package3'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+    if(mysqli_num_rows($package_count_sql) < 3){
     if($deposit >= 1000){
         $new_deposite_amount = $deposit - 1000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 3','1000','60','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 3','1000','60','$next_claim')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -175,11 +256,22 @@ if(isset($_POST['package3'])){
         <?php
     }
 }
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
 if(isset($_POST['package4'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
     if($deposit >= 2000){
         $new_deposite_amount = $deposit - 2000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 4','2000','120','$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 4','2000','120','$next_claim')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -206,11 +298,22 @@ if(isset($_POST['package4'])){
         <?php
     }
 }
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
 if(isset($_POST['package5'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
     if($deposit >= 4000){
         $new_deposite_amount = $deposit - 4000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 5','4000', '240', '$today')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 5','4000', '240', '$next_claim')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -237,6 +340,16 @@ if(isset($_POST['package5'])){
         <?php
     }
 }
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
+// }
 
 ?>
 <!DOCTYPE html>
@@ -536,44 +649,96 @@ if(isset($_POST['package5'])){
                     
                                             <?php
                                             $i = 1;
-                                                while($claim_btns = mysqli_fetch_assoc($check_package_id))
-                                                {
-                                        
-                                                    if(mysqli_num_rows($check_package_id))
-                                                    {
-                                                    
-                                                    if(strtotime($today) >= strtotime($check_time) ) 
-                                                        {
-                                                    
-                                            ?>
-                                                    <form method="POST">
-                                                    <center><button type="submit" name="claim" class="button-64" id="claim"
-                                                        role="button" ><span class="text">Claim now !</span></button>
-                                                </center>
-                                                    </form>
-                                                
-                                                <?php
-                                                } else {
-                                            
+                                            $timestamp = array();
+                                            if(mysqli_num_rows($check_package_id) == 0){
                                                 ?>
-                                            
-                                                    <h2 id='demo<?php echo $i ?>'>24 : 00 : 00</h2>
-                                                    <h5>hr : min: sec</h5>
-                                            <?php 
-                                                
-                                                $i = $i + 1;
-                                                
-                                               } 
-                                            }
-                                                else{
-                                                    ?>
-                                                    <center><button type="submit" name="claim" class="button-64"
+                                                <center><button type="submit" name="claim" class="button-64"
                                                         role="button" style="cursor:not-allowed;"><span class="text">No Package Activated!</span></button>
                                                     </center>
                                                     <?php
+                                            }
+                                                while($claim_btns = mysqli_fetch_assoc($check_package_id))
+                                                {
+                                                    $timestamp[] = $claim_btns['timestamp'];
+                                                }
+                                                
+                                                    if($time_row = mysqli_num_rows($check_package_id))
+                                                    {
+                                                    // if(strtotime($today) <= strtotime($check_time_new[0]) ||strtotime($today) <= strtotime($check_time_new[1]) ||strtotime($today) <= strtotime($check_time_new[2]))
+                                                    if(mysqli_num_rows($package_id_sql) == 1){
+                                                    if(strtotime($today) <= strtotime($first_timestamp)) 
+                                                    {
+                                            ?>
+                                                    <h2 id='demo1'>24 : 00 : 00</h2>
+                                                    <h5>hr : min: sec</h5>
+                                                <?php
+                                                    
+                                                }
+                                                else{
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64' id='claim' role='button' ><span class='text'>Claim $".$first_reward."now !</span></button></center></form>";
                                                 }
                                             }
-                                            
+                                            elseif(mysqli_num_rows($package_id_sql) == 2){
+                                                if(strtotime($today) <= strtotime($first_timestamp)) 
+                                                    {
+                                            ?>
+                                                    <h2 id='demo1'>24 : 00 : 00</h2>
+                                                    <h5>hr : min: sec</h5>
+                                                <?php
+                                                    
+                                                }
+                                                else{
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64' id='claim' role='button' ><span class='text'>Claim $".$first_reward."now !</span></button></center></form>";
+                                                }
+                                                if(strtotime($today) <= strtotime($second_timestamp)) 
+                                                    {
+                                            ?>
+                                                    <h2 id='demo2'>24 : 00 : 00</h2>
+                                                    <h5>hr : min: sec</h5>
+                                                <?php
+                                                    
+                                                }
+                                                else{
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_20' class='button-64' id='claim' role='button' ><span class='text'>Claim $".$second_reward."now !</span></button></center></form>";
+                                                }
+                                            }
+                                            elseif(mysqli_num_rows($package_id_sql) == 3){
+                                                if(strtotime($today) <= strtotime($first_timestamp)) 
+                                                    {
+                                            ?>
+                                                    <h2 id='demo1'>24 : 00 : 00</h2>
+                                                    <h5>hr : min: sec</h5>
+                                                <?php
+                                                    
+                                                }
+                                                else{
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64' id='claim' role='button' ><span class='text'>Claim <b>$".$first_reward."</b> now !</span></button></center></form>";
+                                                }
+                                                if(strtotime($today) <= strtotime($second_timestamp)) 
+                                                    {
+                                            ?>
+                                                    <h2 id='demo2'>24 : 00 : 00</h2>
+                                                    <h5>hr : min: sec</h5>
+                                                <?php
+                                                    
+                                                }
+                                                else{
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_20' class='button-64' id='claim' role='button' ><span class='text'>Claim <b>$".$second_reward."</b> now !</span></button></center></form>";
+                                                }
+                                                if(strtotime($today) <= strtotime($third_timestamp)) 
+                                                    {
+                                            ?>
+                                                    <h2 id='demo3'>24 : 00 : 00</h2>
+                                                    <h5>hr : min: sec</h5>
+                                                <?php
+                                                    
+                                                }
+                                                else{
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_30' class='button-64' id='claim' role='button' ><span class='text'>Claim <b>$".$third_reward."</b> now !</span></button></center></form>";
+                                                }
+                                            }
+                                            }
+                                            $timer = json_encode($timestamp);
                                             ?>
                                         </div>
 
@@ -1007,10 +1172,10 @@ if(isset($_POST['package5'])){
                                             <?php
                                                 $package_status = mysqli_query($con, "SELECT * FROM package WHERE user_id = $id");
                                                 while($package_row=mysqli_fetch_assoc($package_status)){
-                                                    if($package_row['status'] == 0){
+                                                    if($package_row['days'] == 0){
                                             ?>
                                             <!-- <p class="text-center p-1 px-5 bg-primary fw-500">Pacakge 1 Activated</p> -->
-                                            <p class="text-center p-1 px-5 bg-warning fw-500"><?php echo $package_row['package_name']?> is Not Activated !</p>
+                                            <p class="text-center p-1 px-5 bg-warning fw-500"><?php echo $package_row['package_name']?> is Expired !</p>
                                             <?php } 
                                                 else {
                                                     ?>
@@ -1250,11 +1415,14 @@ if(isset($_POST['package5'])){
         });
         </script>
                     <script>
+                        
+                        // console.log(timer_first[0]);
                         if ( window.history.replaceState ) {
                             window.history.replaceState( null, null, window.location.href );
                         }
                     // Set the date we're counting down to
-                    var countDownDate1 = new Date("<?php echo $check_time ?>").getTime();
+                    $timer_first  = <?php echo $timer ?>;
+                    var countDownDate1 = new Date($timer_first[0]).getTime();
 
                     // Update the count down every 1 second
                     var x1 = setInterval(function() {
@@ -1278,15 +1446,16 @@ if(isset($_POST['package5'])){
                         // If the count down is over, write some text 
                         if (distance1 < 0) {
                             clearInterval(x);
-                            document.getElementById("demo1").innerHTML = "EXPIRED";
+                            // document.getElementById("demo1").innerHTML = "<form method='POST'><center><button type='submit' name='claim_10' class='button-64' id='claim' role='button' ><span class='text'>Claim now !</span></button></center></form>";
                         }
                     }, 1000);
                     </script>
 
 
                     <script>
+                        $timer_first  = <?php echo $timer ?>;
                     // Set the date we're counting down to
-                    var countDownDate2 = new Date("<?php echo $check_time ?>").getTime();
+                    var countDownDate2 = new Date($timer_first[1]).getTime();
 
                     // Update the count down every 1 second
                     var x2 = setInterval(function() {
@@ -1309,15 +1478,17 @@ if(isset($_POST['package5'])){
                         // If the count down is over, write some text 
                         if (distance2 < 0) {
                             clearInterval(x2);
-                            document.getElementById("demo2").innerHTML = "EXPIRED";
+                            // document.getElementById("demo2").innerHTML = "<form method='POST'><center><button type='submit' name='claim_20' class='button-64' id='claim' role='button' ><span class='text'>Claim now !</span></button></center></form>";
                         }
                     }, 1000);
                     </script>
 
 
                     <script>
+                         $timer_first  = <?php echo $timer ?>;
+        
                     // Set the date we're counting down to
-                    var countDownDate3 = new Date("<?php echo $check_time ?>").getTime();
+                    var countDownDate3 = new Date($timer_first[2]).getTime();
 
                     // Update the count down every 1 second
                     var x3 = setInterval(function() {
@@ -1338,7 +1509,7 @@ if(isset($_POST['package5'])){
                         // If the count down is over, write some text 
                         if (distance3 < 0) {
                             clearInterval(x3);
-                            document.getElementById("demo3").innerHTML = "EXPIRED";
+                            // document.getElementById("demo3").innerHTML = "<form method='POST'><center><button type='submit' name='claim_30' class='button-64' id='claim' role='button' ><span class='text'>Claim now !</span></button></center></form>";
                         }
                     }, 1000);
                     </script>
