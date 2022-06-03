@@ -51,19 +51,43 @@ elseif(mysqli_num_rows($package_id_sql) == 3){
     $third_id = json_encode($id1[2]);
 }
 // claim reward system 
+if(mysqli_num_rows($package_id_sql) == 1){
+$first_reward_sql = mysqli_query($con, "SELECT * FROM package where user_id = $id AND id = $first_id");
+$first_reward_row = mysqli_fetch_assoc($first_reward_sql);
+$first_reward = $first_reward_row['reward'];
+}
+elseif(mysqli_num_rows($package_id_sql) == 2){
+$first_reward_sql = mysqli_query($con, "SELECT * FROM package where user_id = $id AND id = $first_id");
+$first_reward_row = mysqli_fetch_assoc($first_reward_sql);
+$first_reward = $first_reward_row['reward'];
+$second_reward_sql = mysqli_query($con, "SELECT * FROM package where user_id = $id AND id = $second_id");
+$second_reward_row = mysqli_fetch_assoc($second_reward_sql);
+$second_reward = $second_reward_row['reward'];
+}
+elseif(mysqli_num_rows($package_id_sql) == 3){
+    $first_reward_sql = mysqli_query($con, "SELECT * FROM package where user_id = $id AND id = $first_id");
+    $first_reward_row = mysqli_fetch_assoc($first_reward_sql);
+    $first_reward = $first_reward_row['reward'];
+    $second_reward_sql = mysqli_query($con, "SELECT * FROM package where user_id = $id AND id = $second_id");
+    $second_reward_row = mysqli_fetch_assoc($second_reward_sql);
+    $second_reward = $second_reward_row['reward'];
+    $third_reward_sql = mysqli_query($con, "SELECT * FROM package where user_id = $id AND id = $third_id");
+    $third_reward_row = mysqli_fetch_assoc($third_reward_sql);
+    $third_reward = $third_reward_row['reward'];
+}
 if(isset($_POST['claim_10'])){
     mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id AND id = $first_id");
-    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where id = $id");
+    mysqli_query($con, "UPDATE users SET amount = amount + '$first_reward' where id = $id");
     redirect('index.php');
 }
 if(isset($_POST['claim_20'])){
     mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id AND id = $second_id");
-    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where id = $id");
+    mysqli_query($con, "UPDATE users SET amount = amount + '$second_reward' where id = $id");
     redirect('index.php');
 }
 if(isset($_POST['claim_30'])){
     mysqli_query($con, "UPDATE package SET days = days - 1, timestamp = '$next_claim' where user_id = $id AND id = $third_id");
-    mysqli_query($con, "UPDATE users SET amount = amount + '$reward' where id = $id");
+    mysqli_query($con, "UPDATE users SET amount = amount + '$third_reward' where id = $id");
     redirect('index.php');
 }
 
