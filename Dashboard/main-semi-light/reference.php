@@ -8,9 +8,9 @@ if(!isset($_SESSION["id"])){
 }
 
 $id = $_SESSION['id'];
-
-    $ref_code=mysqli_query($con,"SELECT reference_id from users where id = $id");
-    $ref_result =mysqli_fetch_assoc($ref_code);
+// $ref_code = '';
+    $ref_code_sql=mysqli_query($con,"SELECT reference_id from users where id = $id");
+    $ref_result =mysqli_fetch_assoc($ref_code_sql);
     $ref_code = $ref_result['reference_id'];
     $msg = '';
 
@@ -45,6 +45,31 @@ $id = $_SESSION['id'];
             $msg ="<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
             text-align:center;'>Please Enter Valid Reference Code!!!</p>";
         }
+    }
+
+    if(isset($_POST['refresh'])){
+        $latest_id_sql = mysqli_query($con,"SELECT * from reference where user_id = $id  ORDER BY id DESC");
+        $latest_id_row = mysqli_fetch_assoc($latest_id_sql);
+        $latest_id = $latest_id_row['reference_id'];
+        $status = $latest_id_row['status'];
+        $check_ref_sql = mysqli_query($con,"SELECT deposit,reference_id,ref_reward,amount FROM users WHERE reference_id IN (SELECT reference_id from reference WHERE user_id = $id ) ORDER BY id DESC");
+        $check=mysqli_fetch_assoc($check_ref_sql);
+            $get_deposite = $check['deposit'];
+            $get_ref_code = $check['reference_id'];
+            $amount = $check['amount'];
+            if($get_deposite != 0 && $amount >= 0){
+                if($status == 0){
+              mysqli_query($con,"UPDATE `reference` SET `status`= 1   WHERE reference_id = '$get_ref_code'");
+              mysqli_query($con,"UPDATE `users` SET amount= amount + 50   WHERE id = '$id'");
+              mysqli_query($con,"UPDATE `users` SET amount= amount + 50   WHERE reference_id = '$latest_id'");
+            } }else{
+              ?>
+              <script>
+                  alert("Please Wait!! Insufficient Balance");
+                  window.location.href="reference.php";
+                  </script>
+                  <?php
+            }
     }
 ?>
 <!DOCTYPE html>
@@ -269,6 +294,11 @@ $id = $_SESSION['id'];
                                    <div class="card vh-auto">
                                         <div class="card-header">
                                             <h1 class="card-title text-dark fw-500">Refered Users</h1>
+                                            <form action="" method="post">
+                                            <button type="submit"  class="btn btn-info btn-lg" name="refresh">
+                                                <span class="glyphicon glyphicon-refresh" ></span> Refresh
+                                            </button>
+                                                </form>
                                         </div>
                                         <div class="card-body" style="overflow: scroll;">
                                             <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -292,9 +322,17 @@ $id = $_SESSION['id'];
                                                             <td><?php echo $i++ ?></td>
                                                             <td><?php echo $row['username']?></td>
                                                             <td><?php echo $row['reference_id']?></td>
-                                                            <td><i
-                                            class="mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box">
-                                        </i></td>
+                                                            <?php 
+                                                                if($row['status'] == 1 ){
+                                                                    echo "<td><i
+                                                                    class='mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box'>
+                                                                </i></td>";
+                                                                }
+                                                                else{
+                                                                    echo "<td><h4>Pending</h4></td>";
+                                                                }
+                                                            ?>
+                                                            
                                                         </tr>
                                                         <?php } ?>
                                                     </tbody>
