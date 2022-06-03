@@ -199,7 +199,7 @@ if(isset($_POST['sign-up']))
                                                         <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px;'>
                                                             <tr>
                                                                 <td bgcolor='#ffffff' align='center' valign='top' style='padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: Lato, Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;'>
-                                                                    <h1 style='font-size: 48px; font-weight: 400; margin: 2;'>Welcome!</h1> <img src='https://raw.githubusercontent.com/jaisonjohn78/Peradot/main/assets/img/logo.png' width='150' style='display: block; border: 0px;' />
+                                                                    <h1 style='font-size: 48px; font-weight: 400; margin: 2;'>Welcome!</h1> <img src='https://raw.githubusercontent.com/jaisonjohn78/Peradot/main/assets/img/logo.png' width='150' style='display: block; border: 0px; user-drag: none; -webkit-user-drag: none; user-select: none; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;' draggable='false' />
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -210,7 +210,7 @@ if(isset($_POST['sign-up']))
                                                         <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px;'>
                                                             <tr>
                                                                 <td bgcolor='#ffffff' align='left' style='padding: 20px 30px 40px 30px; color: #434343; font-family: Lato, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;'>
-                                                                    <p style='margin: 0;'>We're excited to have you get started. First, you need to confirm your account. Just press the button below.</p>
+                                                                    <p style='margin: 0; text-align: center;'>We're really very excited to have you get started. First, you need to confirm your account. Just press the button below.</p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -235,7 +235,7 @@ if(isset($_POST['sign-up']))
                                                             </tr> <!-- COPY -->
                                                             <tr>
                                                                 <td bgcolor='#ffffff' align='left' style='padding: 20px 30px 20px 30px; color: #666666; font-family: Lato, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;'>
-                                                                    <p style='margin: 0;'><a href='".$base_url."index/login.php?verification=".$code."' style='color: #068f06;'>https://link-here</a></p>
+                                                                    <p style='margin: 0;'><a href='".$base_url."index/login.php?verification=".$code."' style='color: #068f06;'>".$base_url."index/login.php?verification=".$code."</a></p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -245,7 +245,7 @@ if(isset($_POST['sign-up']))
                                                             </tr>
                                                             <tr>
                                                                 <td bgcolor='#ffffff' align='left' style='padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: Lato, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;'>
-                                                                    <p style='margin: 0;'>Cheers,<br>Peradot Pvt Ltd</p>
+                                                                    <p style='margin: 0;'>Cheers,<br>Peradot Foundation</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -257,7 +257,7 @@ if(isset($_POST['sign-up']))
                                                             <tr>
                                                                 <td bgcolor='#FFECD1' align='center' style='padding: 30px 30px 30px 30px; border-radius: 4px 4px 4px 4px; color: #666666; font-family: Lato, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;'>
                                                                     <h2 style='font-size: 20px; font-weight: 400; color: #111111; margin: 0;'>Need more help?</h2>
-                                                                    <p style='margin: 0;'><a href='#' target='_blank' style='color: #068f06;'>We&rsquo;re here to help you out</a></p>
+                                                                    <p style='margin: 0;'><a href='http://peradot.in/' target='_blank' style='color: #068f06;'>We&rsquo;re here to help you out</a></p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -268,7 +268,7 @@ if(isset($_POST['sign-up']))
                                                         <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px;'>
                                                             <tr>
                                                                 <td bgcolor='#f4f4f4' align='left' style='padding: 0px 30px 30px 30px; color: #666666; font-family: Lato, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;'> <br>
-                                                                    <p style='margin: 0;'>If these emails get annoying, please feel free to <a href='#' target='_blank' style='color: #111111; font-weight: 700;'>unsubscribe</a>.</p>
+                                                                    <p style='margin: 0;'>If these emails get annoying, please feel free to <a href='../' target='_blank' style='color: #111111; font-weight: 700;'>unsubscribe</a>.</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -382,7 +382,7 @@ if (isset($_POST['sign-in'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Register</title>
+    <title>Peradot Login - Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link
      rel="stylesheet"
