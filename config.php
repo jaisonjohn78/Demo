@@ -12,8 +12,8 @@ $database = "peradot";
 
 $con = mysqli_connect($hostname, $username, $password, $database) or die("Database connection failed");
 
-$base_url = "http://localhost/Peradot/";
-// $base_url = "http://peradot.in/";
+// $base_url = "http://localhost/Peradot/";
+$base_url = "http://peradot.in/";
 $my_email = "peradotfoundation@gmail.com";
 $password = "puyxnbtxkghdrzju";
 

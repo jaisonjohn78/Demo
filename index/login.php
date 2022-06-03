@@ -281,7 +281,7 @@ if(isset($_POST['sign-up']))
                                         $mail->send();
                                         ?>
                                         <script>
-                                        	alert("Message has been sent");
+                                        	alert("Successfully Registered ");
                                             </script>
                                         <?php
                                     } catch (Exception $e) {
@@ -294,7 +294,7 @@ if(isset($_POST['sign-up']))
 									echo "</div>";
                                     ?>
                                     <script>
-                                        	alert("We've send a verification link on your email address.");
+                                        	alert("We've send a verification link on your email address \n(Check your spam if not found ).");
                                             </script>
                                         <?php
                                     

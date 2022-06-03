@@ -255,7 +255,7 @@ if (isset($_POST['submit'])) {
                 $mail->send();
                 ?>
                 <script>
-                    alert("Message has been sent");
+                    alert("Mail has been sent");
                 </script>
                 <?php
             } catch (Exception $e) {
