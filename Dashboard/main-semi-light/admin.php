@@ -101,32 +101,20 @@ $id = $_SESSION['id'];
     
                   <!-- User Account-->
                   <li class="dropdown user user-menu">
-                    <a
-                      href="#"
-                      class="waves-effect waves-light dropdown-toggle btn-primary-light"
-                      data-bs-toggle="dropdown"
-                      title="User"
-                    >
-                      <i data-feather="user"></i>
-                    </a>
-                    <ul class="dropdown-menu animated flipInX">
-                      <li class="user-body">
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-user text-muted me-2"></i> Profile</a
-                        >
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-wallet text-muted me-2"></i> My Wallet</a
-                        >
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-settings text-muted me-2"></i> Settings</a
-                        >
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout.php"
-                          ><i class="ti-lock text-muted me-2"></i> Logout</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
+                            <a href="#" class="waves-effect waves-light dropdown-toggle btn-primary-light"
+                                data-bs-toggle="dropdown" title="User">
+                                <i data-feather="user"></i>
+                            </a>
+                            <ul class="dropdown-menu animated flipInX">
+                                <li class="user-body">
+                                    <a class="dropdown-item" href="../../index.html"><i class="ti-home text-muted me-2"></i>
+                                        Home</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="logout.php"><i class="ti-lock text-muted me-2"></i>
+                                        Logout</a>
+                                </li>
+                            </ul>
+                        </li>
     
       
                 </ul>

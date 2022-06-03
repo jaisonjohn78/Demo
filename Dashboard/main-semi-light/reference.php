@@ -154,32 +154,23 @@ $id = $_SESSION['id'];
     
                   <!-- User Account-->
                   <li class="dropdown user user-menu">
-                    <a
-                      href="#"
-                      class="waves-effect waves-light dropdown-toggle btn-primary-light"
-                      data-bs-toggle="dropdown"
-                      title="User"
-                    >
-                      <i data-feather="user"></i>
-                    </a>
-                    <ul class="dropdown-menu animated flipInX">
-                      <li class="user-body">
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-user text-muted me-2"></i> Profile</a
-                        >
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-wallet text-muted me-2"></i> My Wallet</a
-                        >
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-settings text-muted me-2"></i> Settings</a
-                        >
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout.php"
-                          ><i class="ti-lock text-muted me-2"></i> Logout</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
+                            <a href="#" class="waves-effect waves-light dropdown-toggle btn-primary-light"
+                                data-bs-toggle="dropdown" title="User">
+                                <i data-feather="user"></i>
+                            </a>
+                            <ul class="dropdown-menu animated flipInX">
+                                <li class="user-body">
+                                    <a class="dropdown-item" href="index.php"><i class="ti-user text-muted me-2"></i>
+                                    Dashboard</a>
+
+                                    <a class="dropdown-item" href="../../index.html"><i class="ti-home text-muted me-2"></i>
+                                        Home</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="logout.php"><i class="ti-lock text-muted me-2"></i>
+                                        Logout</a>
+                                </li>
+                            </ul>
+                        </li>
     
       
                 </ul>
@@ -224,17 +215,15 @@ $id = $_SESSION['id'];
                         </ul>
 
                         <div class="sidebar-widgets mt-5">
-                            <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
+                        <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
                                 <img src="../images/trophy.png" alt="" />
                                 <h4 class="my-3 fw-500 text-uppercase text-primary">
-                                    Start Trading
+                                    Invest your Savings
                                 </h4>
-                                <span class="fs-12 d-block mb-3 text-black-50">Offering discounts for better online a
-                                    store can loyalty
-                                    weapon into driving</span>
-                                <button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
-                                    Invest Now
-                                </button>
+                                <span class="fs-12 d-block mb-3 text-black-50">Check out the best packages for you with high returns </span>
+                                <a href="index.php#price"><button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
+                                    Select Package
+                                </button></a>
                             </div>
                             <div class="copyright text-center m-25">
                                 <p>

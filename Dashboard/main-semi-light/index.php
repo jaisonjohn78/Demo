@@ -90,12 +90,12 @@ $first_timestamp_row = mysqli_fetch_assoc($first_timestamp_sql);
 $first_timestamp = $first_timestamp_row['timestamp'];
 $first_reward = $first_timestamp_row['reward'];
 
-$second_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $second_id days != 0");
+$second_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $second_id AND days != 0");
 $second_timestamp_row = mysqli_fetch_assoc($second_timestamp_sql);
 $second_timestamp = $second_timestamp_row['timestamp'];
 $second_reward = $second_timestamp_row['reward'];
 
-$third_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $third_id days != 0");
+$third_timestamp_sql =mysqli_query($con, "SELECT timestamp,reward FROM package where user_id = $id AND id = $third_id AND days != 0");
 $third_timestamp_row = mysqli_fetch_assoc($third_timestamp_sql);
 $third_timestamp = $third_timestamp_row['timestamp'];
 $third_reward = $third_timestamp_row['reward'];
@@ -487,6 +487,14 @@ else{
         color: white;
         background: #212529;
     }
+
+    #demo1 , #demo2, #demo3 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    #boxtimer h5 {
+        margin-top: -15px;
+    }
     </style>
 </head>
 
@@ -522,7 +530,7 @@ else{
                             </a>
                         </li>
                         <li class="btn-group nav-item d-none d-xl-inline-block">
-                            <a href="" class="waves-effect waves-light nav-link svg-bt-icon btn-primary-light"
+                            <a href="../../index.html#contact" class="waves-effect waves-light nav-link svg-bt-icon btn-primary-light"
                                 title="Mailbox">
                                 <i data-feather="at-sign"></i>
                             </a>
@@ -551,11 +559,11 @@ else{
                             <ul class="dropdown-menu animated flipInX">
                                 <li class="user-body">
                                     <a class="dropdown-item" href="#"><i class="ti-user text-muted me-2"></i>
-                                        Profile</a>
-                                    <a class="dropdown-item" href="#"><i class="ti-wallet text-muted me-2"></i> My
-                                        Wallet</a>
-                                    <a class="dropdown-item" href="#"><i class="ti-settings text-muted me-2"></i>
-                                        Settings</a>
+                                    <?php echo $user_row['username']; ?></a>
+                                    <a class="dropdown-item" href="#"><i class="ti-wallet text-muted me-2"> 
+                                        $<?php echo $user_row['amount']; ?></i></a>
+                                    <a class="dropdown-item" href="../../index.html"><i class="ti-home text-muted me-2"></i>
+                                        Home</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="logout.php"><i class="ti-lock text-muted me-2"></i>
                                         Logout</a>
@@ -605,17 +613,15 @@ else{
                         </ul>
 
                         <div class="sidebar-widgets mt-5">
-                            <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
+                        <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
                                 <img src="../images/trophy.png" alt="" />
                                 <h4 class="my-3 fw-500 text-uppercase text-primary">
-                                    Start Trading
+                                    Invest your Savings
                                 </h4>
-                                <span class="fs-12 d-block mb-3 text-black-50">Offering discounts for better online a
-                                    store can loyalty
-                                    weapon into driving</span>
-                                <button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
-                                    Invest Now
-                                </button>
+                                <span class="fs-12 d-block mb-3 text-black-50">Check out the best packages for you with high returns </span>
+                                <a href="index.php#price"><button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
+                                    Select Package
+                                </button></a>
                             </div>
                             <div class="copyright text-center m-25">
                                 <p>
@@ -639,7 +645,7 @@ else{
 
                             <div class="col-12">
                                 <div class="box">
-                                    <div class="box-body text-center">
+                                    <div class="box-body text-center" id="boxtimer">
 
                                         <h1 class="text-bold">Claim Daily reward</h1>
 
@@ -652,7 +658,7 @@ else{
                                             $timestamp = array();
                                             if(mysqli_num_rows($check_package_id) == 0){
                                                 ?>
-                                                <center><button type="submit" name="claim" class="button-64"
+                                                <center><button type="submit" name="claim" class="button-64 my-5"
                                                         role="button" style="cursor:not-allowed;"><span class="text">No Package Activated!</span></button>
                                                     </center>
                                                     <?php
@@ -669,13 +675,14 @@ else{
                                                     if(strtotime($today) <= strtotime($first_timestamp)) 
                                                     {
                                             ?>
+                                                    
                                                     <h2 id='demo1'>24 : 00 : 00</h2>
                                                     <h5>hr : min: sec</h5>
                                                 <?php
                                                     
                                                 }
                                                 else{
-                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64' id='claim' role='button' ><span class='text'>Claim $".$first_reward."now !</span></button></center></form>";
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64 my-2' id='claim' role='button' ><span class='text'>Claim $".$first_reward."now !</span></button></center></form>";
                                                 }
                                             }
                                             elseif(mysqli_num_rows($package_id_sql) == 2){
@@ -688,7 +695,7 @@ else{
                                                     
                                                 }
                                                 else{
-                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64' id='claim' role='button' ><span class='text'>Claim $".$first_reward."now !</span></button></center></form>";
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64 my-2' id='claim' role='button' ><span class='text'>Claim $".$first_reward."now !</span></button></center></form>";
                                                 }
                                                 if(strtotime($today) <= strtotime($second_timestamp)) 
                                                     {
@@ -699,7 +706,7 @@ else{
                                                     
                                                 }
                                                 else{
-                                                    echo "<form method='POST'><center><button type='submit' name='claim_20' class='button-64' id='claim' role='button' ><span class='text'>Claim $".$second_reward."now !</span></button></center></form>";
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_20' class='button-64 my-2' id='claim' role='button' ><span class='text'>Claim $".$second_reward."now !</span></button></center></form>";
                                                 }
                                             }
                                             elseif(mysqli_num_rows($package_id_sql) == 3){
@@ -712,7 +719,7 @@ else{
                                                     
                                                 }
                                                 else{
-                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64' id='claim' role='button' ><span class='text'>Claim <b>$".$first_reward."</b> now !</span></button></center></form>";
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_10' class='button-64 my-2' id='claim' role='button' ><span class='text'>Claim <b>$".$first_reward."</b> now !</span></button></center></form>";
                                                 }
                                                 if(strtotime($today) <= strtotime($second_timestamp)) 
                                                     {
@@ -723,7 +730,7 @@ else{
                                                     
                                                 }
                                                 else{
-                                                    echo "<form method='POST'><center><button type='submit' name='claim_20' class='button-64' id='claim' role='button' ><span class='text'>Claim <b>$".$second_reward."</b> now !</span></button></center></form>";
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_20' class='button-64 my-2' id='claim' role='button' ><span class='text'>Claim <b>$".$second_reward."</b> now !</span></button></center></form>";
                                                 }
                                                 if(strtotime($today) <= strtotime($third_timestamp)) 
                                                     {
@@ -734,7 +741,7 @@ else{
                                                     
                                                 }
                                                 else{
-                                                    echo "<form method='POST'><center><button type='submit' name='claim_30' class='button-64' id='claim' role='button' ><span class='text'>Claim <b>$".$third_reward."</b> now !</span></button></center></form>";
+                                                    echo "<form method='POST'><center><button type='submit' name='claim_30' class='button-64 my-2' id='claim' role='button' ><span class='text'>Claim <b>$".$third_reward."</b> now !</span></button></center></form>";
                                                 }
                                             }
                                             }
@@ -1034,7 +1041,7 @@ else{
                                                             </div>
                                                         </div>
                                                     <!-- </form> -->
-                                                    
+                                                    </div>
                                                         <div class="row align-items-center">
                                                     <!-- <form action="" method="POST"> -->
                                                         <div class="col-lg-6 col-md-12 mb-4">
@@ -1061,7 +1068,7 @@ else{
                                                                     </ul>
                                                                 </div>
 
-
+                                                            
                                                             </div>
                                                         </div>
                                                         <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1106,10 +1113,10 @@ else{
 
                                                                     </ul>
                                                                 </div>
-
-
+                                                            
                                                             </div>
-                                                        </div> 
+                                                        
+                                                        </div>
                                                         <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
@@ -1130,14 +1137,14 @@ else{
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        </div>
+                                                        
                                                     </form>
                                                     </div>
                                                 </div>
-
+                                                </div>
                                         </section>
 
-                                    </div>
+            </div>
                                 </div>
                             </div>
 

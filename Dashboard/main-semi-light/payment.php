@@ -71,6 +71,14 @@ body.special:before{
   padding: 1% 6%;
   z-index: 99999;
 }
+
+@media only screen and (max-width: 525px)
+{
+  input[type="file"]{
+      color: transparent;
+  }
+
+}
     </style>
 </head>
 
@@ -140,32 +148,22 @@ body.special:before{
     
                   <!-- User Account-->
                   <li class="dropdown user user-menu">
-                    <a
-                      href="#"
-                      class="waves-effect waves-light dropdown-toggle btn-primary-light"
-                      data-bs-toggle="dropdown"
-                      title="User"
-                    >
-                      <i data-feather="user"></i>
-                    </a>
-                    <ul class="dropdown-menu animated flipInX">
-                      <li class="user-body">
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-user text-muted me-2"></i> Profile</a
-                        >
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-wallet text-muted me-2"></i> My Wallet</a
-                        >
-                        <a class="dropdown-item" href="#"
-                          ><i class="ti-settings text-muted me-2"></i> Settings</a
-                        >
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout.php"
-                          ><i class="ti-lock text-muted me-2"></i> Logout</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
+                            <a href="#" class="waves-effect waves-light dropdown-toggle btn-primary-light"
+                                data-bs-toggle="dropdown" title="User">
+                                <i data-feather="user"></i>
+                            </a>
+                            <ul class="dropdown-menu animated flipInX">
+                                <li class="user-body">
+                                    <a class="dropdown-item" href="index.php"><i class="ti-user text-muted me-2"></i>
+                                    Dashboard</a>
+                                    <a class="dropdown-item" href="../../index.html"><i class="ti-home text-muted me-2"></i>
+                                        Home</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="logout.php"><i class="ti-lock text-muted me-2"></i>
+                                        Logout</a>
+                                </li>
+                            </ul>
+                        </li>
     
       
                 </ul>
@@ -242,19 +240,19 @@ body.special:before{
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="d-flex top_box">
-                                        <h3 class="m-0">Total Amount</h3>
+                                        <h3 class="my-2">Total Amount</h3>
 
                                     </div>
                                 </div>
                                 <div class="col-xl-6 text-center my-2">
 
-                                    <h1 class="fw-500 m-0">$<?php echo $user_row['amount']  ?><i
+                                    <h1 class="fw-500 m-0">$<?php echo number_format((float)$user_row['amount'], 2, '.', ''); ?><i
                                             class="mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box">
                                         </i></h1>
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                         <div class="row mt-55">
                             <div class="col-xl-12">
                                <div class="row">
@@ -267,7 +265,7 @@ body.special:before{
                                             <h2>Upload Your Transaction</h2>
                                             
                                             <form action="upload.php" method="post" enctype="multipart/form-data">
-                                            <div class="d-flex justify-content-between bg-light rounded p-40 mx-10 my-15">
+                                            <div class="d-flex justify-content-between bg-light rounded p-20 mx-1 my-10">
                                                 <input type="file" name="file" onchange="loadFile(event)" required/>
                                                 <input type="submit" class="btn btn-primary" name="submit" value="Upload">
                                             </div>
@@ -293,7 +291,7 @@ body.special:before{
                                             <h2>Enter Your Metamask Address</h2>
                                             <h4 class="msg"><?php echo $msg ?></h4>
                                             <form action="" method="post" enctype="multipart/form-data">
-                                              <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
+                                              <div class="d-flex justify-content-end bg-light rounded p-10 mx-10 my-15">
                                                   <input type="text" class="form-control" name="metamask" placeholder="Meta Mask Address">
                                                   <input type="submit" class="btn btn-primary" name="withdraw" value="Withdraw">
                                               </div>
@@ -305,7 +303,7 @@ body.special:before{
                                                 <button
                                                   id="loginButton"
                                                   onclick=""
-                                                  class="btn mx-auto rounded p-2 bg-info text-white"
+                                                  class="btn mx-auto rounded bg-info p-2 text-white"
                                                 >
                                                   Login with MetaMask
                                                 </button>
@@ -330,6 +328,7 @@ body.special:before{
                                </div>
                             </div>
                 </section>
+                <div class="table-responsive" >
                 <table id="example" class="table table-striped table-bordered " style="width:100%">
                                                     <thead>
                                                         <tr>
@@ -404,6 +403,7 @@ body.special:before{
                                                     </tbody>
                                                   
                                                 </table>
+                </div>
                 <!-- /.content -->
             </div>
         </div>
@@ -452,8 +452,8 @@ body.special:before{
 
       function toggleButton() {
         if (!window.ethereum) {
-          loginButton.innerText = "MetaMask is not installed";
-          loginButton.classList.remove("bg-purple-500", "text-white");
+          loginButton.innerText = "No Metamask Account Detected... Please Install Metamask to Login !";
+          loginButton.classList.remove("bg-info", "text-white");
           loginButton.classList.add(
             "bg-gray-500",
             "text-gray-100",

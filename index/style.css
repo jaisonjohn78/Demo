@@ -325,7 +325,7 @@ body {
 
 /* RESPONSIVE */
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 525px) {
   body {
     overflow: auto;
     overflow-x: hidden !important;
@@ -345,9 +345,12 @@ body {
         transform: translateY(100%);
     } */
 
+    lottie-player {
+      display: none;
+    }
   .container.sign-in .col.sign-in,
   .container.sign-up .col.sign-up {
-    transform: translateY(0);
+    transform: translateY(0%);
   }
 
   .content-row {
@@ -363,6 +366,7 @@ body {
     width: 100%;
     position: absolute;
     padding: 2rem;
+    height: 98vh !important;
     background-color: var(--white);
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
