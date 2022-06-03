@@ -213,14 +213,12 @@ body.special:before{
                             <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
                                 <img src="../images/trophy.png" alt="" />
                                 <h4 class="my-3 fw-500 text-uppercase text-primary">
-                                    Start Trading
+                                    Invest your Savings
                                 </h4>
-                                <span class="fs-12 d-block mb-3 text-black-50">Offering discounts for better online a
-                                    store can loyalty
-                                    weapon into driving</span>
-                                <button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
-                                    Invest Now
-                                </button>
+                                <span class="fs-12 d-block mb-3 text-black-50">Check out the best packages for you with high returns </span>
+                                <a href="index.php#price"><button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
+                                    Select Package
+                                </button></a>
                             </div>
                             <div class="copyright text-center m-25">
                                 <p>

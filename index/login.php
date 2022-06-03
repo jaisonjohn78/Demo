@@ -459,8 +459,8 @@ if (isset($_POST['sign-in'])) {
 						<div class="input-group" style="width:64%;">
 						    <!-- <i class="fa-solid fa-phone"></i> -->
 							<input type="tel" name="phone" class="phone" required>
-                            <!-- <span id="valid-msg" class="hide">✓ Valid</span>
-                            <span id="error-msg" class="hide"></span> -->
+                            <span id="valid-msg" class="hide">✓ Valid</span>
+                            <span id="error-msg" class="hide"></span>
 						</div>
         
 						<div class="input-group">
