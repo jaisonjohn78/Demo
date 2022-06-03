@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                 $mail->Username   = $my_email;                     //SMTP username
-                $mail->Password   = 'hardik@sxca';                              //SMTP password
+                $mail->Password   = 'puyxnbtxkghdrzju';                              //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -362,7 +362,7 @@ if (isset($_POST['submit'])) {
 							</b></a>
                         	</span>
                         </p>
-					<p  class="link">Contact Us: hardik@gmail.com</p>
+					<p  class="link">Contact Us: peradotfoundation@gmail.com</p>
 					</div>
 				</div>
 				<div class="form-wrapper">

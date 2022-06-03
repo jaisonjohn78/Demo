@@ -66,7 +66,7 @@ if(isset($_POST['sign-up']))
                                         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                                         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                                         $mail->Username   = $my_email;                     //SMTP username
-                                        $mail->Password   = 'hardik@sxca';                               //SMTP password
+                                        $mail->Password   = 'puyxnbtxkghdrzju';                               //SMTP password
                                         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                                         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
                 
@@ -427,9 +427,18 @@ if (isset($_POST['sign-in'])) {
         .iti input, .iti input[type=text], .iti input[type=tel] {
             width:157% !important;
         }
-        #valid-msg{
-            color:white;
+        #valid-msg, #error-msg {
+            position: relative;
+            left: 80%;
+            top: -40px;
         }
+        #valid-msg {
+            color: green;
+        }
+        #error-msg {
+            color: red;
+        }
+
 	</style>
 </head>
 <body>
