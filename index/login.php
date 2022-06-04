@@ -352,7 +352,7 @@ if (isset($_POST['sign-in'])) {
             elseif((md5($password_new) == $db_pass) && empty($row_2['code'])) {
                 ?>
                     <script>
-                        window.location.href = '../Dashboard/main-semi-light/index.php';
+                        window.location.href = '../Dashboard/main/index.php';
                     </script>
                 <?php
                     $_SESSION['ID'] = $row_2['id'];

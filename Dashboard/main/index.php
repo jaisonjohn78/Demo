@@ -383,11 +383,17 @@ else{
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <script src="js/script.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="android/android-launchericon-96-96.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0c1a32">
+    <meta name="theme-color" content="#0c1a32">
+    <meta name="description" content="Trust in the future." />
+    <meta name="author" content="Peradot" />
 
     <title>
-        Panel
+        Peradot Dashboard 
     </title>
 
     <!-- Vendors Style-->
@@ -459,6 +465,16 @@ else{
         .button-64 {
             font-size: 24px;
             min-width: 196px;
+        }
+    }
+
+    @media only screen and (max-width: 525px) {
+
+    .box-body {
+            padding: 0px !important;
+        }
+        #example_filter label {
+            margin-left: 20px;
         }
     }
 
@@ -789,7 +805,7 @@ else{
                                     <h3 class="m-0">Live Bitcoin Transactions (BTC)</h3>
                                 </div>
                             </div>
-                            <div class="col-xl-12 col-12">
+                            <div class="col-xl-12 col-12" style="padding-left: 0px !important; padding-right: 0px !important;">
                                 <div class="box">
                                     <div class="customhtab box-header with-border">
                                         <ul class="nav nav-pills">
@@ -822,7 +838,7 @@ else{
                                                     </div>
                                                     <div id="Overview-3" class="tab-pane">
                                                         <div>
-                                                            <div class="col-12">
+                                                            <div class="col-12" style="padding-top: 10px;">
                                                                 <div class="box">
                                                                     <div class="box-body" style="display: contents;">
                                                                         <div class="table-responsive">
@@ -871,7 +887,7 @@ else{
                                                     </div>
                                                     <div id="Overview-4" class="tab-pane">
                                                         <div>
-                                                            <div class="col-12">
+                                                            <div class="col-12" style="padding-top: 10px;">
                                                                 <div class="box">
                                                                     <div class="box-body">
                                                                         <div class="table-responsive">
@@ -1559,16 +1575,23 @@ else{
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://www.globalty.com.br/DataTables-1.10.15/extensions/Buttons/js/dataTables.buttons.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/bpampuch/pdfmake@0.1.27/build/pdfmake.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/gh/bpampuch/pdfmake@0.1.27/build/vfs_fonts.js" ></script>
+<script src="https://www.globalty.com.br/DataTables-1.10.15/extensions/Buttons/js/buttons.html5.js" ></script>
+
         <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#example').DataTable({dom: 'Bfrtip',searching: false,
+        dom: 'Blfrtip', buttons: [ { extend: 'pdfHtml5', download: 'open' } ] });
         });
 
         $(document).ready(function() {
-            $('#example1').DataTable();
+            $('#example1').DataTable({dom: 'Bfrtip',searching: false,
+        dom: 'Blfrtip', buttons: [ { extend: 'pdfHtml5', download: 'open' } ] });
         });
         </script>
         <!-- <style>
