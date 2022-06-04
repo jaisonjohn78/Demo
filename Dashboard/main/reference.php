@@ -298,6 +298,7 @@ $id = $_SESSION['id'];
                                             <button type="submit"  class="btn btn-info btn-lg" name="refresh">
                                                 <span class="glyphicon glyphicon-refresh" ></span> Refresh
                                             </button>
+                                            <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p>
                                                 </form>
                                         </div>
                                         <div class="card-body" style="overflow: scroll;">
