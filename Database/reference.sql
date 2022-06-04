@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 31, 2022 at 06:32 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.5
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jun 03, 2022 at 04:15 PM
+-- Server version: 10.5.15-MariaDB-cll-lve
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `peradot`
+-- Database: `u230766858_peradot`
 --
 
 -- --------------------------------------------------------
@@ -32,16 +32,9 @@ CREATE TABLE `reference` (
   `user_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `reference_id` varchar(255) NOT NULL,
-  `timestamp` varchar(255) NOT NULL
+  `timestamp` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `reference`
---
-
-INSERT INTO `reference` (`id`, `user_id`, `username`, `reference_id`, `timestamp`) VALUES
-(6, 3, 'test1', 'DdGv4wZX', 'May 31, 2022, 6:30 pm'),
-(7, 3, 'test2', 'CUwEWTkA', 'May 31, 2022, 6:30 pm');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +54,7 @@ ALTER TABLE `reference`
 -- AUTO_INCREMENT for table `reference`
 --
 ALTER TABLE `reference`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

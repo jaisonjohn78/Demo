@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 31, 2022 at 06:32 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.5
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jun 03, 2022 at 04:14 PM
+-- Server version: 10.5.15-MariaDB-cll-lve
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `peradot`
+-- Database: `u230766858_peradot`
 --
 
 -- --------------------------------------------------------
@@ -39,15 +39,6 @@ CREATE TABLE `history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `history`
---
-
-INSERT INTO `history` (`id`, `user_id`, `user`, `metamaskid`, `timestamp`, `status`, `withdraw`, `deposit`) VALUES
-(1, 3, 'hardik', '--', 'May 30, 2022, 7:59 pm', 'confirm', '--', '1000'),
-(2, 3, 'hardik', 'slc', 'May 30, 2022, 7:59 pm', 'confirm', '1000', '--'),
-(3, 3, 'hardik', '--', 'May 30, 2022, 8:00 pm', 'Reject', '--', '477');
-
---
 -- Indexes for dumped tables
 --
 
@@ -65,7 +56,7 @@ ALTER TABLE `history`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

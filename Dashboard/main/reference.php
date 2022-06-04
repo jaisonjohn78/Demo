@@ -65,7 +65,7 @@ $id = $_SESSION['id'];
             } }else{
               ?>
               <script>
-                  alert("Please Wait!! Insufficient Balance");
+                  alert("Empty List or Referred user has not deposited");
                   window.location.href="reference.php";
                   </script>
                   <?php
