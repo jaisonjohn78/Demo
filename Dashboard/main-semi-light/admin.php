@@ -285,13 +285,14 @@ $id = $_SESSION['id'];
                                                             echo "(".$user_rid.") " . $row_rid[1];
                                                             ?></td>
                                                             
-                                                            <td>$60</td>
+                                                            
                                                             <td><?php echo $row['metamaskID']?></td>
+                                                            <td><?php echo $row['w_amount']?></td>
                                                             <td><?php echo $row['status']?></td>
                                                             <td><?php echo $row['timestamp']?></td>
                                                                 <td class="d-flex justify-content-around">
                                                                   <?php
-                                                                    echo "<a href='./update_withdraw_status.php?id=".$row['user_id']."' class='btn btn-primary btn-md'>
+                                                                    echo "<a href='./update_withdraw_status.php?id=".$row['id']."' class='btn btn-primary btn-md'>
                                                                         <i class='fa fa-eye'></i>
                                                                     </a>";
 
