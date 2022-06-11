@@ -16,13 +16,14 @@ $targetFilePath = $targetDir . $fileName;
 $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
 if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
+    $deposit_amount = $_POST['deposit_amount'];
     // Allow certain file formats
     $allowTypes = array('jpg','png','jpeg','gif','pdf');
     if(in_array($fileType, $allowTypes)){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
             // Insert image file name into database
-            $insert = $con->query("INSERT into deposite (user_id,image_path,timestamp) VALUES ('$id','".$fileName."','$today')");
+            $insert = $con->query("INSERT into deposite (user_id,d_amount,image_path,timestamp) VALUES ('$id','$deposit_amount','".$fileName."','$today')");
             if($insert){
                 ?>
                 <script>

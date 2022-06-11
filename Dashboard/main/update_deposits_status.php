@@ -255,7 +255,7 @@ if(isset($_POST['submit'])){
                 <form method="post" action="" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Amount:</label>
-                        <input type="text" name="amount" class="form-control" id="exampleInputEmail1" placeholder="Amount" required>
+                        <input type="text" name="amount" class="form-control" value=<?php echo $amount ?> id="exampleInputEmail1" placeholder="Amount" required>
                     </div>
                     <div class="form-group">
                         <select name="status" style="width:100%;padding:7px;border-radius:5px;border:1px solid #86a4c3;" required>
