@@ -813,10 +813,10 @@ else{
                                                 <a href="#Overview-1" class="nav-link active" data-bs-toggle="tab"
                                                     aria-expanded="false">Chart</a>
                                             </li>
-                                            <li class="nav-item">
+                                          <!--    <li class="nav-item">
                                                 <a href="#Overview-3" class="nav-link" data-bs-toggle="tab"
                                                     aria-expanded="true">Peradot Transactions</a>
-                                            </li>
+                                            </li>  -->
                                             <li class="nav-item">
                                                 <a href="#Overview-4" class="nav-link" data-bs-toggle="tab"
                                                     aria-expanded="true">My Historical Data</a>
