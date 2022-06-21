@@ -23,28 +23,28 @@ if(isset($_POST['withdraw'])){
     $meta_insert = $con->query("INSERT into withdraw (user_id,metamaskID,w_amount,timestamp) VALUES ('$id','$metamask','$withdraw_amount','$today')");
     if($meta_insert){
       ?>
-      <script>
-        alert("Your Withdrawal Request Is Sucessfully Registerd!!!\nPlease Wait For Approval...");
-        window.location.href='payment.php';
-        </script>
-        <?php
+<script>
+alert("Your Withdrawal Request Is Sucessfully Registerd!!!\nPlease Wait For Approval...");
+window.location.href = 'payment.php';
+</script>
+<?php
     }else{
       ?>
-      <script>
-        alert("Oops Something Went Wrong. Please Try Again Later!!!");
-        window.location.href='payment.php';
-        </script>
-        <?php
+<script>
+alert("Oops Something Went Wrong. Please Try Again Later!!!");
+window.location.href = 'payment.php';
+</script>
+<?php
         
     }
   }
   else{
     ?>
-    <script>
-      alert("Insufficient Withdraw Amount!!!");
-      window.location.href = "payment.php";
-      </script>
-      <?php
+<script>
+alert("Insufficient Withdraw Amount!!!");
+window.location.href = "payment.php";
+</script>
+<?php
   }
 }
  
@@ -277,8 +277,36 @@ if(isset($_POST['withdraw'])){
                                                     class="d-flex justify-content-between bg-light rounded p-20 mx-1 my-10">
                                                     <input type="file" name="file" onchange="loadFile(event)"
                                                         required />
-                                                    <input type="submit" class="btn btn-primary" name="submit"
-                                                        value="Upload">
+                                                    <input type="button" class="btn btn-primary" value="Upload"
+                                                        data-toggle="modal" data-target="#exampleModal1">
+                                                </div>
+                                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                                    Deposit</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label for="">Deposit Amount :</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="deposit_amount"
+                                                                    placeholder="Enter Deposit Amount" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary"
+                                                                    name="submit">Deposit</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </form>
                                             <h5 class="my-3 text-muted">Upload the Screenshot of your Transaction once
