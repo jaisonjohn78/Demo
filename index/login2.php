@@ -68,7 +68,7 @@ if(isset($_POST['sign-up']))
 //         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
 // $result =mysqli_fetch_assoc($sql);
 // setting link  http:
-// http://localhost/Peradot/index/login2.php?refer=qkOxIQcH
+// localhost/Peradot/index/login.php/?myref=
     
 		$password = md5($password);
 		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id,code) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id','$code')");
@@ -420,7 +420,6 @@ if(isset($_POST['sign-up']))
          $phone = mysqli_real_escape_string($con, $_POST['phone']);
          $password = mysqli_real_escape_string($con, $_POST['password']);
          $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
-         $reference_code = mysqli_real_escape_string($con, $_POST['refer_input']);
          $code = mysqli_real_escape_string($con, md5(rand()));
          date_default_timezone_set("Asia/Kolkata");
          $today = date("F j, Y, g:i a");

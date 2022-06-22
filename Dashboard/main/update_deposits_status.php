@@ -49,20 +49,96 @@ if(isset($_POST['submit'])){
                alert("Opps Something went wrong, Unable to update... Try again later");
             }
 
-    if($new_status == 'confirm') {
-        $user_sql = mysqli_query($con,"UPDATE `users` SET `deposit`= deposit + $new_amount  WHERE id = $user_id");
-    
-        unlink("uploads/$img");
-        $admin_sql = mysqli_query($con,"DELETE FROM `deposite` WHERE user_id = $user_id");
-        alert("Deposite has been confirmed");
-        $history_sql = mysqli_query($con,"INSERT INTO `history` (`user_id`,`user`, `timestamp`, `status`,`deposit` ) VALUES ('$user_rid','$row_rid[1]', '$time', '$new_status','$new_amount')");
-    }elseif($new_status == 'Reject'){
-      $admin_sql = mysqli_query($con,"DELETE FROM `deposite` WHERE user_id = $user_id");
-        alert("Deposite has been Rejected");
-        $history_sql = mysqli_query($con,"INSERT INTO `history` (`user_id`,`user`, `timestamp`, `status`,`deposit` ) VALUES ('$user_rid','$row_rid[1]', '$time', '$new_status','$new_amount')");
-    } else {
+            if($new_status == 'confirm') {
+              $user_sql = mysqli_query($con,"UPDATE `users` SET `deposit`= deposit + $new_amount  WHERE id = $user_id");
+          
+              unlink("uploads/$img");
+              $admin_sql = mysqli_query($con,"DELETE FROM `deposite` WHERE user_id = $user_id");
+              alert("Deposite has been confirmed");
+              $history_sql = mysqli_query($con,"INSERT INTO `history` (`user_id`,`user`, `timestamp`, `status`,`deposit` ) VALUES ('$user_rid','$row_rid[1]', '$time', '$new_status','$new_amount')");
+              // updates();
+              global $con;
         
-    }
+        
+            
+              $userid = $_SESSION['id'];
+          
+              // $current_user = mysqli_query($con,"SELECT * FROM `users` WHERE `id`=$userid");
+              // $current_fire = mysqli_fetch_assoc($current_user);
+              // $depositeOfUser = $current_fire['deposit'];
+              
+              //referred user details -> username
+              
+              $query_ref = "SELECT * FROM `reference` WHERE `user_id`=$userid";
+              $result_ref = mysqli_query($con,$query_ref); 
+              
+              // global $new_balance;
+              //while loop to update all the reffered user percent
+              while($ref_row = mysqli_fetch_assoc($result_ref) ){
+              
+                $username = $ref_row['username'];
+                $deposit_data = mysqli_query($con,"SELECT * FROM `users` WHERE `username`='$username'");
+                $deposit_fire = mysqli_fetch_assoc($deposit_data);
+                $old_deposit = $deposit_fire['deposit'];
+                //checking the column of referred to if it is same as referred from 
+              
+                $from_query = mysqli_query($con,"SELECT * FROM `reference` WHERE  `refered_to`= '$username'");
+              
+                if(mysqli_num_rows($from_query)>0){
+              
+                  $update_query = mysqli_query($con,"UPDATE `users` SET `percent`=6 WHERE `username`='$username'");
+              
+                  if($update_query){
+                    alert("set to 6");
+                    $percent = $new_amount*0.06;
+                    $new_balance = $old_deposit +$percent;
+                    $update_balance = mysqli_query($con,"UPDATE `users` SET `deposit`=$new_balance WHERE `username`='$username'");
+                  }else{
+                    alert('Not set to 6');
+                  }
+              
+              
+                }else{
+                  $update_query = mysqli_query($con,"UPDATE `users` SET `percent`=10 WHERE `username`='$username'");
+              
+                  if($update_query){
+                    alert("set to 10");
+                    $percent = $new_amount*0.1;
+                    $new_balance = $old_deposit +$percent;
+                  
+                    $update_balance = mysqli_query($con,"UPDATE `users` SET `deposit`=$new_balance WHERE `username`='$username'");
+                    if($update_balance){
+                      alert("updated");
+                    }else{
+                      alert("not updated");
+                    }
+                  }else{
+                    alert('Not set to 10');
+                  }
+                }
+               
+              
+              }
+              
+          
+      
+      
+      
+      
+      
+      
+        //while loop to update all the reffered user percent
+       
+      
+      
+      
+          }elseif($new_status == 'Reject'){
+            $admin_sql = mysqli_query($con,"DELETE FROM `deposite` WHERE user_id = $user_id");
+              alert("Deposite has been Rejected");
+              $history_sql = mysqli_query($con,"INSERT INTO `history` (`user_id`,`user`, `timestamp`, `status`,`deposit` ) VALUES ('$user_rid','$row_rid[1]', '$time', '$new_status','$new_amount')");
+          } else {
+              
+          }
 }
 ?>
 <!DOCTYPE html>
