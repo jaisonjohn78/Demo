@@ -1023,14 +1023,11 @@ input.addEventListener('keyup', reset);
   <?php
   
   if(isset($_GET['refer']) && $_GET['refer']!=''){
-    if(!($_SESSION['id']) && $_SESSION['id']==true)
-    {
         $url = $_GET['refer'];
-        $query = mysqli_query($con,"SELECT * FROM `users` WHERE  `reference_id`=$url");
-        $result = mysqli_fetch_assoc($query);
-        if(mysqli_num_rows($result)==1){
+        $query_refz = mysqli_query($con,"SELECT * FROM `users` WHERE  `reference_id`=$url");
+        $result_refz = mysqli_fetch_assoc($query_refz);
+        if($result_refz){
             echo "<script>
-          
             window.location.href = login.php;
             </script>";
         }else{
@@ -1040,7 +1037,7 @@ input.addEventListener('keyup', reset);
         }
 
     }
-  }
+
   ?>
 
 
