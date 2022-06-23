@@ -297,8 +297,8 @@ $id = $_SESSION['id'];
                                 </div>
                                 <div class="col-xl-6 text-center my-2">
 
-                                <h1 class="fw-500 m-0" id="code" ><?php echo $ref_code ?>
-                                <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box">
+                                <h1 class="fw-500 m-0" id="copycode"><?php echo $ref_code ?>
+                                <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box" onclick="copyElementText()">
                                         </i>
                                       
                                 </h1>
@@ -330,7 +330,7 @@ $id = $_SESSION['id'];
                                             $query  = mysqli_query($con,"SELECT * FROM `users` WHERE `id`=$user_id");
                                             $result = mysqli_fetch_assoc($query);
                                             $ureferral_code = $result['reference_id'];
-                                            $string_url = $base_url.'1/index/login2.php?refer='.$ureferral_code;
+                                            $string_url = $base_url.'index/login.php?refer='.$ureferral_code;
                                             echo "<script>console.log($ureferral_code);</script>";
                                             ?>
                                             <div class="d-flex justify-content-end bg-light rounded p-15 mx-5 my-10">
@@ -360,7 +360,7 @@ $id = $_SESSION['id'];
                                             <!-- <button type="submit"  class="btn btn-info btn-lg" name="refresh">
                                                 <span class="glyphicon glyphicon-refresh" ></span> Refresh
                                             </button> -->
-                                            <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p>
+                                            <!-- <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p> -->
                                                 </form>
                                         </div>
                                         <div class="card-body" style="overflow: scroll;">
@@ -392,7 +392,7 @@ $id = $_SESSION['id'];
                                                                 </i></td>";
                                                                 }
                                                                 else{
-                                                                    echo "<td><h4>Pending</h4></td>";
+                                                                    echo "<td><h4>-</h4></td>";
                                                                 }
                                                             ?>
                                                             
@@ -443,11 +443,12 @@ $id = $_SESSION['id'];
         <script>
 		    if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
-
+    }
         function myFunction() {
   /* Get the text field */
   var copyText = document.getElementById("user_ref_code");
-
+  
+ 
   /* Select the text field */
   copyText.select();
   copyText.setSelectionRange(0, 99999); /* For mobile devices */
@@ -458,7 +459,20 @@ $id = $_SESSION['id'];
   /* Alert the copied text */
   alert("Copied the text: " + copyText.value);
 }
-        }
+
+
+        
+function copyElementText() {
+    var text = document.getElementById("copycode").innerText;
+    var elem = document.createElement("textarea");
+    document.body.appendChild(elem);
+    elem.value = text;
+    elem.select();
+    document.execCommand("copy");
+    document.body.removeChild(elem);
+    alert("copied code: "+text);
+}
+
 	      </script>
         <!-- Vendor JS -->
         <script src="js/vendors.min.js"></script>
