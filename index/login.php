@@ -36,11 +36,6 @@ if(isset($_POST['sign-up']))
         } 
     $reference_id =  random_strings(8);
     
-   
-    
-
-
-
 	$check = mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE email='$email' OR phone='$phone'"));
 
 
@@ -61,29 +56,12 @@ if(isset($_POST['sign-up']))
     
 	else {
 
-
-        //kareena 
-
-
-//         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
-// $result =mysqli_fetch_assoc($sql);
-// setting link  http:
-// http://localhost/Peradot/index/login2.php?refer=qkOxIQcH
-    
 		$password = md5($password);
 		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id,code) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id','$code')");
 		if($query) {
            
 //kareena 3
-        $username = mysqli_real_escape_string($con, $_POST['username']);
-         $email = mysqli_real_escape_string($con, $_POST['email']);
-         $phone = mysqli_real_escape_string($con, $_POST['phone']);
-         $password = mysqli_real_escape_string($con, $_POST['password']);
-         $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
-         $code = mysqli_real_escape_string($con, md5(rand()));
-         date_default_timezone_set("Asia/Kolkata");
-         $today = date("F j, Y, g:i a");
-         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
+$sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
 $result =mysqli_fetch_assoc($sql);
 $referred_from  = $result['username'];
 
@@ -93,9 +71,7 @@ $refered_to_id= $current_user['id'];
 $refered_name = $current_user['username'];
 
 $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$referred_from','$refered_name','$reference_code','$today')");
-// setting link  http://localhost/Peradot/index/login.php/?myref=
-     
-     
+
 //kareena 3 finish
 
 			echo "<div style='display: none;'>";
@@ -375,11 +351,6 @@ if(isset($_POST['sign-up']))
         } 
     $reference_id =  random_strings(8);
     
-   
-    
-
-
-
 	$check = mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE email='$email' OR phone='$phone'"));
 
 
@@ -403,28 +374,13 @@ if(isset($_POST['sign-up']))
 
         //kareena 
 
-
-        // $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
-// $result =mysqli_fetch_assoc($sql);
-// setting link  http://localhost/Peradot/index/login.php/?myref=
-        // if($_GET['myref'])
-        
-
 		$password = md5($password);
 		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id,code) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id','$code')");
 		if($query) {
 
-
-            $username = mysqli_real_escape_string($con, $_POST['username']);
-         $email = mysqli_real_escape_string($con, $_POST['email']);
-         $phone = mysqli_real_escape_string($con, $_POST['phone']);
-         $password = mysqli_real_escape_string($con, $_POST['password']);
-         $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
-         $reference_code = mysqli_real_escape_string($con, $_POST['refer_input']);
-         $code = mysqli_real_escape_string($con, md5(rand()));
-         date_default_timezone_set("Asia/Kolkata");
-         $today = date("F j, Y, g:i a");
-         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
+if($_POST['refer_input']!=''){
+    $reference_code = $username = mysqli_real_escape_string($con, $_POST['refer_input']);
+    $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
 $result =mysqli_fetch_assoc($sql);
 $referred_from  = $result['username'];
 
@@ -434,6 +390,7 @@ $refered_to_id= $current_user['id'];
 $refered_name = $current_user['username'];
 
 $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$referred_from','$refered_name','$reference_code','$today')");
+}
 			echo "<div style='display: none;'>";
                                     //Create an instance; passing `true` enables exceptions
                                     $mail = new PHPMailer(true);

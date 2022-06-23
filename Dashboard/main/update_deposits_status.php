@@ -57,68 +57,60 @@ if(isset($_POST['submit'])){
               alert("Deposite has been confirmed");
               $history_sql = mysqli_query($con,"INSERT INTO `history` (`user_id`,`user`, `timestamp`, `status`,`deposit` ) VALUES ('$user_rid','$row_rid[1]', '$time', '$new_status','$new_amount')");
               // updates();
-              global $con;
-        
-        
+
+      // $userid = 14;
+      // $new_amount = 1000;
+
+      //searching current user in reference table
+      $ref_query = mysqli_query($con,"SELECT * FROM  `reference` WHERE `user_id`=$user_id");
+      echo mysqli_num_rows($ref_query);
+      //while loop
+      while($ref_row = mysqli_fetch_assoc($ref_query)){
+      $username = $ref_row['username'];
+
+      $from_user = mysqli_query($con,"SELECT * FROM `users` WHERE `username` = '$username'");
+      $from_result = mysqli_fetch_assoc($from_user);
+      $old_amount = $from_result['amount'];
+
+
+      echo "<script>alert('$username')</script>";
+      echo "<script>alert($old_amount)</script>";
+
+
+
+      $refered_query = mysqli_query($con,"SELECT * FROM `reference` WHERE `refered_to` = '$username'");
+      if(mysqli_num_rows($refered_query)==0){
+        echo "<script>alert('10% wala ');</script>";
+        $percent = $new_amount *0.1;
+        $new_value = $old_amount + $percent;
+        echo "<script>alert('$new_value');</script>";
+        $update = mysqli_query($con,"UPDATE `users` SET `amount`=$new_value WHERE `username`='$username'");
+        if($update){
+            echo "<script>alert('added');</script>";
+        }else{
+            echo "<script>alert('not added');</script>";
+        }
+
+      }else{
+        echo "<script>alert('6% wala ');</script>";
+        $percent = $new_amount *0.06;
+        $new_value = $old_amount + $percent;
+        echo "<script>alert('$new_value');</script>";
+        $update = mysqli_query($con,"UPDATE `users` SET `amount`=$new_value WHERE `username`='$username'");
+        if($update){
+            echo "<script>alert('added to 6');</script>";
+        }else{
+            echo "<script>alert('not added to 6');</script>";
+        }
+
+      }
+    }
+          
             
-              $userid = $_SESSION['id'];
-          
-              // $current_user = mysqli_query($con,"SELECT * FROM `users` WHERE `id`=$userid");
-              // $current_fire = mysqli_fetch_assoc($current_user);
-              // $depositeOfUser = $current_fire['deposit'];
-              
-              //referred user details -> username
-              
-              $query_ref = "SELECT * FROM `reference` WHERE `user_id`=$userid";
-              $result_ref = mysqli_query($con,$query_ref); 
-              
-              // global $new_balance;
-              //while loop to update all the reffered user percent
-              while($ref_row = mysqli_fetch_assoc($result_ref) ){
-              
-                $username = $ref_row['username'];
-                $deposit_data = mysqli_query($con,"SELECT * FROM `users` WHERE `username`='$username'");
-                $deposit_fire = mysqli_fetch_assoc($deposit_data);
-                $old_deposit = $deposit_fire['deposit'];
-                //checking the column of referred to if it is same as referred from 
-              
-                $from_query = mysqli_query($con,"SELECT * FROM `reference` WHERE  `refered_to`= '$username'");
-              
-                if(mysqli_num_rows($from_query)>0){
-              
-                  $update_query = mysqli_query($con,"UPDATE `users` SET `percent`=6 WHERE `username`='$username'");
-              
-                  if($update_query){
-                    alert("set to 6");
-                    $percent = $new_amount*0.06;
-                    $new_balance = $old_deposit +$percent;
-                    $update_balance = mysqli_query($con,"UPDATE `users` SET `deposit`=$new_balance WHERE `username`='$username'");
-                  }else{
-                    alert('Not set to 6');
-                  }
               
               
-                }else{
-                  $update_query = mysqli_query($con,"UPDATE `users` SET `percent`=10 WHERE `username`='$username'");
               
-                  if($update_query){
-                    alert("set to 10");
-                    $percent = $new_amount*0.1;
-                    $new_balance = $old_deposit +$percent;
-                  
-                    $update_balance = mysqli_query($con,"UPDATE `users` SET `deposit`=$new_balance WHERE `username`='$username'");
-                    if($update_balance){
-                      alert("updated");
-                    }else{
-                      alert("not updated");
-                    }
-                  }else{
-                    alert('Not set to 10');
-                  }
-                }
-               
-              
-              }
+           
               
           
       
@@ -127,11 +119,7 @@ if(isset($_POST['submit'])){
       
       
       
-        //while loop to update all the reffered user percent
-       
-      
-      
-      
+        //while loop 
           }elseif($new_status == 'Reject'){
             $admin_sql = mysqli_query($con,"DELETE FROM `deposite` WHERE user_id = $user_id");
               alert("Deposite has been Rejected");
