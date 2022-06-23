@@ -7,6 +7,9 @@ if(!isset($_SESSION["id"])){
   header("Location: ../../index/login.php");
 }
 
+
+
+
 $id = $_SESSION['id'];
 // $ref_code = '';
     $ref_code_sql=mysqli_query($con,"SELECT reference_id from users where id = $id");
@@ -21,12 +24,28 @@ $id = $_SESSION['id'];
         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
         $result =mysqli_fetch_assoc($sql);
         $username=$result['username'];
+
+
+
+       
+                               $userid = $_SESSION['id'];
+                               $query = "SELECT * FROM `users` WHERE `id`=$userid";
+                               $result_query = mysqli_query($con,$query);
+                               $result = mysqli_fetch_assoc($result_query);
+                               
+                             
+
+
+
+
+
+        $refered_to = $result['username'];
         $total_balance = $result['amount'];
         $sql1 = mysqli_query($con,"SELECT * from reference WHERE user_id = $id AND reference_id = '$reference_code'");
         if(mysqli_num_rows($sql)){
             if(mysqli_num_rows($sql1) == 0){
               if($reference_code != $ref_code){
-                mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`reference_id`,`timestamp`) VALUES ('$id','$username','$reference_code','$today')");
+                mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$id','$username','$refered_to','$reference_code','$today')");
                 $ref_profit = ($total_balance*10)/100;
                 $new_total_balance = $total_balance + $ref_profit;
                 mysqli_query($con,"UPDATE users SET amount = '$new_total_balance' where reference_id = '$reference_code'");
@@ -83,7 +102,7 @@ $id = $_SESSION['id'];
     <meta name="author" content="" />
 
     <title>
-        Payment
+        References
     </title>
 
     <!-- Vendors Style-->
@@ -286,18 +305,61 @@ $id = $_SESSION['id'];
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-8" style="margin:auto";>
+                                    <div class="card vh-auto">
+                                    <div class="card-header">
+                                            <h1 class="card-title text-dark fw-500">Reference Code </h1>
+                                        </div>
+                                        <form action="" method = "post">
+                                        <div class="card-body">
+                                            <h5>Enter referral code</h5>
+                                            <h4 class="msg"><?php echo $msg ?></h4>
+                                            <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
+                                                <input type="text" class="form-control" name="reference_code" placeholder="referral code">
+                                                <input type="submit" class="btn btn-primary" name="refer" value="submit">
+                                            </div>
+                                            <hr>
 
+                
+                                        </div>
+                                        
+                                            <h5 style="margin-left:1rem"> Your referral link</h5>
+                                          
+                                            <?php
+                                            $user_id = $_SESSION['id'];
+                                            $query  = mysqli_query($con,"SELECT * FROM `users` WHERE `id`=$user_id");
+                                            $result = mysqli_fetch_assoc($query);
+                                            $ureferral_code = $result['reference_id'];
+                                            $string_url = $base_url.'1/index/login2.php?refer='.$ureferral_code;
+                                            echo "<script>console.log($ureferral_code);</script>";
+                                            ?>
+                                            <div class="d-flex justify-content-end bg-light rounded p-15 mx-5 my-10">
+                                                <input type="text" class="form-control" id="user_ref_code" name="reference_link" placeholder="your referral code" value = "<?php echo $string_url?>" readonly>
+                                                <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box" style="font-size:2rem;margin-top:.1rem;cursor:pointer" id="copy" onclick="myFunction()">
+                                        </i>
+                                                <!-- <input type="submit" class="btn btn-primary" name="refer" value="copy"> -->
+                                          
+                                            <hr>
+
+                
+                                        </div>
+                                        </form>
+                                    </div>
+                                    
+                                   </div>
+                               </div>
+                               
                         <div class="row mt-55">
                             <div class="col-xl-12 col-sm-12">
                                <div class="row justify-content-center">
-                                   <div class="col-xl-6 col-sm-12">
+                                   <div class="col-xl-12 col-sm-12">
                                    <div class="card vh-auto">
                                         <div class="card-header">
                                             <h1 class="card-title text-dark fw-500">Refered Users</h1>
                                             <form action="" method="post">
-                                            <button type="submit"  class="btn btn-info btn-lg" name="refresh">
+                                            <!-- <button type="submit"  class="btn btn-info btn-lg" name="refresh">
                                                 <span class="glyphicon glyphicon-refresh" ></span> Refresh
-                                            </button>
+                                            </button> -->
                                             <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p>
                                                 </form>
                                         </div>
@@ -306,9 +368,9 @@ $id = $_SESSION['id'];
                                                     <thead>
                                                         <tr>
                                                             <th>ID</th>
-                                                            <th>User Name</th>
+                                                            <th>Referred by</th>
                                                             <th>Reference Code</th>
-                                                            <th>Done</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -343,28 +405,8 @@ $id = $_SESSION['id'];
                                         
                                     </div>
                                     </div>
-                                    <div class="col-xl-6">
-                                    <div class="card vh-auto">
-                                    <div class="card-header">
-                                            <h1 class="card-title text-dark fw-500">Reference Code </h1>
-                                        </div>
-                                        <form action="" method = "post">
-                                        <div class="card-body">
-                                            <h5>Enter referral code</h5>
-                                            <h4 class="msg"><?php echo $msg ?></h4>
-                                            <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
-                                                <input type="text" class="form-control" name="reference_code"placeholder="referral code">
-                                                <input type="submit" class="btn btn-primary" name="refer" value="submit">
-                                            </div>
-                                            <hr>
-
-                
-                                        </div>
-                                        </form>
-                                    </div>
-                                    
-                                   </div>
-                               </div>
+                                
+                                
                             </div>
                 </section>
                 <!-- /.content -->
@@ -401,6 +443,21 @@ $id = $_SESSION['id'];
         <script>
 		    if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
+
+        function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("user_ref_code");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
         }
 	      </script>
         <!-- Vendor JS -->
