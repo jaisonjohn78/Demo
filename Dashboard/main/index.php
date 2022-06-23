@@ -373,6 +373,134 @@ else{
         <?php
 }
 }
+
+if(isset($_POST['package6'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
+    if($deposit >= 6000){
+        $new_deposite_amount = $deposit - 6000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 6','6000', '360', '$next_claim')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
+
+if(isset($_POST['package7'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
+    if($deposit >= 8000){
+        $new_deposite_amount = $deposit - 8000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 7','8000', '480', '$next_claim')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
+if(isset($_POST['package8'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
+    if($deposit >= 10000){
+        $new_deposite_amount = $deposit - 10000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 7','10000', '600', '$next_claim')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
 // }
 
 ?>
@@ -1174,6 +1302,141 @@ else{
                                                             </div>
                                                         </div>
                                                         
+                                                        
+                                                        <div class="col-lg-6 col-md-12 mb-4">
+                                                            <div class="card card3 h-100">
+                                                                <div class="card-body">
+
+                                                                    <h5 class="card-title">Deluxe</h5>
+                                                                    <small class='text-muted'>Package 6</small>
+                                                                    <br><br>
+                                                                    <h1>$6000</h1>
+                                                                    <span class="h2">$10800</span>/month
+                                                                    <br><br>
+                                                                    <div class="d-grid my-3">
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal5">Select</button>
+                                                                    </div>
+                                                                    <ul>
+                                                                    <li>$360/day for 30Days = $10800</li>
+                                                                       <li>$4800 Profit  </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <p><b>$6000</b> will be deducted from your account and <b>package 6</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package6">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6 col-md-12 mb-4">
+                                                            <div class="card card3 h-100">
+                                                                <div class="card-body">
+
+                                                                    <h5 class="card-title">Deluxe</h5>
+                                                                    <small class='text-muted'>Package 7</small>
+                                                                    <br><br>
+                                                                    <h1>$8000</h1>
+                                                                    <span class="h2">$14400</span>/month
+                                                                    <br><br>
+                                                                    <div class="d-grid my-3">
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal6">Select</button>
+                                                                    </div>
+                                                                    <ul>
+                                                                    <li>$480/day for 30Days = $14400</li>
+                                                                       <li>$6400 Profit  </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <p><b>$8000</b> will be deducted from your account and <b>package 7</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package7">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 mb-4">
+                                                            <div class="card card3 h-100">
+                                                                <div class="card-body">
+
+                                                                    <h5 class="card-title">Ultimate</h5>
+                                                                    <small class='text-muted'>Package 8</small>
+                                                                    <br><br>
+                                                                    <h1>$10000</h1>
+                                                                    <span class="h2">$18000</span>/month
+                                                                    <br><br>
+                                                                    <div class="d-grid my-3">
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#exampleModal7">Select</button>
+                                                                    </div>
+                                                                    <ul>
+                                                                    <li>$600/day for 30Days = $18000</li>
+                                                                       <li>$8000 Profit  </li>
+
+                                                                    </ul>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <p><b>$10000</b> will be deducted from your account and <b>package 8</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package8">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </form>
                                                     </div>
                                                 </div>
