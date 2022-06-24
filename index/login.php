@@ -58,7 +58,15 @@ if(isset($_POST['sign-up']))
 	else {
 
         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
-        if(mysqli_num_rows($sql)>0){
+        if(mysqli_num_rows($sql)==0){
+            echo "<script>alert('Invalid Reference code !');</script>";
+            
+        }
+        else{
+           
+        $password = md5($password);
+		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id,code) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id','$code')");
+
         $result =mysqli_fetch_assoc($sql);
         $referred_from  = $result['username'];
         
@@ -68,13 +76,8 @@ if(isset($_POST['sign-up']))
         $refered_name = $current_user['username'];
         
         $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$referred_from','$refered_name','$reference_code','$today')");
-        }else{
-            echo "<script>Invalid Reference code !</script>";
-            header("Location: login.php");
-        }
 
-		$password = md5($password);
-		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id,code) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id','$code')");
+		
 		if($query) {
            
 			echo "<div style='display: none;'>";
@@ -328,6 +331,7 @@ if(isset($_POST['sign-up']))
         
 	}
 }
+}
 }else{
 
 if(isset($_POST['sign-up']))
@@ -371,35 +375,29 @@ if(isset($_POST['sign-up']))
 	}
     
 	else {
-
-
-        
 if($_POST['refer_input']!='')
 {
     $reference_code =  mysqli_real_escape_string($con, $_POST['refer_input']);
-    $sql = mysqli_query($con,"SELECT * from users WHERE reference_id == '$reference_code'");
-    alert(mysqli_num_rows($sql));
-    if(mysqli_num_rows($sql)>0){
-$result =mysqli_fetch_assoc($sql);
-$referred_from  = $result['username'];
-
-$current = mysqli_query($con,"SELECT * FROM `users` WHERE `email` = '$email'");
-$current_user = mysqli_fetch_assoc($current);
-$refered_to_id= $current_user['id'];
-$refered_name = $current_user['username'];
-
-$add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$referred_from','$refered_name','$reference_code','$today')");
-    }else{
-        // alert("Invalid Reference code!");
+    $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
+    
+    if(mysqli_num_rows($sql)==0){
         echo "<script>alert('Invalid reference code !');</script>";
-        header("Location: login.php");
     }
-}else{
-    alert("Invalid Reference code!");
-}
-
-		$password = md5($password);
-		$query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id,code) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id','$code')");
+    else{
+        $password = md5($password);
+        $query = mysqli_query($con, "INSERT INTO users (username, email, phone, password, timestamp, reference_id,code) VALUES ('$username', '$email', '$phone', '$password', '$today', '$reference_id','$code')");
+        $result =mysqli_fetch_assoc($sql);
+        $referred_from  = $result['username'];
+    
+    $current = mysqli_query($con,"SELECT * FROM `users` WHERE `email` = '$email'");
+    $current_user = mysqli_fetch_assoc($current);
+    $refered_to_id= $current_user['id'];
+    $refered_name = $current_user['username'];
+    
+   
+    
+    $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$referred_from','$refered_name','$reference_code','$today')");
+       
 		if($query) {
 
 			echo "<div style='display: none;'>";
@@ -650,9 +648,16 @@ $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_
 		else {
 			alert("Something went wrong");
 		}
-	}
+    }
+    }
+    else{
+        echo "<script>alert('Invalid Reference code!')<script>";
+    }
 }
+    }
 }
+
+
 
 if (isset($_GET['verification'])) {
     if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE code='{$_GET['verification']}'")) > 0) {
