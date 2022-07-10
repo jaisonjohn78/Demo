@@ -771,6 +771,12 @@ if (isset($_POST['sign-in'])) {
             font-size:1.1rem;
             color:white;
         }
+        p {
+            font-size: 1.3rem !important;
+        }
+        a:hover, b:hover {
+            color: #7132ed;
+        }
         @media only screen and (max-width: 425px){
             .link{
                 color:black;

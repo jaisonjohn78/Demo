@@ -89,6 +89,13 @@ window.location.href = "payment.php";
         z-index: 99999;
     }
 
+    #deposit-btn {
+        display: block;
+        position: relative;
+        width: 6rem;
+        left: 70%;
+    }
+
     @media only screen and (max-width: 525px) {
         input[type="file"] {
             color: transparent;
@@ -277,9 +284,9 @@ window.location.href = "payment.php";
                                                     class="d-flex justify-content-between bg-light rounded p-20 mx-1 my-10">
                                                     <input type="file" name="file" onchange="loadFile(event)"
                                                         required />
-                                                    <input type="button" class="btn btn-primary" value="Upload"
-                                                        data-toggle="modal" data-target="#exampleModal1">
-                                                </div>
+                                                    </div>
+                                                    <input type="button" class="btn btn-primary" id="deposit-btn" value="Upload"
+                                                    data-toggle="modal" data-target="#exampleModal1">
                                                 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
