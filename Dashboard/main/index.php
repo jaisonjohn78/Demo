@@ -12,6 +12,9 @@ $id = $_SESSION['id'];
 $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
 $user_row = mysqli_fetch_assoc($user_sql);
 $deposit = $user_row['deposit'];
+$peracoin =$user_row['peracoin'];
+$pwallet_rate = 5;
+$pwallet = number_format(($peracoin * $pwallet_rate),2);
 if ($user_row['admin'] == 1) {
   header("Location: admin.php");
 }
@@ -1673,8 +1676,8 @@ else{
         <div class="profile-name">PWallet</div>
        
 
-        <div class="profile-username" style="font-size: 1.9rem; font-weight: 600px; margin-top: 15px;">$0.00</div>
-        <div class="button-side"><h1>0</h1><p>Peracoin</p></div>
+        <div class="profile-username" style="font-size: 1.9rem; font-weight: 600px; margin-top: 15px;">$<?php echo $pwallet ?></div>
+        <div class="button-side"><h1><?php echo $peracoin ?></h1><p>Peracoin</p></div>
     </div>
 </div>
 
