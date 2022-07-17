@@ -539,6 +539,16 @@ else{
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N2ZL4XWR3N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N2ZL4XWR3N');
+</script>
     <style>
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -772,7 +782,16 @@ else{
                             <li class="">
                                 <a href="reference.php">
                                     <i data-feather="share-2"></i>
-                                    <span>Reference Code</span>
+                                    <span>My Referral</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="perashop/index.html">
+                                    <i data-feather="shopping-bag"></i>
+                                    <span>Perashop</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>

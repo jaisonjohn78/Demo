@@ -250,7 +250,7 @@ $id = $_SESSION['id'];
                             <li class="active">
                               <a href="reference.php">
                                   <i data-feather="share-2" ></i>
-                                  <span>Reference</span>
+                                  <span>My Referral</span>
                                   <span class="pull-right-container">
                                       <i class="fa fa-angle-right pull-right"></i>
                                   </span>

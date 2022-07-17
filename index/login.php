@@ -745,6 +745,8 @@ if (isset($_POST['sign-in'])) {
    />
    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="../assets/img/sm-logo.png" />
+
 	<style> 
         
 		i {

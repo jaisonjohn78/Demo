@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="Peradot Foundation">
     <meta name="title" content="Landing Page for Peradot">
+   
+    <meta name="keywords" content="Peradot%Foundation, peradot%foundation, PERADOT, peradot, peracoin, perashop, peradot%investment, Peradot Foundation, cryptocurrency, Crypto">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     <meta name="author" content="Peradot">
 
@@ -12,6 +16,8 @@
     <!-- <link rel="icon" type="image/png" href="assets/img/logo.png"> -->
 
     <title> Paradot - Landing Page </title>
+
+    <link rel="icon" type="image/png" href="assets/img/sm-logo.png" />
 
     <!--google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
@@ -251,7 +257,7 @@
         </div>
         
     </section>
-    <div class="timer-container"><h1>Initial Coin Offering</h1><h3>31 March 2023</h3><div id="timer"></div><br><a href=""><input type="button" class="btn btn-white btn-pill text-uppercase" value="Get Airdrop Now" style="margin-top: 40px;"></a></div>
+    <div class="timer-container"><h1>Initial Coin Offering</h1><h4 id="time-text">Loading..</h4><div id="timer"></div><br><a href=""><input type="button" class="btn btn-white btn-pill text-uppercase" value="Get Airdrop Now" style="margin-top: 40px;"></a></div>
 
 </div>
 <!--section end-->
@@ -352,7 +358,7 @@
                 <div class="col-md-7 col-gap">
                     <h2 class="mb-md-5 wow fadeInUp" data-wow-delay=".2s">Why you will choose Peradot platform?</h2>
                     <p class=" wow fadeInUp" data-wow-delay=".3s">Peradot covers 3 major platforms namely; NFT, Metaverse and P2P network. The amount which is being invested by the public will be using into different fields and the investors will be receiving the attractive ROI for their investments to make their life lavish. The saved fund is being used to improve the performance of the company and for the betterment of the company as well as the whole members and staff grope, who are the foundation of the whole empire. </p>
-                    <a href="index/login.php" class="btn btn-purple btn-pill text-uppercase wow fadeInUp" data-wow-delay=".4s">Register Now</a>
+                    <a href="assets/whitepaper.pdf" download class="btn btn-purple btn-pill text-uppercase wow fadeInUp" data-wow-delay=".4s">WhitePaper</a>
                 </div>
                 <div class="col-md-5 col-gap wow fadeInUp" data-wow-delay=".5s">
                     <img class="py-4" src="assets/img/art3.png" alt=""/>
@@ -1101,8 +1107,9 @@ time {
 })();
 </script>
 <script>
+var set_date = "October 17, 2022 08:59:00"
     function updateTimer() {
-  future  = Date.parse("July 15, 2022 08:59:00");
+  future  = Date.parse(set_date);
   now     = new Date();
   diff    = future - now;
 
@@ -1116,6 +1123,7 @@ time {
   m = mins  - hours * 60;
   s = secs  - mins  * 60;
 
+  document.getElementById("time-text").innerHTML = set_date;
   document.getElementById("timer")
     .innerHTML =
       '<div>' + d + '<span>days</span></div>' +
