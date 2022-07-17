@@ -18,27 +18,16 @@ $id = $_SESSION['id'];
     $msg = '';
 
     if(isset($_POST['refer'])){
-        $reference_code = $_POST['reference_code'];
+        $reference_code = trim($_POST['reference_code']);
         $today = date("F j, Y, g:i a"); 
 
         $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
         $result =mysqli_fetch_assoc($sql);
         $username=$result['username'];
-
-
-
-       
                                $userid = $_SESSION['id'];
                                $query = "SELECT * FROM `users` WHERE `id`=$userid";
                                $result_query = mysqli_query($con,$query);
                                $result = mysqli_fetch_assoc($result_query);
-                               
-                             
-
-
-
-
-
         $refered_to = $result['username'];
         $total_balance = $result['amount'];
         $sql1 = mysqli_query($con,"SELECT * from reference WHERE user_id = $id AND reference_id = '$reference_code'");
@@ -83,11 +72,11 @@ $id = $_SESSION['id'];
               mysqli_query($con,"UPDATE `users` SET amount= amount + 50   WHERE reference_id = '$latest_id'");
             } }else{
               ?>
-              <script>
-                  alert("Empty List or Referred user has not deposited");
-                  window.location.href="reference.php";
-                  </script>
-                  <?php
+<script>
+alert("Empty List or Referred user has not deposited");
+window.location.href = "reference.php";
+</script>
+<?php
             }
     }
 ?>
@@ -117,18 +106,19 @@ $id = $_SESSION['id'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
     <style>
-      #code {
+    #code {
         cursor: pointer;
-      }
-      @media only screen and (max-width: 600px) {
+    }
+
+    @media only screen and (max-width: 600px) {
 
         .row {
-          --bs-gutter-x: 0 !important;
-          margin-right: -25px !important;
-          margin-left: -15px !important;
+            --bs-gutter-x: 0 !important;
+            margin-right: -25px !important;
+            margin-left: -15px !important;
         }
-        
-      }
+
+    }
     </style>
 </head>
 
@@ -137,67 +127,55 @@ $id = $_SESSION['id'];
         <div id="loader"></div>
 
         <header class="main-header">
-        <div class="d-flex align-items-center logo-box justify-content-start">
-          <!-- Logo -->
-          <a href="index.php" class="logo" style="text-decoration: none;">
-            <!-- logo-->
-            <div class="logo-mini w-40 m-auto">
-              <span class="light-logo"
-                ><img src="../images/logo.png" alt="logo"
-              /></span>
-              <span class="dark-logo"
-                ><img src="../images/logo.png" alt="logo"
-              /></span>
+            <div class="d-flex align-items-center logo-box justify-content-start">
+                <!-- Logo -->
+                <a href="index.php" class="logo" style="text-decoration: none;">
+                    <!-- logo-->
+                    <div class="logo-mini w-40 m-auto">
+                        <span class="light-logo"><img src="../images/logo.png" alt="logo" /></span>
+                        <span class="dark-logo"><img src="../images/logo.png" alt="logo" /></span>
+                    </div>
+                    <div class="logo-lg align-items-center m-auto ">
+                        <h3 class="title text-bold text-center"
+                            style="color: white; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'">
+                            Peradot</h3>
+                    </div>
+                </a>
             </div>
-            <div class="logo-lg align-items-center m-auto ">
-              <h3 class="title text-bold text-center" style="color: white; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'">Peradot</h3>
-            </div>
-          </a>
-        </div>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top">
-              <!-- Sidebar toggle button-->
-              <div class="app-menu">
-                <ul class="header-megamenu nav">
-                  <li class="btn-group nav-item">
-                    <a
-                      href="#"
-                      class="waves-effect waves-light nav-link push-btn btn-primary-light"
-                      data-toggle="push-menu"
-                      role="button"
-                    >
-                      <i data-feather="align-left"></i>
-                    </a>
-                  </li>
-                  <li class="btn-group nav-item d-none d-xl-inline-block">
-                    <a
-                      href=""
-                      class="waves-effect waves-light nav-link svg-bt-icon btn-primary-light"
-                      title="Mailbox"
-                    >
-                      <i data-feather="at-sign"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-    
-              <div class="navbar-custom-menu r-side">
-                <ul class="nav navbar-nav">
-                  
-                  <li class="btn-group nav-item d-lg-inline-flex d-none">
-                    <a
-                      href="#"
-                      data-provide="fullscreen"
-                      class="waves-effect waves-light nav-link full-screen btn-primary-light"
-                      title="Full Screen"
-                    >
-                      <i data-feather="maximize"></i>
-                    </a>
-                  </li>
-        
-    
-                  <!-- User Account-->
-                  <li class="dropdown user user-menu">
+                <!-- Sidebar toggle button-->
+                <div class="app-menu">
+                    <ul class="header-megamenu nav">
+                        <li class="btn-group nav-item">
+                            <a href="#" class="waves-effect waves-light nav-link push-btn btn-primary-light"
+                                data-toggle="push-menu" role="button">
+                                <i data-feather="align-left"></i>
+                            </a>
+                        </li>
+                        <li class="btn-group nav-item d-none d-xl-inline-block">
+                            <a href="" class="waves-effect waves-light nav-link svg-bt-icon btn-primary-light"
+                                title="Mailbox">
+                                <i data-feather="at-sign"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="navbar-custom-menu r-side">
+                    <ul class="nav navbar-nav">
+
+                        <li class="btn-group nav-item d-lg-inline-flex d-none">
+                            <a href="#" data-provide="fullscreen"
+                                class="waves-effect waves-light nav-link full-screen btn-primary-light"
+                                title="Full Screen">
+                                <i data-feather="maximize"></i>
+                            </a>
+                        </li>
+
+
+                        <!-- User Account-->
+                        <li class="dropdown user user-menu">
                             <a href="#" class="waves-effect waves-light dropdown-toggle btn-primary-light"
                                 data-bs-toggle="dropdown" title="User">
                                 <i data-feather="user"></i>
@@ -205,9 +183,10 @@ $id = $_SESSION['id'];
                             <ul class="dropdown-menu animated flipInX">
                                 <li class="user-body">
                                     <a class="dropdown-item" href="index.php"><i class="ti-user text-muted me-2"></i>
-                                    Dashboard</a>
+                                        Dashboard</a>
 
-                                    <a class="dropdown-item" href="../../index.html"><i class="ti-home text-muted me-2"></i>
+                                    <a class="dropdown-item" href="../../index.html"><i
+                                            class="ti-home text-muted me-2"></i>
                                         Home</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="logout.php"><i class="ti-lock text-muted me-2"></i>
@@ -215,12 +194,12 @@ $id = $_SESSION['id'];
                                 </li>
                             </ul>
                         </li>
-    
-      
-                </ul>
-              </div>
+
+
+                    </ul>
+                </div>
             </nav>
-          </header>
+        </header>
 
         <aside class="main-sidebar">
             <!-- sidebar-->
@@ -248,6 +227,7 @@ $id = $_SESSION['id'];
                                 </a>
                             </li>
                             <li class="active">
+<<<<<<< HEAD
                               <a href="reference.php">
                                   <i data-feather="share-2" ></i>
                                   <span>My Referral</span>
@@ -256,18 +236,30 @@ $id = $_SESSION['id'];
                                   </span>
                               </a>
                           </li>
+=======
+                                <a href="reference.php">
+                                    <i data-feather="share-2"></i>
+                                    <span>Reference</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                            </li>
+>>>>>>> 6fb077d8ec0ae7a51d1be0a18785e050a0a4b2e7
                         </ul>
 
                         <div class="sidebar-widgets mt-5">
-                        <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
+                            <div class="mx-25 mt-30 p-30 text-center bg-primary-light rounded5">
                                 <img src="../images/trophy.png" alt="" />
                                 <h4 class="my-3 fw-500 text-uppercase text-primary">
                                     Invest your Savings
                                 </h4>
-                                <span class="fs-12 d-block mb-3 text-black-50">Check out the best packages for you with high returns </span>
-                                <a href="index.php#price"><button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
-                                    Select Package
-                                </button></a>
+                                <span class="fs-12 d-block mb-3 text-black-50">Check out the best packages for you with
+                                    high returns </span>
+                                <a href="index.php#price"><button type="button"
+                                        class="waves-effect waves-light btn btn-sm btn-primary mb-5">
+                                        Select Package
+                                    </button></a>
                             </div>
                             <div class="copyright text-center m-25">
                                 <p>
@@ -297,35 +289,37 @@ $id = $_SESSION['id'];
                                 </div>
                                 <div class="col-xl-6 text-center my-2">
 
-                                <h1 class="fw-500 m-0" id="copycode"><?php echo $ref_code ?>
-                                <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box" onclick="copyElementText()">
+                                    <h1 class="fw-500 m-0" id="copycode"><?php echo $ref_code ?>
+                                        <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box"
+                                            onclick="copyElementText()">
                                         </i>
-                                      
-                                </h1>
+
+                                    </h1>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-8" style="margin:auto";>
-                                    <div class="card vh-auto">
-                                    <div class="card-header">
-                                            <h1 class="card-title text-dark fw-500">Reference Code </h1>
+                        <div class="col-xl-8" style="margin:auto" ;>
+                            <div class="card vh-auto">
+                                <div class="card-header">
+                                    <h1 class="card-title text-dark fw-500">Reference Code </h1>
+                                </div>
+                                <form action="" method="post">
+                                    <div class="card-body">
+                                        <h5>Enter referral code</h5>
+                                        <h4 class="msg"><?php echo $msg ?></h4>
+                                        <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
+                                            <input type="text" class="form-control" name="reference_code"
+                                                placeholder="referral code">
+                                            <input type="submit" class="btn btn-primary" name="refer" value="submit">
                                         </div>
-                                        <form action="" method = "post">
-                                        <div class="card-body">
-                                            <h5>Enter referral code</h5>
-                                            <h4 class="msg"><?php echo $msg ?></h4>
-                                            <div class="d-flex justify-content-end bg-light rounded p-30 mx-10 my-15">
-                                                <input type="text" class="form-control" name="reference_code" placeholder="referral code">
-                                                <input type="submit" class="btn btn-primary" name="refer" value="submit">
-                                            </div>
-                                            <hr>
+                                        <hr>
 
-                
-                                        </div>
-                                        
-                                            <h5 style="margin-left:1rem"> Your referral link</h5>
-                                          
-                                            <?php
+
+                                    </div>
+
+                                    <h5 style="margin-left:1rem"> Your referral link</h5>
+
+                                    <?php
                                             $user_id = $_SESSION['id'];
                                             $query  = mysqli_query($con,"SELECT * FROM `users` WHERE `id`=$user_id");
                                             $result = mysqli_fetch_assoc($query);
@@ -333,47 +327,51 @@ $id = $_SESSION['id'];
                                             $string_url = $base_url.'index/login.php?refer='.$ureferral_code;
                                             echo "<script>console.log($ureferral_code);</script>";
                                             ?>
-                                            <div class="d-flex justify-content-end bg-light rounded p-15 mx-5 my-10">
-                                                <input type="text" class="form-control" id="user_ref_code" name="reference_link" placeholder="your referral code" value = "<?php echo $string_url?>" readonly>
-                                                <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box" style="font-size:2rem;margin-top:.1rem;cursor:pointer" id="copy" onclick="myFunction()">
+                                    <div class="d-flex justify-content-end bg-light rounded p-15 mx-5 my-10">
+                                        <input type="text" class="form-control" id="user_ref_code" name="reference_link"
+                                            placeholder="your referral code" value="<?php echo $string_url?>" readonly>
+                                        <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box"
+                                            style="font-size:2rem;margin-top:.1rem;cursor:pointer" id="copy"
+                                            onclick="myFunction()">
                                         </i>
-                                                <!-- <input type="submit" class="btn btn-primary" name="refer" value="copy"> -->
-                                          
-                                            <hr>
+                                        <!-- <input type="submit" class="btn btn-primary" name="refer" value="copy"> -->
 
-                
-                                        </div>
-                                        </form>
+                                        <hr>
+
+
                                     </div>
-                                    
-                                   </div>
-                               </div>
-                               
-                        <div class="row mt-55">
-                            <div class="col-xl-12 col-sm-12">
-                               <div class="row justify-content-center">
-                                   <div class="col-xl-12 col-sm-12">
-                                   <div class="card vh-auto">
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-55">
+                        <div class="col-xl-12 col-sm-12">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-12 col-sm-12">
+                                    <div class="card vh-auto">
                                         <div class="card-header">
                                             <h1 class="card-title text-dark fw-500">Refered Users</h1>
                                             <form action="" method="post">
-                                            <!-- <button type="submit"  class="btn btn-info btn-lg" name="refresh">
+                                                <!-- <button type="submit"  class="btn btn-info btn-lg" name="refresh">
                                                 <span class="glyphicon glyphicon-refresh" ></span> Refresh
                                             </button> -->
-                                            <!-- <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p> -->
-                                                </form>
+                                                <!-- <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p> -->
+                                            </form>
                                         </div>
                                         <div class="card-body" style="overflow: scroll;">
-                                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID</th>
-                                                            <th>Referred by</th>
-                                                            <th>Reference Code</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                            <table id="example" class="table table-striped table-bordered"
+                                                style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Referred by</th>
+                                                        <th>Reference Code</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
                                                     <?php
                                                         // $user_id= $_SESSION["user_id"];
                                                         $res=mysqli_query($con,"SELECT * FROM reference WHERE user_id = '$id'");                                    // die();
@@ -381,11 +379,11 @@ $id = $_SESSION['id'];
                                                         while($row=mysqli_fetch_assoc($res)){
                                                         
                                                     ?>
-                                                        <tr>
-                                                            <td><?php echo $i++ ?></td>
-                                                            <td><?php echo $row['username']?></td>
-                                                            <td><?php echo $row['reference_id']?></td>
-                                                            <?php 
+                                                    <tr>
+                                                        <td><?php echo $i++ ?></td>
+                                                        <td><?php echo $row['username']?></td>
+                                                        <td><?php echo $row['reference_id']?></td>
+                                                        <?php 
                                                                 if($row['status'] == 1 ){
                                                                     echo "<td><i
                                                                     class='mx-3 mdi mdi-checkbox-marked-circle btn-rounded btn-success down_box'>
@@ -395,18 +393,18 @@ $id = $_SESSION['id'];
                                                                     echo "<td><h4>-</h4></td>";
                                                                 }
                                                             ?>
-                                                            
-                                                        </tr>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                  
-                                                </table>
+
+                                                    </tr>
+                                                    <?php } ?>
+                                                </tbody>
+
+                                            </table>
                                         </div>
-                                        
+
                                     </div>
-                                    </div>
-                                
-                                
+                                </div>
+
+
                             </div>
                 </section>
                 <!-- /.content -->
@@ -439,41 +437,41 @@ $id = $_SESSION['id'];
         <!-- Page Content overlay -->
 
         <!-- Custom JS -->
-  
+
         <script>
-		    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
         function myFunction() {
-  /* Get the text field */
-  var copyText = document.getElementById("user_ref_code");
-  
- 
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-   /* Copy the text inside the text field */
-  navigator.clipboard.writeText(copyText.value);
-
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
-}
+            /* Get the text field */
+            var copyText = document.getElementById("user_ref_code");
 
 
-        
-function copyElementText() {
-    var text = document.getElementById("copycode").innerText;
-    var elem = document.createElement("textarea");
-    document.body.appendChild(elem);
-    elem.value = text;
-    elem.select();
-    document.execCommand("copy");
-    document.body.removeChild(elem);
-    alert("copied code: "+text);
-}
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
-	      </script>
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+
+
+
+        function copyElementText() {
+            var text = document.getElementById("copycode").innerText;
+            var elem = document.createElement("textarea");
+            document.body.appendChild(elem);
+            elem.value = text;
+            elem.select();
+            document.execCommand("copy");
+            document.body.removeChild(elem);
+            alert("copied code: " + text);
+        }
+        </script>
         <!-- Vendor JS -->
         <script src="js/vendors.min.js"></script>
         <script src="js/pages/chat-popup.js"></script>
@@ -487,13 +485,15 @@ function copyElementText() {
         <script src="js/pages/dashboard2.js"></script>
         <script src="js/pages/dashboard2-chart.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-    $('#example').DataTable({searching: false});
-});
-    </script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                searching: false
+            });
+        });
+        </script>
 </body>
 
 </html>

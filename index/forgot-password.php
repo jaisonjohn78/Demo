@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';
 
 $msg = "";
-
+$error_1 = '';
 if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $code = mysqli_real_escape_string($con, md5(rand()));
@@ -253,32 +253,29 @@ if (isset($_POST['submit'])) {
                 
                 </html>";
                 $mail->send();
-                ?>
-                <script>
-                    alert("Mail has been sent");
-                </script>
-                <?php
+                $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Mail has been sent</p> ";
+                    // alert("Mail has been sent");
+               
             } catch (Exception $e) {
-                ?>
-                <script>
+                $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Message could not be sent. Mailer Error: $mail->ErrorInfo</p> ";
+
                     alert("Message could not be sent. Mailer Error: <?php echo $mail->ErrorInfo ?>");
-                </script>
-                <?php
+            
             }
             echo "</div>";      
-            ?>
-            <script>
-                alert("We've send a verification link on your email address.");
+           
+                $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>We've send a verification link on your email address.</p> ";
+                ?>
+                <script>
+                // alert("We've send a verification link on your email address.");
                 window.location.href="forgot-password.php";
                 </script>
             <?php
         }
     } else {
-        ?>
-        <script>
-        alert("This email address do not found.");
-        </script>
-        <?php
+        $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>This email address do not found.</p> ";
+        // alert("This email address do not found.");
+       
     }
 }
 
@@ -343,6 +340,7 @@ if (isset($_POST['submit'])) {
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-in">
                         <h2 class="register_login">Forgot Password</h2>
+                        <?php echo $error_1 ?>
                         <hr>
 						<form method="POST">
 						<div class="input-group">

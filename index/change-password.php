@@ -9,7 +9,7 @@
 //   }
 
 $msg = "";
-
+$error_1 = "";
 if (isset($_GET['reset'])) {
     if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE code='{$_GET['reset']}'")) > 0) {
         if (isset($_POST['submit'])) {
@@ -21,28 +21,26 @@ if (isset($_GET['reset'])) {
 
                 if ($query) {
                     
-                    
+					$error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Password Successfully changed.</p> ";
                     ?>
                     <script>
-                        alert("Password Successfully changed.");
+                        // alert("Password Successfully changed.");
                     window.location.href="login.php";
                 </script>
                 <?php
                 }
             } else {
-                ?>
-                <script>
-                alert("Password and Confirm Password do not match.");
-                </script>
-                <?php
+                
+					$error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Password and Confirm Password do not match.</p> ";
+                // alert("Password and Confirm Password do not match.");
+             
             }
         }
     } else {
-        ?>
-        <script>
-        alert("Reset Link do not match.");
-        </script>
-        <?php
+		$error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Reset Link do not match.</p> ";
+
+        // alert("Reset Link do not match.");
+      
     }
 } else {
     header("Location: forgot-password.php");
@@ -110,6 +108,7 @@ ob_end_flush();
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-in">
                         <h2 class="register_login">Reset Password</h2>
+						<?php echo $error_1 ?>
                         <hr>
 						<form method="POST">
 						<div class="input-group">

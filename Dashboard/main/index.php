@@ -12,6 +12,9 @@ $id = $_SESSION['id'];
 $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
 $user_row = mysqli_fetch_assoc($user_sql);
 $deposit = $user_row['deposit'];
+$peracoin =$user_row['peracoin'];
+$pwallet_rate = 5;
+$pwallet = number_format(($peracoin * $pwallet_rate),2);
 if ($user_row['admin'] == 1) {
   header("Location: admin.php");
 }
@@ -496,6 +499,134 @@ else{
     ?>
     <script>
         alert("Can't Activate More Than 3 Package");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
+
+if(isset($_POST['package6'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
+    if($deposit >= 6000){
+        $new_deposite_amount = $deposit - 6000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 6','6000', '360', '$next_claim')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
+
+if(isset($_POST['package7'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
+    if($deposit >= 8000){
+        $new_deposite_amount = $deposit - 8000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 7','8000', '480', '$next_claim')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+else{
+    ?>
+    <script>
+        alert("Not selected");
+        window.location.href='index.php';
+        </script>
+        <?php
+}
+}
+if(isset($_POST['package8'])){
+    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
+if(mysqli_num_rows($package_count_sql) < 3){
+    if($deposit >= 10000){
+        $new_deposite_amount = $deposit - 10000;
+        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 7','10000', '600', '$next_claim')");
+        if($update_deposite_sql){
+            ?>
+            <script>
+                alert("Successfully activated your paln");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+        else{
+            ?>
+            <script>
+                alert("Something Went Wrong!! Try again...");
+                window.location.href='index.php';
+            </script>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <script>
+            alert("Insufficient Balance ");
+            window.location.href='index.php';
+        </script>
+        <?php
+    }
+}
+else{
+    ?>
+    <script>
+        alert("Not selected");
         window.location.href='index.php';
         </script>
         <?php
@@ -1323,7 +1454,11 @@ else{
                                                         
                                                         
                                                         <div class="col-lg-6 col-md-12 mb-4">
+<<<<<<< HEAD
                                                             <div class="card card2 h-100">
+=======
+                                                            <div class="card card3 h-100">
+>>>>>>> ee6172451976f6f6803656f98ec50cf9596e520c
                                                                 <div class="card-body">
 
                                                                     <h5 class="card-title">Deluxe</h5>
@@ -1413,7 +1548,11 @@ else{
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 mb-4">
+<<<<<<< HEAD
                                                             <div class="card card1 h-100">
+=======
+                                                            <div class="card card3 h-100">
+>>>>>>> ee6172451976f6f6803656f98ec50cf9596e520c
                                                                 <div class="card-body">
 
                                                                     <h5 class="card-title">Ultimate</h5>
@@ -1692,8 +1831,8 @@ else{
         <div class="profile-name">PWallet</div>
        
 
-        <div class="profile-username" style="font-size: 1.9rem; font-weight: 600px; margin-top: 15px;">$0.00</div>
-        <div class="button-side"><h1>0</h1><p>Peracoin</p></div>
+        <div class="profile-username" style="font-size: 1.9rem; font-weight: 600px; margin-top: 15px;">$<?php echo $pwallet ?></div>
+        <div class="button-side"><h1><?php echo $peracoin ?></h1><p>Peracoin</p></div>
     </div>
 </div>
 
