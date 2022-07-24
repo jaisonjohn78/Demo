@@ -326,7 +326,7 @@
                 <div class="divider is-centered"></div>
                 <!-- Title & subtitle -->
                 <h2 class="title is-light is-semibold has-text-centered is-spaced">Join our ICO Now</h2>
-                <h4 class="subtitle is-6 is-light has-text-centered is-compact">Viderer malorum sadipscing cum ei. Eu impetus perfecto sit, no sea labore detraxit. Primis mediocrem necessitatibus an vis. Ut sea pertinax perpetua, eruditi volumus quaestio ex mel, has ei tota homero.</h4>
+                <h3 class="subtitle is-6 is-light has-text-centered is-compact">$1 Million share in Digital Market   </h3>
     
                 <!-- Content wrapper -->
                 <div class="content-wrapper is-large">
@@ -565,8 +565,7 @@
                 <!-- Divider -->
                 <div class="divider is-centered"></div>
                 <!-- Title -->
-                <h2 class="title is-light is-semibold has-text-centered is-spaced">Perashop</h2>
-                <h4 class="subtitle is-6 is-light has-text-centered is-compact"></h4>
+                <h1 class="title is-light is-semibold has-text-centered is-spaced">Perashop</h1>
     
                 <!-- Content wrapper -->
                 <div class="content-wrapper is-large">
@@ -577,11 +576,13 @@
                             <!-- Side feature -->
                             <div class="side-feature-content">
                                 <!-- Title -->
-                                <h3 class="title is-4 is-light"><img src="img/icons/ico/bitnetwork.svg" alt=""> <span>Convert</span></h3>
+                                <h3 class="title is-4 is-light"><img src="img/logo/img-1.png" alt=""> <span>Buy Peracoin  </span></h3>
                                 <!-- Divider -->
                                 <div class="divider is-long"></div>
-                                <p class="is-light"><label>BTC</label><input type="number"  style="margin: 15px ;"></p>
-                                <p class="is-light"><label>USD</label><input type="number"  style="margin: 15px ;" width="5rem"></p>
+                <h3 class="subtitle is-6 is-light is-compact">Your Total Ballance : $9999</h3>
+
+                                <p class="is-light"><label>BTC</label><input type="number" id="convert_in"  style="margin: 15px ;"></p>
+                                <p class="is-light"><label>USD</label><input type="number" id="convert_out"  style="margin: 15px ;" width="5rem"></p>
                             </div>
                             <a href="#" class="button k-button k-primary raised has-gradient is-bold">
                                 <span class="text">Convert</span>
@@ -953,6 +954,14 @@
     }"></a></div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="./js/bundle.js"></script>
+    <script>
+        document.getElementById('convert_in').onchange( function() {
+            var convert_out = document.getElementById('convert_out').value;
+            var convert_in = document.getElementById('convert_in').value;
+            var convert_result = 10;
+            document.getElementById('convert_out').value = convert_result;
+        });
+    </script>
 
 </body>
 

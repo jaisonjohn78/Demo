@@ -596,7 +596,7 @@ if(mysqli_num_rows($package_count_sql) < 3){
     if($deposit >= 10000){
         $new_deposite_amount = $deposit - 10000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 7','10000', '600', '$next_claim')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 8','10000', '600', '$next_claim')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -1105,8 +1105,62 @@ else{
                                                     <div id="Overview-1" class="tab-pane active">
                                                         <!-- <div id="chart-timeline"></div> -->
                                                         <center>
-                                                            <div class="btcwdgt-chart" bw-cash="true" bw-theme="dark"
-                                                                style="width:100% !important; "></div>
+                                                            <!-- <div class="btcwdgt-chart" bw-cash="true" bw-theme="dark"
+                                                                style="width:100% !important; "></div> -->
+
+                                                                <script>
+window.onload = function() {
+ 
+var dps = [];
+var chart = new CanvasJS.Chart("chartContainer", {
+	zoomEnabled: true,
+	exportEnabled: true,
+	title: {
+		text: ""
+	},
+	subtitles: [{
+		text : ""
+	}],
+	axisX: {
+		valueFormatString: "DD MMM"
+	},
+	axisY: {
+		title: "Price",
+		interval: 5,
+		prefix: "$"
+	},
+	data: [{
+		type: "candlestick",
+		name: "Qualcomm Incorporated Stock Price",
+		showInLegend: true,
+		yValueFormatString: "$##0.00",
+		xValueType: "dateTime",
+		dataPoints: dps
+	}]
+});
+ 
+$.getJSON("https://canvasjs.com/data/gallery/php/qualcomm-stock-price.json", parseData);
+ 
+function parseData(result) {
+	for (var i = 0; i < result.length; i++) {
+		dps.push({
+			x: result[i].x,
+			y: result[i].y
+		});
+	}
+	chart.render();
+}
+ 
+}
+</script>
+<style>
+    a[title = "JavaScript Charts"] {
+        display: none !important;
+    }
+</style>
+<div id="chartContainer" style="height: 380px; width: 100% !important;"></div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
                                                         </center>
 
                                                     </div>
@@ -1454,11 +1508,7 @@ else{
                                                         
                                                         
                                                         <div class="col-lg-6 col-md-12 mb-4">
-<<<<<<< HEAD
-                                                            <div class="card card2 h-100">
-=======
                                                             <div class="card card3 h-100">
->>>>>>> ee6172451976f6f6803656f98ec50cf9596e520c
                                                                 <div class="card-body">
 
                                                                     <h5 class="card-title">Deluxe</h5>
@@ -1503,7 +1553,7 @@ else{
                                                         </div>
 
                                                         <div class="col-lg-6 col-md-12 mb-4">
-                                                            <div class="card card3 h-100">
+                                                            <div class="card card1 h-100">
                                                                 <div class="card-body">
 
                                                                     <h5 class="card-title">Deluxe</h5>
@@ -1548,11 +1598,7 @@ else{
                                                         </div>
 
                                                         <div class="col-lg-12 col-md-12 mb-4">
-<<<<<<< HEAD
-                                                            <div class="card card1 h-100">
-=======
-                                                            <div class="card card3 h-100">
->>>>>>> ee6172451976f6f6803656f98ec50cf9596e520c
+                                                            <div class="card card2 h-100">
                                                                 <div class="card-body">
 
                                                                     <h5 class="card-title">Ultimate</h5>

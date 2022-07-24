@@ -611,18 +611,6 @@ h6 {
     font-size: 100%;
     font-weight: normal
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0; 
-    width: 15rem;
-}
-input[type=number] {
-    -moz-appearance: textfield;
-    width: 15rem;
-  }
 
 ul {
     list-style: none
@@ -14767,8 +14755,7 @@ print {
 
 .button.k-primary.has-gradient.raised:hover {
     -webkit-box-shadow: 0 14px 26px -12px rgba(127, 0, 255, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(63, 0, 252, .2) !important;
-    important;
-    box-shadow: 0 14px 26px -12px rgba(127, 0, 255, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(63, 0, 252, .2) !important !important;
+    box-shadow: 0 14px 26px -12px rgba(127, 0, 255, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(63, 0, 252, .2) !important;
     opacity: .95
 }
 
@@ -14834,8 +14821,8 @@ print {
 }
 
 .button.k-secondary.has-gradient.raised:hover {
-    -webkit-box-shadow: 0 14px 26px -12px rgba(0, 255, 153, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(51, 204, 255, .2) !important !important;
-    box-shadow: 0 14px 26px -12px rgba(0, 255, 153, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(51, 204, 255, .2) !important !important;
+    -webkit-box-shadow: 0 14px 26px -12px rgba(0, 255, 153, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(51, 204, 255, .2) !important;
+    box-shadow: 0 14px 26px -12px rgba(0, 255, 153, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(51, 204, 255, .2) !important;
     opacity: .95
 }
 
