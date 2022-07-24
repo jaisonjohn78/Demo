@@ -6,12 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Peradot</title>
-
-    <link rel="icon" type="image/png" href="img/logo/logo.png" />
+    <link rel="icon" type="image/png" href="img/logo/sm-logo.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
-
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -34,7 +32,7 @@
                     <div class="container">
                         <!-- Brand -->
                         <div class="navbar-brand">
-                            <a href="index.html" class="navbar-item">
+                            <a href="index.php" class="navbar-item">
                                 <img class="" src="img/logo/logo.png" alt="">
                                 <span class="brand-name">Peradot</span>
                             </a>
@@ -64,15 +62,15 @@
                                 
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="index.html#ico">Ico</a>
+                                    <a class="is-centered-responsive" href="index.php#ico">Ico</a>
                                 </div>
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="index.html#perashop">shop</a>
+                                    <a class="is-centered-responsive" href="index.php#perashop">shop</a>
                                 </div>
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="roadmap.html">Roadmap</a>
+                                    <a class="is-centered-responsive" href="">Roadmap</a>
                                 </div>
  
                                 <!-- Menu item -->
@@ -98,7 +96,7 @@
                     <div class="container">
                         <!-- Brand -->
                         <div class="navbar-brand">
-                            <a href="index.html" class="navbar-item">
+                            <a href="index.php" class="navbar-item">
                                 <img class="" src="img/logo/logo.png" alt="">
                                 <span class="brand-name">Peradot</span>
                             </a>
@@ -128,15 +126,15 @@
                                 
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="index.html#ico">Ico</a>
+                                    <a class="is-centered-responsive" href="index.php#ico">Ico</a>
                                 </div>
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="index.html#perashop">shop</a>
+                                    <a class="is-centered-responsive" href="index.php#perashop">shop</a>
                                 </div>
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="roadmap.html">Roadmap</a>
+                                    <a class="is-centered-responsive" href="roadmap.php">Roadmap</a>
                                 </div>
 
                                 <!-- Menu item -->
@@ -297,11 +295,11 @@
                         
     
                         <li>
-                            <a href="index.html#ico">ICO</a>
+                            <a href="index.php#ico">ICO</a>
                         </li>
     
                         <li>
-                            <a href="index.html#perashop">Shop</a>
+                            <a href="index.php#perashop">Shop</a>
                         </li>
                     </ul>
                 </div>
@@ -324,10 +322,8 @@
                 <div class="column is-4">
                     <ul class="footer-links">
                         <li>
-                            <a href="roadmap.html">roadmap</a>
+                            <a href="roadmap.php">roadmap</a>
                         </li>
-    
-                        
                     </ul>
                 </div>
             </div>

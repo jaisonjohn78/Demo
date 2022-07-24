@@ -1,3 +1,17 @@
+<?php
+    include '../../../config.php';
+    include '../../../function.php';
+    
+    
+    if (!isset($_SESSION["id"])) {
+      header("Location: ../../../index/login.php");
+    }
+    
+    $id = $_SESSION['id'];
+    $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
+    $user_row = mysqli_fetch_assoc($user_sql);
+    $username = $user_row['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +20,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Peradot</title>
-
     <link rel="icon" type="image/png" href="img/logo/sm-logo.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
@@ -14,6 +27,13 @@
 
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        #username{
+            position: relative;
+            right: -218px;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,7 +54,7 @@
                     <div class="container">
                         <!-- Brand -->
                         <div class="navbar-brand">
-                            <a href="index.html" class="navbar-item">
+                            <a href="index.php" class="navbar-item">
                                 <img class="" src="img/logo/logo.png" alt="">
                                 <span class="brand-name">Peradot</span>
                             </a>
@@ -74,15 +94,15 @@
                                 </div>
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="roadmap.html">Roadmap</a>
+                                    <a class="is-centered-responsive" href="roadmap.php">Roadmap</a>
                                 </div>
                             
                                 <!-- Menu item -->
                                 
                                 <!-- Sign up -->
-                                <div class="navbar-item is-nav-link">
+                                <div class="navbar-item is-nav-link" id="username">
                                     <a href="#" class="button k-button k-primary raised has-gradient slanted">
-                                        <span class="text">Register</span>
+                                        <span class="text"><?php echo $username?></span>
                                         <span class="front-gradient"></span>
                                     </a>
                                 </div>
@@ -100,7 +120,7 @@
                     <div class="container">
                         <!-- Brand -->
                         <div class="navbar-brand">
-                            <a href="index.html" class="navbar-item">
+                            <a href="index.php" class="navbar-item">
                                 <img class="" src="img/logo/logo.png" alt="">
                                 <span class="brand-name">Peradot</span>
                             </a>
@@ -140,17 +160,18 @@
                                 </div>
                                 <!-- Menu item -->
                                 <div class="navbar-item is-nav-link">
-                                    <a class="is-centered-responsive" href="roadmap.html">Roadmap</a>
+                                    <a class="is-centered-responsive" href="roadmap.php">Roadmap</a>
                                 </div>
                                 <!-- Menu item -->
 
                                 
                                 <!-- Sign up -->
-                                <div class="navbar-item">
+                                <div class="navbar-item" id="username">
                                     <a href="#" class="button k-button k-primary raised has-gradient slanted">
-                                        <span class="text">Register</span>
+                                    <span class="text"><?php echo $username?></span>
                                         <span class="front-gradient"></span>
                                     </a>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -297,7 +318,7 @@
                                 <div class="divider is-long"></div>
                                 <p class="is-light">Peradot's isn't just for digital money. Anything you can own can be represented, traded and put to use as non-fungible tokens (NFTs). You can tokenise your art and get royalties automatically every time it's re-sold. Or use a token for something you own to take out a loan. The possibilities are growing all the time.</p>
                                 <div class="cta-wrapper">
-                                    <a href="index.html#ico" class="button k-button k-primary raised has-gradient is-bold">
+                                    <a href="index.php#ico" class="button k-button k-primary raised has-gradient is-bold">
                                         <span class="text">Join the ICO</span>
                                         <span class="front-gradient"></span>
                                     </a>
@@ -641,7 +662,7 @@
                                     </div>
                                     <!-- Member meta -->
                                     <div class="member-info">
-                                        <h4 class="title is-light is-6 is-tight">1 coin</h4>
+                                        <h4 class="title is-light is-6 is-tight">10 coin</h4>
                                         <div class="position">$ 5</div>
                                         <p class="description"><button><b>BUY</b></button></p>
                                     </div>
@@ -902,11 +923,11 @@
                         
     
                         <li>
-                            <a href="index.html#ico">ICO</a>
+                            <a href="index.php#ico">ICO</a>
                         </li>
     
                         <li>
-                            <a href="index.html#perashop">Shop</a>
+                            <a href="index.php#perashop">Shop</a>
                         </li>
                     </ul>
                 </div>
@@ -929,7 +950,7 @@
                 <div class="column is-4">
                     <ul class="footer-links">
                         <li>
-                            <a href="roadmap.html">roadmap</a>
+                            <a href="roadmap.php">roadmap</a>
                         </li>
 
                         <li>
