@@ -217,6 +217,15 @@ window.location.href = "payment.php";
                                     </span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a href="perashop/index.php">
+                                    <i data-feather="shopping-bag"></i>
+                                    <span>Perashop</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
 
                         <div class="sidebar-widgets mt-5">

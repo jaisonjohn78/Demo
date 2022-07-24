@@ -4408,7 +4408,7 @@ function initCountdown() {
   return {
     setupCountdown: function setupCountdown() {
       // Set the date we're counting down to
-      var countDownDate = new Date("Oct 24, 2021 07:00:00").getTime(); // Update the count down every 1 second
+      var countDownDate = new Date("Oct 21, 2022 12:00:00").getTime(); // Update the count down every 1 second
 
       var x = setInterval(function () {
         // Get todays date and time
@@ -4427,7 +4427,7 @@ function initCountdown() {
         secondsElement.textContent = Math.floor(distance % (1000 * 60) / 1000); // If the count down is finished, write some text
 
         if (distance < 0) {
-          clearInterval(x);
+          // clearInterval(x);
         }
       }, 1000);
     }
@@ -4683,7 +4683,7 @@ function initTabs() {
     },
     setupCountdown: function setupCountdown() {
       // Set the date we're counting down to
-      var countDownDate = new Date("Oct 24, 2021 07:00:00").getTime(); // Update the count down every 1 second
+      var countDownDate = new Date("Oct 21, 2022 12:00:00").getTime(); // Update the count down every 1 second
 
       var x = setInterval(function () {
         // Get todays date and time

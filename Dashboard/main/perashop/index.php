@@ -2,15 +2,18 @@
     include '../../../config.php';
     include '../../../function.php';
     
-    
+    $peracoin_rate = 5;
     if (!isset($_SESSION["id"])) {
-      header("Location: ../../../index/login.php");
+      $username = "Register Now";
+    }
+    else {
+    
+        $id = $_SESSION['id'];
+        $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
+        $user_row = mysqli_fetch_assoc($user_sql);
+        $username = $user_row['username'];
     }
     
-    $id = $_SESSION['id'];
-    $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
-    $user_row = mysqli_fetch_assoc($user_sql);
-    $username = $user_row['username'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +30,21 @@
 
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet">
     <style>
         #username{
             position: relative;
-            right: -218px;
+            width: auto;
+        }
+        .navbar-brand {
+            display: flex !important;
         }
     </style>
 </head>
@@ -101,7 +114,7 @@
                                 
                                 <!-- Sign up -->
                                 <div class="navbar-item is-nav-link" id="username">
-                                    <a href="#" class="button k-button k-primary raised has-gradient slanted">
+                                    <a href="../payment.php" class="button k-button k-primary raised has-gradient slanted">
                                         <span class="text"><?php echo $username?></span>
                                         <span class="front-gradient"></span>
                                     </a>
@@ -167,7 +180,7 @@
                                 
                                 <!-- Sign up -->
                                 <div class="navbar-item" id="username">
-                                    <a href="#" class="button k-button k-primary raised has-gradient slanted">
+                                    <a href="../payment.php" class="button k-button k-primary raised has-gradient slanted">
                                     <span class="text"><?php echo $username?></span>
                                         <span class="front-gradient"></span>
                                     </a>
@@ -225,7 +238,7 @@
     
                 <div class="has-text-centered">
                     <a class="button k-button k-secondary raised has-gradient is-fat is-bold rounded">
-                        <span class="text">Buy Tokens 20% off</span>
+                        <span class="text">Buy Tokens 30% off</span>
                         <span class="front-gradient"></span>
                     </a>
                 </div>
@@ -392,19 +405,19 @@
                                             <h4 class="title is-6 is-light animated preFadeInUp fadeInUp">ICO TERMS</h4>
                                             <ul class="custom-bullet-list">
                                                 <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Presale</span>
+                                                    <span>Bonus</span>
                                                     <br>
-                                                    <span class="item-content">Presale starts on Apr 8 2021 (9:00am GMT)</span>
+                                                    <span class="item-content" style="color: red;">Bonus started on July 25 2022 (12:00am GMT)</span>
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
                                                     <span>Sale</span>
                                                     <br>
-                                                    <span class="item-content">Token sales starts on Jun 8 2021 (12:00am GMT)</span>
+                                                    <span class="item-content">Token sales starts on Oct 20 2022 (12:00am GMT)</span>
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Bonus</span>
+                                                    <span>Presale</span>
                                                     <br>
-                                                    <span class="item-content">Bonus starts on July 29 2021 (12:00am GMT)</span>
+                                                    <span class="item-content">Presale starts on Nov 8 2022 (9:00am GMT)</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -440,12 +453,13 @@
                                                     <div>Soft Cap</div>
                                                     <div>Bonus</div>
                                                 </div>
-                                                <progress class="progress ico-progress" value="65" max="100">65%</progress>
+                                                <progress class="progress ico-progress" value="97" max="100">97%</progress>
+                                                <p style="text-align: center;">3 Month Hold Period</p>
                                             </div>
     
                                             <!-- Button -->
                                             <div class="button-block">
-                                                <span class="button k-button k-secondary raised has-gradient is-bold is-fullwidth rounded"><a href="#offers">Buy Now</a></span>
+                                            <a href="#offers"><span class="button k-button k-secondary raised has-gradient is-bold is-fullwidth rounded">Buy Now</span></a>
                                                 <span class="front-gradient"></span>
                                             </div>
     
@@ -488,7 +502,7 @@
                                     </div>
                                     <!-- Tab image -->
                                     <div class="column is-5">
-                                        <img class="animated preFadeInUp fadeInUp" src="img/logo/img-1.png" alt="">
+                                        <img class="animated preFadeInUp fadeInUp" src="img/logo/img-1.png" style="filter: saturate(2) opacity(0.4);" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -600,13 +614,82 @@
                                 <h3 class="title is-4 is-light"><img src="img/logo/img-1.png" alt=""> <span>Buy Peracoin  </span></h3>
                                 <!-- Divider -->
                                 <div class="divider is-long"></div>
-                <h3 class="subtitle is-6 is-light is-compact">Your Total Ballance : $9999</h3>
+                <h3 class="subtitle is-6 is-light is-compact">Your Total Ballance : $<?php echo number_format((float)$user_row['amount'], 2, '.', ''); ?></h3>
+                
+                <!-- in btn number  -->
+                <style>
+                input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 
-                                <p class="is-light"><label>BTC</label><input type="number" id="convert_in"  style="margin: 15px ;"></p>
-                                <p class="is-light"><label>USD</label><input type="number" id="convert_out"  style="margin: 15px ;" width="5rem"></p>
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.number-input {
+  border: 2px solid #ddd;
+  display: inline-flex;
+}
+
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+
+.number-input button {
+  outline:none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+  background-color: #6f42c1;
+}
+
+.number-input button:before,
+.number-input button:after {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 1rem;
+  height: 2px;
+  background-color: #212121;
+  transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type=number] {
+  font-family: sans-serif;
+  max-width: 5rem;
+  padding: .5rem;
+  border: solid #ddd;
+  border-width: 0 2px;
+  font-size: 2rem;
+  height: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+                </style>
+                <div class="number-input" style="margin: 15px ;">
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); convert();" ></button>
+  <input class="quantity" min="0" name="quantity" value="0" id="convert_in" onchange="convert()" type="number">
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); convert();" class="plus"></button>
+</div>
+
+                                <p class="is-light"><label>Total</label><input type="text" id="convert_out"  style="margin: 15px; background: transparent; font-size:larger; font-weight:900; outline: none; border: none;" width="5rem" readonly></p>
                             </div>
                             <a href="#" class="button k-button k-primary raised has-gradient is-bold">
-                                <span class="text">Convert</span>
+                                <span class="text">Buy Now</span>
                                 <span class="front-gradient"></span>
                             </a>
                         </div>
@@ -662,30 +745,32 @@
                                     </div>
                                     <!-- Member meta -->
                                     <div class="member-info">
-                                        <h4 class="title is-light is-6 is-tight">10 coin</h4>
-                                        <div class="position">$ 5</div>
-                                        <p class="description"><button><b>BUY</b></button></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <!-- Team member -->
-                        <div class="column is-3">
-                            <div class="team-member-container">
-                                <div class="dark-card">
-                                    <div class="avatar">
-                                        <svg class="circle-chart" viewbox="0 0 33.83098862 33.83098862" width="140" height="140" xmlns="http://www.w3.org/2000/svg">
-                                            <circle class="circle-chart-background" stroke-width="1" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-                                            <circle class="circle-chart-circle" stroke-width="1" stroke-dasharray="33,100" stroke-linecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-                                        </svg>
-                                        <img class="is-sketch" src="img/team/img_1_sketch.png" alt="">
-                                        <img class="is-real" src="img/team/img-1.png" alt="">
-                                    </div>
-                                    <div class="member-info">
                                         <h4 class="title is-light is-6 is-tight">5 coin</h4>
-                                        <div class="position">$ 15</div>
-                                        <p class="description"><button><b>BUY</b></button></p>
+                                        <div class="position">$ <?php echo 5 * $peracoin_rate; ?></div>
+                                        <p class="description"><button data-toggle="modal" data-target="#exampleModal"><b>BUY</b></button></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+    
+                        <!-- Team member -->
+                        <div class="column is-3">
+                            <div class="team-member-container">
+                                <div class="dark-card">
+                                    <div class="avatar">
+                                        <svg class="circle-chart" viewbox="0 0 33.83098862 33.83098862" width="140" height="140" xmlns="http://www.w3.org/2000/svg">
+                                            <circle class="circle-chart-background" stroke-width="1" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+                                            <circle class="circle-chart-circle" stroke-width="1" stroke-dasharray="33,100" stroke-linecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+                                        </svg>
+                                        <img class="is-sketch" src="img/team/img_1_sketch.png" alt="">
+                                        <img class="is-real" src="img/team/img-1.png" alt="">
+                                    </div>
+                                    <div class="member-info">
+                                        <h4 class="title is-light is-6 is-tight">15 coin</h4>
+                                        <div class="position">$ <?php echo 15 * $peracoin_rate; ?></div>
+                                        <p class="description"><button data-toggle="modal" data-target="#exampleModal1"><b>BUY</b></button></p>
                                     </div>
                                 </div>
                             </div>
@@ -704,9 +789,9 @@
                                         <img class="is-real" src="img/team/img-1.png" alt="">
                                     </div>
                                     <div class="member-info">
-                                        <h4 class="title is-light is-6 is-tight">10 coin</h4>
-                                        <div class="position">$ 30</div>
-                                        <p class="description"><button><b>BUY</b></button></p>
+                                        <h4 class="title is-light is-6 is-tight">40 coin</h4>
+                                        <div class="position">$ <?php echo 40 * $peracoin_rate; ?></div>
+                                        <p class="description"><button data-toggle="modal" data-target="#exampleModal2"><b>BUY</b></button></p>
                                     </div>
                                 </div>
                             </div>
@@ -732,9 +817,9 @@
                                         <img class="is-real" src="img/team/img-1.png" alt="">
                                     </div>
                                     <div class="member-info">
-                                        <h4 class="title is-light is-6 is-tight">15 coin</h4>
-                                        <div class="position">$ 45</div>
-                                        <p class="description"><button><b>BUY</b></button></p>
+                                        <h4 class="title is-light is-6 is-tight">60 coin</h4>
+                                        <div class="position">$ <?php echo 60 * $peracoin_rate; ?></div>
+                                        <p class="description"><button data-toggle="modal" data-target="#exampleModal3"><b>BUY</b></button></p>
                                     </div>
                                 </div>
                             </div>
@@ -753,9 +838,9 @@
                                         <img class="is-real" src="img/team/img-1.png" alt="">
                                     </div>
                                     <div class="member-info">
-                                        <h4 class="title is-light is-6 is-tight">20 coin</h4>
-                                        <div class="position">$ 60</div>
-                                        <p class="description"><button><b>BUY</b></button></p>
+                                        <h4 class="title is-light is-6 is-tight">100 coin</h4>
+                                        <div class="position">$ <?php echo 100 * $peracoin_rate; ?></div>
+                                        <p class="description"><button data-toggle="modal" data-target="#exampleModal4"><b>BUY</b></button></p>
                                     </div>
                                 </div>
                             </div>
@@ -774,9 +859,9 @@
                                         <img class="is-real" src="img/team/img-1.png" alt="">
                                     </div>
                                     <div class="member-info">
-                                        <h4 class="title is-light is-6 is-tight">25 coin</h4>
-                                        <div class="position">$ 75</div>
-                                        <p class="description"><button><b>BUY</b></button></p>
+                                        <h4 class="title is-light is-6 is-tight">250 coin</h4>
+                                        <div class="position">$ <?php echo 250 * $peracoin_rate; ?></div>
+                                        <p class="description"><button data-toggle="modal" data-target="#exampleModal5"><b>BUY</b></button></p>
                                     </div>
                                 </div>
                             </div>
@@ -843,7 +928,7 @@
                             <div class="contact-icons">
                                 <!-- Phone -->
                                 <a class="contact-icon" data-aos="fade-up" data-aos-delay="100" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                                    <img class="is-phone" src="img/icons/phone.svg" alt="">
+                                    <img class="is-phone" src="img/icons/linkedin.svg" alt="">
                                 </a>
                                 <!-- Mail -->
                                 <a class="contact-icon" data-aos="fade-up" data-aos-delay="300" data-aos-offset="200" data-aos-easing="ease-out-quart">
@@ -851,49 +936,13 @@
                                 </a>
                                 <!-- Telegram -->
                                 <a class="contact-icon" data-aos="fade-up" data-aos-delay="500" data-aos-offset="200" data-aos-easing="ease-out-quart">
-                                    <img class="is-telegram" src="img/logo/telegram.svg" alt="">
+                                    <img class="is-telegram" src="img/icons/instagram.svg" alt="" >
                                 </a>
                             </div> 
                         </div>
                     </div>
     
-                    <div class="columns">
-                        <div class="column is-6 is-offset-3">
-                            <!-- Form -->
-                            <form action="https://formsubmit.co/peradotfoundation@gmail.com" method="POST">                          
-                                <!-- Field -->
-                                <div class="control-material is-secondary">      
-                                    <input class="material-input " type="text" required>
-                                    <span class="material-highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>Name</label>
-                                </div>
-                                <!-- Field -->
-                                <div class="control-material is-secondary">      
-                                    <input class="material-input " type="email" required>
-                                    <span class="material-highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>Email</label>
-                                </div>
-                                <!-- Field -->
-                                <div class="control-material is-secondary">  
-                                    <input class="material-input " type="text" required>
-                                    <span class="material-highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>Message </label>
-                                </div>
-    
-                                <!-- Submit -->
-                                <div class="has-text-centered">
-                                    <button class="button is-button k-button k-primary raised has-gradient is-fat is-bold is-submit">
-                                        <span class="text">Send message</span>
-                                        <span class="front-gradient"></span>
-                                    </button>
-                                </div>
-                            </form>
-                            <!-- /Form -->
-                        </div>
-                    </div>
+                    
     
     
                 </div>
@@ -973,15 +1022,150 @@
         'visible': scrolled,
         '': !scrolled
     }"></a></div>
+
+
+
+
+                            <!-- modal start  -->
+<form action="" method="post">
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+                                                            <div class="modal-dialog" role="document" style="z-index: 9999;">
+                                                                <div class="modal-content" style="z-index: 9999;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="z-index: 9999;">
+                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer" style="z-index: 9999;">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package1">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+                                                            <div class="modal-dialog" role="document" style="z-index: 9999;">
+                                                                <div class="modal-content" style="z-index: 9999;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="z-index: 9999;">
+                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer" style="z-index: 9999;">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package2">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+                                                            <div class="modal-dialog" role="document" style="z-index: 9999;">
+                                                                <div class="modal-content" style="z-index: 9999;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="z-index: 9999;">
+                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer" style="z-index: 9999;">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package3">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+                                                            <div class="modal-dialog" role="document" style="z-index: 9999;">
+                                                                <div class="modal-content" style="z-index: 9999;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="z-index: 9999;">
+                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer" style="z-index: 9999;">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package4">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+                                                            <div class="modal-dialog" role="document" style="z-index: 9999;">
+                                                                <div class="modal-content" style="z-index: 9999;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="z-index: 9999;">
+                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer" style="z-index: 9999;">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package5">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+                                                            <div class="modal-dialog" role="document" style="z-index: 9999;">
+                                                                <div class="modal-content" style="z-index: 9999;">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="z-index: 9999;">
+                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p>Do you want to proceed??</p>
+                                                                </div>
+                                                                <div class="modal-footer" style="z-index: 9999;">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="package6">Confirm</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                        </form>
+
+
+                        <!-- modal end  -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="./js/bundle.js"></script>
     <script>
-        document.getElementById('convert_in').onchange( function() {
+        function convert() {
             var convert_out = document.getElementById('convert_out').value;
             var convert_in = document.getElementById('convert_in').value;
-            var convert_result = 10;
-            document.getElementById('convert_out').value = convert_result;
-        });
+            var convert_result = 5 * convert_in;
+            document.getElementById('convert_out').value = "$ " + convert_result;
+        }
     </script>
 
 </body>

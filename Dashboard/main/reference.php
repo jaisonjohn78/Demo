@@ -227,7 +227,6 @@ window.location.href = "reference.php";
                                 </a>
                             </li>
                             <li class="active">
-<<<<<<< HEAD
                               <a href="reference.php">
                                   <i data-feather="share-2" ></i>
                                   <span>My Referral</span>
@@ -236,16 +235,15 @@ window.location.href = "reference.php";
                                   </span>
                               </a>
                           </li>
-=======
-                                <a href="reference.php">
-                                    <i data-feather="share-2"></i>
-                                    <span>Reference</span>
+                          <li class="">
+                                <a href="perashop/index.php">
+                                    <i data-feather="shopping-bag"></i>
+                                    <span>Perashop</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-right pull-right"></i>
                                     </span>
                                 </a>
                             </li>
->>>>>>> 6fb077d8ec0ae7a51d1be0a18785e050a0a4b2e7
                         </ul>
 
                         <div class="sidebar-widgets mt-5">
@@ -331,7 +329,7 @@ window.location.href = "reference.php";
                                         <input type="text" class="form-control" id="user_ref_code" name="reference_link"
                                             placeholder="your referral code" value="<?php echo $string_url?>" readonly>
                                         <i class="mx-3 mdi mdi-checkbox-multiple-blank-outline btn-rounded btn-success down_box"
-                                            style="font-size:2rem;margin-top:.1rem;cursor:pointer" id="copy"
+                                            style="font-size:2rem;margin-top:.1rem;cursor:pointer; border-radius:150px !important;width: 50px;height: 49px;" id="copy"
                                             onclick="myFunction()">
                                         </i>
                                         <!-- <input type="submit" class="btn btn-primary" name="refer" value="copy"> -->

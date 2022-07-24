@@ -1110,7 +1110,7 @@ else{
 
                                                                 <script>
 window.onload = function() {
- 
+
 var dps = [];
 var chart = new CanvasJS.Chart("chartContainer", {
 	zoomEnabled: true,
@@ -1138,21 +1138,21 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		dataPoints: dps
 	}]
 });
- 
+
 $.getJSON("https://canvasjs.com/data/gallery/php/qualcomm-stock-price.json", parseData);
- 
+
 function parseData(result) {
 	for (var i = 0; i < result.length; i++) {
 		dps.push({
 			x: result[i].x,
 			y: result[i].y
 		});
-	}
+        }
 	chart.render();
-}
- 
-}
-</script>
+        }
+        
+  }
+    </script>
 <style>
     a[title = "JavaScript Charts"] {
         display: none !important;
@@ -2044,6 +2044,98 @@ function parseData(result) {
 
         <!-- ./wrapper -->
 
+
+
+    
+        <!-- terms and condition start -->
+        <style>
+            #popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 9999;
+                overflow: hidden;
+                /* display: none; */
+            }
+            #popup .card {
+                margin-top: 10px !important;
+                height: 90vh;
+                z-index: 9999 !important;
+            }
+            #popup .card .card-body {
+                overflow-y: scroll;
+            }
+
+
+        </style>
+        <div id="popup" data-backdrop="static">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <center><h3 class="card-title">Terms and Conditions</h3></center>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                        1. About These Terms
+a. Contractual Relationship
+These Terms constitute a legal agreement and create a binding contract between you and Peradot Operators.
+b. Supplementary Terms
+Due to the rapid development of Digital Currencies and Peradot, these Terms between you and Peradot Operators do not enumerate or cover all rights and obligations of each party, and do not guarantee full alignment with needs arising from future development. Therefore,THE PRIVACY POLICY (（）), Peradot PLATFORM RULES, AND ALL OTHER AGREEMENTS ENTERED INTO SEPARATELY BETWEEN YOU AND Peradot ARE DEEMED SUPPLEMENTARY TERMS THAT ARE AN INTEGRAL PART OF THESE TERMS AND SHALL HAVE THE SAME LEGAL EFFECT. YOUR USE OF Peradot SERVICES IS DEEMED YOUR ACCEPTANCE OF THE ABOVE SUPPLEMENTARY TERMS.
+c. Changes to These Terms
+Peradot reserves the right to change or modify these Terms in its discretion at any time. Peradot will notify such changes by updating the terms on its website () and modifying the [Last revised] date displayed on this page.。ANY AND ALL MODIFICATIONS OR CHANGES TO THESE TERMS WILL BECOME EFFECTIVE UPON PUBLICATION ON THE WEBSITE OR RELEASE TO USERS. THEREFORE, YOUR CONTINUED USE OF Peradot SERVICES IS DEEMED YOUR ACCEPTANCE OF THE MODIFIED AGREEMENT AND RULES. IF YOU DO NOT AGREE TO ANY CHANGES TO THESE TERMS, YOU MUST STOP USING Peradot SERVICES IMMEDIATELY. YOU ARE RECOMMENDED TO FREQUENTLY REVIEW THESE TERMS TO ENSURE YOUR UNDERSTANDING OF THE TERMS AND CONDITIONS THAT APPLY TO YOUR ACCESS TO AND USE OF Peradot SERVICES.
+d. Prohibition of Use
+BY ACCESSING AND USING Peradot SERVICES, YOU REPRESENT AND WARRANT THAT YOU HAVE NOT BEEN INCLUDED IN ANY TRADE EMBARGOES OR ECONOMIC SANCTIONS LIST (SUCH AS THE UNITED NATIONS SECURITY COUNCIL SANCTIONS LIST), THE LIST OF SPECIALLY DESIGNATED NATIONALS MAINTAINED BY OFAC (THE OFFICE OF FOREIGN ASSETS CONTROL OF THE U.S. DEPARTMENT OF THE TREASURY), OR THE DENIED PERSONS OR ENTITY LIST OF THE U.S. DEPARTMENT OF COMMERCE. Peradot RESERVES THE RIGHT TO CHOOSE MARKETS AND JURISDICTIONS TO CONDUCT BUSINESS, AND MAY RESTRICT OR REFUSE, IN ITS DISCRETION, THE PROVISION OF Peradot SERVICES IN CERTAIN COUNTRIES OR REGIONS.
+2. About Peradot
+As an important part of the Peradot Ecosystem, Peradot mainly serves as a global online platform for Digital Assets trading, and provides Users with a trading platform, financing services, technical services and other Digital Assets-related services. As further detailed in Article 3 below, Users must register and open an account with Peradot, and deposit Digital Assets into their account prior to trading. Users may, subject to the restrictions set forth in these Terms, apply for the withdrawal of Digital Assets.
+Although Peradot has been committed to maintaining the accuracy of the information provided through Peradot Services, Peradot cannot and does not guarantee its accuracy, applicability, reliability, integrity, performance or appropriateness, nor shall Peradot be liable for any loss or damage that may be caused directly or indirectly by your use of these contents. The information about Peradot Services may change without notice, and the main purpose of providing such information is to help Users make independent decisions. Peradot does not provide investment or consulting advice of any kind, and is not responsible for the use or interpretation of information on Peradot or any other communication medium. All Users of Peradot Services must understand the risks involved in Digital Assets trading, and are recommended to exercise prudence and trade responsibly within their own capabilities.
+The amount of investment will be automatically converted into the para coins after completing the cycle.
+These coins will remain in the account for three months and the investor will be getting 40% of interest on it for these months.
+During this period, no one can sell these coins.
+After completing this full cycle, investor can convert these coins into the currency and easily can withdraw that sum of money in individuals account by just simple finger tip.
+These Peradot Terms of Use is entered into between you (hereinafter referred to as “you” or “your”) and Peradot operators (as defined below). By accessing, downloading, using or clicking on “I agree” to accept any Peradot Services (as defined below) provided by Peradot (as defined below), you agree that you have read, understood and accepted all of the terms and conditions stipulated in these Terms of Use (hereinafter referred to as “these Terms”) as well as our Privacy Policy at www.peradot.in . In addition, when using some features of the Services, you may be subject to specific additional terms and conditions applicable to those features.
+Please read the terms carefully as they govern your use of Peradot Services.THESE TERMS CONTAIN IMPORTANT PROVISIONS INCLUDING AN ARBITRATION PROVISION THAT REQUIRES ALL CLAIMS TO BE RESOLVED BY WAY OF LEGALLY BINDING ARBITRATION.The terms of the arbitration provision are set forth in Article 10, “Resolving Disputes: Forum, Arbitration, Class Action Waiver”, hereunder. As with any asset, the values of Digital Currencies (as defined below) may fluctuate significantly and there is a substantial risk of economic losses when purchasing, selling, holding or investing in Digital Currencies and their derivatives.BY MAKING USE OF Peradot SERVICES, YOU ACKNOWLEDGE AND AGREE THAT: (1) YOU ARE AWARE OF THE RISKS ASSOCIATED WITH TRANSACTIONS OF DIGITAL CURRENCIES AND THEIR DERIVATIVES; (2) YOU SHALL ASSUME ALL RISKS RELATED TO THE USE OF Peradot SERVICES AND TRANSACTIONS OF DIGITAL CURRENCIES AND THEIR DERIVATIVES; AND (3) Peradot SHALL NOT BE LIABLE FOR ANY SUCH RISKS OR ADVERSE OUTCOMES.
+By accessing, using or attempting to use Peradot Services in any capacity, you acknowledge that you accept and agree to be bound by these Terms. If you do not agree, do not access Peradot or utilize Peradot services.
+If you would like to know more about the risks associated with investing in or trading Digital Assets, you can access our General Risk Warning at www.peradot.in
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-primary float-right" id="popup-close">Agree</button>
+                                <a href="logout.php"><button type="button" class="btn btn-default float-right">Disagree</button></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+    if(localStorage.getItem('popState') != 'shown'){
+        $("#popup").delay(2000).fadeIn();
+        localStorage.setItem('popState','shown')
+    }
+
+    $('#popup-close').click(function(e) // You are clicking the close button
+    {
+    $('#popup').fadeOut(); // Now the pop up is hiden.
+    });
+    $('#popup').click(function(e) 
+    {
+    $('#popup').fadeOut(); 
+    });
+    $('#popup').unbind('click');
+});
+        </script>
 
         <!-- Page Content overlay -->
 
