@@ -27,7 +27,7 @@ use PHPMailer\PHPMailer\Exception;
 
 // }
 $error = '';
-$error_1 = "";
+// $error = "";
 $url = "";
 $reference_code_1 = '';
 $reference_code = '';
@@ -650,7 +650,7 @@ if (isset($_GET['verification'])) {
         $query_1 = mysqli_query($con, "UPDATE users SET code='' WHERE code='{$_GET['verification']}'");
         
         if ($query_1) {
-    $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Account verification has been successfully completed.</p> ";
+    $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Account verification has been successfully completed.</p> ";
             // set_message($error);
         }
     } else {
@@ -665,7 +665,7 @@ if (isset($_POST['sign-in'])) {
 
     if (empty($username_new) || empty($password_new)) {
 
-        $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Please fill your Credentials.</p> ";
+        $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Please fill your Credentials.</p> ";
 // alert("Please fill your Credentials.");
 
     } else {
@@ -676,7 +676,7 @@ if (isset($_POST['sign-in'])) {
             $_SESSION['id'] = $row_2['id'];
             $db_pass = $row_2['password'];
             if((md5($password_new) != $db_pass)) {
-                $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Please Enter Valid Password</p> ";
+                $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Please Enter Valid Password</p> ";
             }
             elseif((md5($password_new) == $db_pass) && empty($row_2['code'])) {
 
@@ -690,14 +690,14 @@ window.location.href = '../Dashboard/main/index.php';
                     $_SESSION['EMAIL'] = $row_2['EMAIL'];
                 } else {
                    
-    $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>First verify your account and try again</p> ";
+    $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>First verify your account and try again</p> ";
 
 // alert("First verify your account and try again");
        }
         } 
         else{
            
-        $error_1 = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Please enter valid phone no and Email</p> ";
+        $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;text-align:center;border-radius:10px;'>Please enter valid phone no and Email</p> ";
 
         }
     }
@@ -920,7 +920,7 @@ window.location.href = '../Dashboard/main/index.php';
                 <div class="form-wrapper align-items-center">
                     <div class="form sign-in">
                         <h2 class="register_login">SIGN IN</h2>
-                        <?php echo $error_1 ?>
+                        <?php echo $error ?>
                         <hr>
                         <form method="POST">
                             <div class="input-group">
