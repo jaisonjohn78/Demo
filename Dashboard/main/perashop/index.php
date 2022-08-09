@@ -1038,7 +1038,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$25</b> will be deducted from your account to buy <b>5 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1059,7 +1059,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$75</b> will be deducted from your account to buy <b>15 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1080,7 +1080,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$200</b> will be deducted from your account to buy <b>40 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1101,7 +1101,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$300</b> will be deducted from your account to buy <b>60 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1122,7 +1122,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$500</b> will be deducted from your account to buy <b>100 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1143,7 +1143,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$1250</b> will be deducted from your account to buy <b>250 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
