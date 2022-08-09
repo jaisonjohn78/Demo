@@ -33,6 +33,8 @@ $reference_code_1 = '';
 $reference_code = '';
 if(isset($_GET['refer']) && $_GET['refer']!=''){
     $url =  $_GET['refer'];
+}
+
 if(isset($_POST['sign-up']))
 {
 
@@ -68,14 +70,6 @@ if(isset($_POST['sign-up']))
             $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
             text-align:center;border-radius:10px;'>Email or Phone already exists </p>";
         }
-        else{
-            
-            $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code'");
-            if(mysqli_num_rows($sql) == 0){
-                // echo "<script>alert('Invalid Reference code !');</script>";
-                $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
-                text-align:center;border-radius:10px;'>Invalid Reference code ! </p>";
-            }
         else{
            
             $password = md5($password);
@@ -339,8 +333,6 @@ if(isset($_POST['sign-up']))
             }
 	    }
     }
-}
-}
 else{
    
     if(isset($_POST['sign-up']))
@@ -364,6 +356,14 @@ else{
             return substr(str_shuffle($str_result), 0, $length_of_string); 
         } 
     $reference_id =  random_strings(8);
+
+    if(isset($_GET['refer']) && $_GET['refer']!=''){
+        $reference_code_1 =  mysqli_real_escape_string($con, $_POST['refer_input']);
+        $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code_1'");
+        if(mysqli_num_rows($sql) == 0){
+            $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
+            text-align:center;border-radius:10px;'>Invalid Reference code ! </p>";
+        }
     
 	$check = mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE email='$email' OR phone='$phone'"));
 
@@ -376,13 +376,6 @@ else{
             $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
             text-align:center;border-radius:10px;'>Email or Phone already exists </p>";
         }
-        else{
-            $reference_code_1 =  mysqli_real_escape_string($con, $_POST['refer_input']);
-            $sql = mysqli_query($con,"SELECT * from users WHERE reference_id = '$reference_code_1'");
-            if(mysqli_num_rows($sql) == 0){
-                $error = "<p style='background: #f2dedf;color: #9c4150;border: 1px solid #e7ced1;padding:10px;
-                text-align:center;border-radius:10px;'>Invalid Reference code ! </p>";
-            }
         else{
            
             $password = md5($password);
