@@ -9,6 +9,9 @@ if (!isset($_SESSION["id"])) {
 
 $id = $_SESSION['id'];
 
+// peracoin PRICE
+
+
 $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
 $user_row = mysqli_fetch_assoc($user_sql);
 $deposit = $user_row['deposit'];
@@ -468,7 +471,7 @@ if(mysqli_num_rows($package_count_sql) < 3){
     if($deposit >= 10000){
         $new_deposite_amount = $deposit - 10000;
         $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 7','10000', '600', '$next_claim')");
+        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 8','10000', '600', '$next_claim')");
         if($update_deposite_sql){
             ?>
             <script>
@@ -505,134 +508,6 @@ else{
 }
 }
 
-if(isset($_POST['package6'])){
-    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
-if(mysqli_num_rows($package_count_sql) < 3){
-    if($deposit >= 6000){
-        $new_deposite_amount = $deposit - 6000;
-        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 6','6000', '360', '$next_claim')");
-        if($update_deposite_sql){
-            ?>
-            <script>
-                alert("Successfully activated your paln");
-                window.location.href='index.php';
-            </script>
-            <?php
-        }
-        else{
-            ?>
-            <script>
-                alert("Something Went Wrong!! Try again...");
-                window.location.href='index.php';
-            </script>
-            <?php
-        }
-    }
-    else{
-        ?>
-        <script>
-            alert("Insufficient Balance ");
-            window.location.href='index.php';
-        </script>
-        <?php
-    }
-}
-else{
-    ?>
-    <script>
-        alert("Not selected");
-        window.location.href='index.php';
-        </script>
-        <?php
-}
-}
-
-if(isset($_POST['package7'])){
-    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
-if(mysqli_num_rows($package_count_sql) < 3){
-    if($deposit >= 8000){
-        $new_deposite_amount = $deposit - 8000;
-        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 7','8000', '480', '$next_claim')");
-        if($update_deposite_sql){
-            ?>
-            <script>
-                alert("Successfully activated your paln");
-                window.location.href='index.php';
-            </script>
-            <?php
-        }
-        else{
-            ?>
-            <script>
-                alert("Something Went Wrong!! Try again...");
-                window.location.href='index.php';
-            </script>
-            <?php
-        }
-    }
-    else{
-        ?>
-        <script>
-            alert("Insufficient Balance ");
-            window.location.href='index.php';
-        </script>
-        <?php
-    }
-}
-else{
-    ?>
-    <script>
-        alert("Not selected");
-        window.location.href='index.php';
-        </script>
-        <?php
-}
-}
-if(isset($_POST['package8'])){
-    $package_count_sql = mysqli_query($con, "SELECT id FROM package WHERE user_id = $id AND status = 1 AND days != 0");
-if(mysqli_num_rows($package_count_sql) < 3){
-    if($deposit >= 10000){
-        $new_deposite_amount = $deposit - 10000;
-        $update_deposite_sql = mysqli_query($con, "UPDATE users SET deposit = $new_deposite_amount WHERE id =$id");
-        $insert_package_sql = mysqli_query($con, "INSERT INTO `package`(`user_id`,`package_name`,`package_price`,`reward`,`timestamp`)VALUES($id,'package 8','10000', '600', '$next_claim')");
-        if($update_deposite_sql){
-            ?>
-            <script>
-                alert("Successfully activated your paln");
-                window.location.href='index.php';
-            </script>
-            <?php
-        }
-        else{
-            ?>
-            <script>
-                alert("Something Went Wrong!! Try again...");
-                window.location.href='index.php';
-            </script>
-            <?php
-        }
-    }
-    else{
-        ?>
-        <script>
-            alert("Insufficient Balance ");
-            window.location.href='index.php';
-        </script>
-        <?php
-    }
-}
-else{
-    ?>
-    <script>
-        alert("Not selected");
-        window.location.href='index.php';
-        </script>
-        <?php
-}
-}
-// }
 
 ?>
 <!DOCTYPE html>
@@ -803,6 +678,9 @@ else{
     }
     #boxtimer h5 {
         margin-top: -15px;
+    }
+    .highcharts-credits {
+        display: none;
     }
     </style>
 </head>
@@ -1075,12 +953,12 @@ else{
                             <div class="row mx-5">
                                 <div class="col-xl-6">
                                     <div class="d-flex top_box">
-                                        <h1 class="fw-500 m-0" id="stock-price">$1644.29</h1>
+                                        <h1 class="fw-500 m-0" id="stock-price">$5.00</h1>
 
                                     </div>
                                 </div>
                                 <div class="col-xl-6 text-end my-2">
-                                    <h3 class="m-0">Live Bitcoin Transactions (BTC)</h3>
+                                    <h3 class="m-0">Live Peracoin Rates</h3>
                                 </div>
                             </div>
                             <div class="col-xl-12 col-12" style="padding-left: 0px !important; padding-right: 0px !important;">
@@ -1105,62 +983,66 @@ else{
                                                     <div id="Overview-1" class="tab-pane active">
                                                         <!-- <div id="chart-timeline"></div> -->
                                                         <center>
-                                                            <!-- <div class="btcwdgt-chart" bw-cash="true" bw-theme="dark"
-                                                                style="width:100% !important; "></div> -->
+                                                        <?php
 
-                                                                <script>
-window.onload = function() {
+                                                            $fetch_chart = mysqli_query($con, "SELECT * FROM peracoin");
+                                                            $chart_data = array();
 
-var dps = [];
-var chart = new CanvasJS.Chart("chartContainer", {
-	zoomEnabled: true,
-	exportEnabled: true,
-	title: {
-		text: ""
-	},
-	subtitles: [{
-		text : ""
-	}],
-	axisX: {
-		valueFormatString: "DD MMM"
-	},
-	axisY: {
-		title: "Price",
-		interval: 5,
-		prefix: "$"
-	},
-	data: [{
-		type: "candlestick",
-		name: "Qualcomm Incorporated Stock Price",
-		showInLegend: true,
-		yValueFormatString: "$##0.00",
-		xValueType: "dateTime",
-		dataPoints: dps
-	}]
-});
+                                                            while ($row = mysqli_fetch_array($fetch_chart)) {
+                                                                $chart_data[] = array(
+                                                                    intval($row['timestamp']),
+                                                                    intval($row['open']),
+                                                                    intval($row['high']),
+                                                                    intval($row['low']),
+                                                                    intval($row['close'])
+                                                                );
+                                                            $chart_datas = json_encode($chart_data);
+                                                            }
 
-$.getJSON("https://canvasjs.com/data/gallery/php/qualcomm-stock-price.json", parseData);
 
-function parseData(result) {
-	for (var i = 0; i < result.length; i++) {
-		dps.push({
-			x: result[i].x,
-			y: result[i].y
-		});
-        }
-	chart.render();
-        }
-        
-  }
-    </script>
-<style>
-    a[title = "JavaScript Charts"] {
-        display: none !important;
+
+
+                                                            ?>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <style>
+      .highcharts-credits {
+        display: none;
     }
-</style>
-<div id="chartContainer" style="height: 380px; width: 100% !important;"></div>
-<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    </style>
+
+
+<div id="container"></div>
+<?php
+
+
+
+?>
+<script>
+  var json_encode = <?php echo $chart_datas; ?>;
+
+Highcharts.getJSON('results.json' , function (data) {
+  Highcharts.stockChart('container', {
+    rangeSelector: {
+      selected: 1
+    },
+    navigator: {
+      series: {
+        color: Highcharts.getOptions().colors[0]
+      }
+    },
+    series: [{
+      type: 'hollowcandlestick',
+      name: 'Peracoin Price',
+      data: data
+    }]
+  });
+});
+</script>
+
                                                         </center>
 
                                                     </div>
@@ -2048,6 +1930,18 @@ function parseData(result) {
 
     
         <!-- terms and condition start -->
+        <?php
+
+        if(isset($_POST["tagree"])) {
+            $agree = mysqli_query($con , "UPDATE users SET term = '1' WHERE id = '$id'");
+        }
+
+        $terms = mysqli_query($con, "SELECT * FROM users WHERE id = '$id'");
+        $terms_row = mysqli_fetch_assoc($terms);
+        $terms_condition = $terms_row['term'];
+        if ($terms_condition == 0) {
+
+        ?>
         <style>
             #popup {
                 position: fixed;
@@ -2107,11 +2001,14 @@ If you would like to know more about the risks associated with investing in or t
                                     </div>
                                 </div>
                             </div>
+                            
+                            <form method="POST" >
                             <div class="card-footer">
-                                <button type="button" class="btn btn-primary float-right" id="popup-close">Agree</button>
+                                <button type="submit" name="tagree" class="btn btn-primary float-right" id="popup-close">Agree</button>
                                 <a href="logout.php"><button type="button" class="btn btn-default float-right">Disagree</button></a>
 
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -2137,38 +2034,15 @@ If you would like to know more about the risks associated with investing in or t
 });
         </script>
 
+        <?php
+        }
+        ?>
+
         <!-- Page Content overlay -->
 
         <!-- Vendor JS -->
         <!-- Vendor JS -->
-        <script>
-        (function(b, i, t, C, O, I, N) {
-            window.addEventListener('load', function() {
-                if (b.getElementById(C)) return;
-                I = b.createElement(i), N = b.getElementsByTagName(i)[0];
-                I.src = t;
-                I.id = C;
-                N.parentNode.insertBefore(I, N);
-            }, false)
-        })(document, 'script', 'https://widgets.bitcoin.com/widget.js', 'btcwdgt');
-
-        // let ws = new WebSocket('wss://ws.blockchain.info/inv');
-        let ws = new WebSocket('wss://stream.binance.com:9443/ws/etheur@trade');
-        let stockPriceElement = document.getElementById('stock-price');
-        let lastPrice = null;
-
-        ws.onmessage = (event) => {
-            let stockObject = JSON.parse(event.data);
-            let price = parseFloat(stockObject.p).toFixed(2)
-            stockPriceElement.innerText = '$' + price;
-
-            stockPriceElement.style.color = !lastPrice || lastPrice === price ? 'black' : price > lastPrice ?
-                'green' : 'red';
-
-            lastPrice = price;
-
-        }
-        </script>
+        
         <script>
         $(".currencyField").keyup(function() { //input[name='calc']
             let convFrom;

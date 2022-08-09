@@ -156,6 +156,15 @@ $id = $_SESSION['id'];
                                     </span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a href="peracoin_admin.php">
+                                <i data-feather="dollar-sign" ></i>
+                                    <span>Peracoin</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-right pull-right"></i>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
 
                         

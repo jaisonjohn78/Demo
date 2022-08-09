@@ -2,12 +2,44 @@
 include '../../config.php';
 include '../../function.php';
 
+$fetch_chart = mysqli_query($con, "SELECT * FROM peracoin");
+$timestamp = time();
+$msg = "";
 
-if(!isset($_SESSION["id"])){
-  header("Location: ../../index/login.php");
+if(isset($_POST['price'])) {
+  $open = $_POST['open'];
+  $high = $_POST['high'];
+  $low = $_POST['low'];
+  $close = $_POST['close'];
+
+  $price = $_POST['current'];
+
+
+  $insert_chart = mysqli_query($con, "INSERT INTO peracoin (timestamp, open, high, low, close) VALUES ('$timestamp', '$open', '$high', '$low', '$close')");
+  if($insert_chart) {
+    $msg = "<div style='color: green;'>successfuly inserted</div>";
+    
+  $data = array(
+    floatval($timestamp),
+    floatval($high),
+    floatval($open),
+    floatval($close),
+    floatval($low)
+  );
+
+$inp = file_get_contents('results.json');
+$tempArray = json_decode($inp);
+array_push($tempArray, $data);
+$jsonData = json_encode($tempArray);
+file_put_contents('results.json', $jsonData);
+  } else {
+    $msg = "<div style='color: red;'>Oops Something went wrong !!<div>";
+  }
+
+  
 }
 
-$id = $_SESSION['id'];
+
 
 ?>
 <!DOCTYPE html>
@@ -21,7 +53,7 @@ $id = $_SESSION['id'];
     <meta name="author" content="" />
 
     <title>
-        Peradot Users
+        Admin Panel
     </title>
 
     <!-- Vendors Style-->
@@ -29,21 +61,10 @@ $id = $_SESSION['id'];
     <!--amcharts -->
     <link href="https://www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css" />
 
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
-    
-
-
     <!-- Style-->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/skin_color.css" />
     <link rel="stylesheet" href="css/custom2.css" />
-    <style>
-        .dt-buttons {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
@@ -149,7 +170,7 @@ $id = $_SESSION['id'];
                                     </span>
                                 </a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <a href="user.php">
                                     <i data-feather="user-check"></i>
                                     <span>Users</span>
@@ -167,8 +188,8 @@ $id = $_SESSION['id'];
                                     </span>
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="peracoin_admin.php">
+                            <li class="active">
+                                <a>
                                 <i data-feather="dollar-sign" ></i>
                                     <span>Peracoin</span>
                                     <span class="pull-right-container">
@@ -189,58 +210,98 @@ $id = $_SESSION['id'];
             <div class="container-full">
                 <!-- Main content -->
                 <section class="content">
+                  <div class="row">
+                              
+                              <div class="col-12 text-center my-2">
+
+                                  <h1 class="fw-500 m-0 text-center"><i
+                                          class="mx-3 mdi mdi-currency-usd btn-rounded btn-info down_box">
+                                      </i> Peracoin Rates</h1>
+                                      <h1><?php echo $msg; ?></h1>
+                              </div>
+                          </div>
                     <div class="row">
-                        <div class="col-xl-12">
-                            <div class="row">
-                                
-                                <div class="col-12 text-center my-2">
 
-                                    <h1 class="fw-500 m-0 text-center"><i
-                                            class="mx-3 mdi mdi-account btn-rounded btn-info down_box">
-                                        </i> User List</h1>
-                                </div>
+                        <div class="row mt-5">
+                            <div class="col-xl-12">
+                               <div class="row">
+                                   <div class="col-xl-12">
+                                    <div class="card vh-auto">
+                                        <div class="card-header">
+                                            <h1 class="card-title text-dark fw-500">Peracoin </h1>
+                                            <h2>Current Price : $5.16 </h2>
+                                        </div>
+                                        <form method="POST">
+                                        <div class="card-body">
+                                          
+
+
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend ms-3">
+                                              <span class="input-group-text">$</span>
+                                          </div>
+                                          <input type="text" class="form-control" name="high" aria-label="Amount (to the nearest dollar)" required>
+                                          <div class="input-group-append">
+                                            <span class="input-group-text bg-success">High Price</span>
+                                          </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend ms-3">
+                                              <span class="input-group-text">$</span>
+                                          </div>
+                                          <input type="text" class="form-control" name="close" aria-label="Amount (to the nearest dollar)" required>
+                                          <div class="input-group-append">
+                                            <span class="input-group-text bg-danger">Close Price</span>
+                                          </div>
+                                        </div>
+
+
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend ms-3">
+                                              <span class="input-group-text">$</span>
+                                          </div>
+                                          <input type="text" class="form-control" name="low" aria-label="Amount (to the nearest dollar)" required>
+                                          <div class="input-group-append">
+                                            <span class="input-group-text bg-success">Open Price</span>
+                                          </div>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend ms-3">
+                                              <span class="input-group-text">$</span>
+                                          </div>
+                                          <input type="text" class="form-control" name="open" aria-label="Amount (to the nearest dollar)" required>
+                                          <div class="input-group-append">
+                                            <span class="input-group-text bg-danger">low Price</span>
+                                          </div>
+                                        </div>
+
+
+                                        
+
+                                        <div class="input-group mb-3 ">
+                                            <div class="input-group-prepend ms-3">
+                                              <span class="input-group-text">$</span>
+                                          </div>
+                                          <input type="text" class="form-control" name="current" aria-label="Amount (to the nearest dollar)" required style="font-size: 2.4rem;">
+                                          <div class="input-group-append">
+                                            <span class="input-group-text bg-info">Current Market Price</span>
+                                          </div>
+                                        </div>
+
+
+
+                                        <center><input type="submit" name="price" class="btn btn-primary btn-lg btn-block" ></center>
+                                        </div>
+                                        </form>
+                                        
+                                    </div>
+                                    
+                               </div>
                             </div>
-                            <div class="row mt-55">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered" id="tablez">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Timestamp</th>
-                                            <th>Reference ID</th>
-                                            <th>Balance</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                                    <?php
-                                                        $res=mysqli_query($con,"SELECT * FROM users WHERE admin = '0'");                                    // die();
-                                                        $i=1;
-                                                        while($row=mysqli_fetch_assoc($res)){
-                                                        
-                                                    ?>
-                                                        <tr>
-                                                            <td><?php echo $i++ ?></td>
-                                                            <td><?php echo $row['username']?></td>
-                                                            <td><?php echo $row['email']?></td>
-                                                            <td><?php echo $row["phone"] ?></td>
-                                                            <td><?php echo $row['timestamp']?></td>
-                                                            <td><?php echo $row['reference_id']?></td>
-                                                            <td><?php echo $row['amount']?></td>
-                                                        </tr>
-                                                       <?php } ?>
-                                                    </tbody>
-                                </table>   
-
-                            </div>    
-                        </div>
-                        </div>
-                    </div>
-
-                            
-                </section>
+                            </div>
                 <!-- /.content -->
             </div>
         </div>
@@ -270,45 +331,19 @@ $id = $_SESSION['id'];
 
         <!-- Page Content overlay -->
 
-        
+        <!-- Custom JS -->
         <!-- Vendor JS -->
         <script src="js/vendors.min.js"></script>
-       
+        <script src="js/pages/chat-popup.js"></script>
         <script src="../assets/icons/feather-icons/feather.min.js"></script>
 
         <script src="../assets/vendor_components/Web-Ticker-master/jquery.webticker.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
         <!-- Crypto Admin App -->
-        
         <script src="js/template.js"></script>
         <script src="js/pages/dashboard2.js"></script>
         <script src="js/pages/dashboard2-chart.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-
- 
-
-
-        <!-- Custom JS -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#tablez').DataTable({
-        dom: 'Bfrtip',
-        dom: 'Blfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    });
-            });
-        </script>
 </body>
 
 </html>
