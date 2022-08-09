@@ -9,6 +9,9 @@ if (!isset($_SESSION["id"])) {
 
 $id = $_SESSION['id'];
 
+// peracoin PRICE
+
+
 $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
 $user_row = mysqli_fetch_assoc($user_sql);
 $deposit = $user_row['deposit'];
