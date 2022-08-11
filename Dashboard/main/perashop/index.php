@@ -4,7 +4,11 @@
     
     $peracoin_rate = 5;
     if (!isset($_SESSION["id"])) {
-      $username = "Register Now";
+    $username = "Register Now";
+    //   $user_row = "Please Login";
+    $user_row['amount'] = 0;
+
+
     }
     else {
     
@@ -12,7 +16,15 @@
         $user_sql = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
         $user_row = mysqli_fetch_assoc($user_sql);
         $username = $user_row['username'];
+
     }
+
+    // PRICE RATE FROM TABLE
+
+    $price_sql = mysqli_query($con, "SELECT price FROM price WHERE id=1");
+    $price_row = mysqli_fetch_assoc($price_sql);
+    $current_price = $price_row['price'];
+
     
 ?>
 <!DOCTYPE html>
@@ -614,7 +626,7 @@
                                 <h3 class="title is-4 is-light"><img src="img/logo/img-1.png" alt=""> <span>Buy Peracoin  </span></h3>
                                 <!-- Divider -->
                                 <div class="divider is-long"></div>
-                <h3 class="subtitle is-6 is-light is-compact">Your Total Ballance : $<?php echo number_format((float)$user_row['amount'], 2, '.', ''); ?></h3>
+                <h3 class="subtitle is-6 is-light is-compact">Your Total Balance : $<?php echo number_format((float)$user_row['amount'], 2, '.', ''); ?></h3>
                 
                 <!-- in btn number  -->
                 <style>
@@ -1038,7 +1050,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$25</b> will be deducted from your account to buy <b>5 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1059,7 +1071,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$75</b> will be deducted from your account to buy <b>15 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1080,7 +1092,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$200</b> will be deducted from your account to buy <b>40 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1101,7 +1113,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$300</b> will be deducted from your account to buy <b>60 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1122,7 +1134,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$500</b> will be deducted from your account to buy <b>100 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1143,7 +1155,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account and <b>package 1</b> will be activated</p>
+                                                                    <p><b>$1250</b> will be deducted from your account to buy <b>250 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1161,9 +1173,10 @@ input[type=number]::-webkit-outer-spin-button {
     <script src="./js/bundle.js"></script>
     <script>
         function convert() {
+            var price_sql = <?php echo $current_price;?>;
             var convert_out = document.getElementById('convert_out').value;
             var convert_in = document.getElementById('convert_in').value;
-            var convert_result = 5 * convert_in;
+            var convert_result = price_sql * convert_in;
             document.getElementById('convert_out').value = "$ " + convert_result;
         }
     </script>
