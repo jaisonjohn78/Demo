@@ -25,10 +25,11 @@ html,
 body {
   height: 100vh;
   overflow-x: hidden;
-  /* background-color: #323945; */
+  background-color: #323945;
   background-image: url('peraspace.gif');
   background-size: cover;
   background-repeat: no-repeat;
+  opacity: 0.9;
 }
 
 .container {

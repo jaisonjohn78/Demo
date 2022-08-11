@@ -14,7 +14,7 @@ if(isset($_POST['price'])) {
 
   $price = $_POST['current'];
 
-
+  // UPDATE `price` SET `price` = '5' WHERE `price`.`id` = 1; 
   $insert_chart = mysqli_query($con, "INSERT INTO peracoin (timestamp, open, high, low, close) VALUES ('$timestamp', '$open', '$high', '$low', '$close')");
   if($insert_chart) {
     $msg = "<div style='color: green;'>successfuly inserted</div>";

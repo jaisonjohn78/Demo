@@ -2,7 +2,6 @@
     include '../../../config.php';
     include '../../../function.php';
     
-    $peracoin_rate = 5;
     if (!isset($_SESSION["id"])) {
     $username = "Register Now";
     //   $user_row = "Please Login";
@@ -24,6 +23,13 @@
     $price_sql = mysqli_query($con, "SELECT price FROM price WHERE id=1");
     $price_row = mysqli_fetch_assoc($price_sql);
     $current_price = $price_row['price'];
+
+    $peracoin_rate = $current_price;
+
+    if(isset($_POST['package1'])) {
+        $package_select = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
+    }
+
 
     
 ?>
@@ -48,6 +54,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/css/shepherd.css"/>
 
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet">
     <style>
@@ -62,6 +70,7 @@
 </head>
 
 <body>
+    
 
     <div id="pageloader" class="pageloader is-left-to-right is-theme"></div>
     <div id="infraloader" class="infraloader is-active"></div>    
@@ -390,7 +399,7 @@
                                 <div @click="switchTabs($event)" class="flying-child tab-2" data-tab="tab-2" :class="{
                                     'is-active': activeTab === 'tab-2',
                                     '': activeTab != 'tab-2'
-                                }"><a href="javascript:void(0);">TOKEN</a></div>
+                                }"><a href="javascript:void(0);">RATES</a></div>
                                 <div @click="switchTabs($event)" class="flying-child tab-3" data-tab="tab-3" :class="{
                                     'is-active': activeTab === 'tab-3',
                                     '': activeTab != 'tab-3'
@@ -398,7 +407,7 @@
                                 <div @click="switchTabs($event)" class="flying-child tab-4" data-tab="tab-4" :class="{
                                     'is-active': activeTab === 'tab-4',
                                     '': activeTab != 'tab-4'
-                                }"><a href="javascript:void(0);">BOUNTY</a></div>
+                                }"><a href="javascript:void(0);">GIVEAWAYS</a></div>
                                 <div class="slider"></div>
                             </div>
                         </div>
@@ -424,7 +433,7 @@
                                                 <li class="animated preFadeInUp fadeInUp">
                                                     <span>Sale</span>
                                                     <br>
-                                                    <span class="item-content">Token sales starts on Oct 20 2022 (12:00am GMT)</span>
+                                                    <span class="item-content">Peracoin sales starts on Oct 26 2022 (12:00am GMT)</span>
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
                                                     <span>Presale</span>
@@ -465,13 +474,16 @@
                                                     <div>Soft Cap</div>
                                                     <div>Bonus</div>
                                                 </div>
+                                                <div class="">
                                                 <progress class="progress ico-progress" value="97" max="100">97%</progress>
-                                                <p style="text-align: center;">3 Month Hold Period</p>
+                                                <p style="text-align: center;">First month holding <br/> <b>3 Month Hold Period</b></p>
+                                                <hr class="step2" />
+                                                </div>
                                             </div>
     
                                             <!-- Button -->
                                             <div class="button-block">
-                                            <a href="#offers"><span class="button k-button k-secondary raised has-gradient is-bold is-fullwidth rounded">Buy Now</span></a>
+                                            <a href="#offers"><span class="button k-button k-secondary raised has-gradient is-bold is-fullwidth rounded ">Buy Now</span></a>
                                                 <span class="front-gradient"></span>
                                             </div>
     
@@ -492,22 +504,22 @@
                                     <!-- Tab content -->
                                     <div class="column is-5 is-offset-1">
                                         <div class="text-content">
-                                            <h4 class="title is-6 is-light animated preFadeInUp fadeInUp">TOKEN RATES</h4>
+                                            <h4 class="title is-6 is-light animated preFadeInUp fadeInUp">PERACOIN RATES</h4>
                                             <ul class="custom-bullet-list">
                                                 <li class="animated preFadeInUp fadeInUp">
                                                     <span>Tokens Sales</span>
                                                     <br>
-                                                    <span class="item-content">1 200 000 KP (22%)</span>
+                                                    <span class="item-content">1 000 000 PEC (22%)</span>
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
                                                     <span>Token Exchange</span>
                                                     <br>
-                                                    <span class="item-content">1 BTC = 2200 KP, 1 ETH = 825 KP</span> 
+                                                    <span class="item-content">1 PEC = $1,23,704.5 USD , (22%)</span> 
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
                                                     <span>Transations</span>
                                                     <br>
-                                                    <span class="item-content">Minimal transaction amount is 1 BTC, 1 ETH, 1 LTC</span>
+                                                    <span class="item-content">No Minimal transaction amount <br>Maximum 10,000 PEC (Peracoin)</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -532,20 +544,15 @@
                                             <h4 class="title is-6 is-light animated preFadeInUp fadeInUp">PROFIT</h4>
                                             <ul class="custom-bullet-list">
                                                 <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Tokens Sales</span>
+                                                    <span>High Returns and 100% Trusted</span>
                                                     <br>
-                                                    <span class="item-content">1 200 000 KP (22%)</span>
+                                                    
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Token Exchange</span>
+                                                    <span>+22% Rapid Market price increment</span>
                                                     <br>
-                                                    <span class="item-content">1 BTC = 2200 KP, 1 ETH = 825 KP</span> 
                                                 </li>
-                                                <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Transations</span>
-                                                    <br>
-                                                    <span class="item-content">Minimal transaction amount is 1 BTC, 1 ETH, 1 LTC</span>
-                                                </li>
+
                                             </ul>
                                         </div>
                                     </div>
@@ -569,19 +576,19 @@
                                             <h4 class="title is-6 is-light animated preFadeInUp fadeInUp">REWARDS & BOUNTIES</h4>
                                             <ul class="custom-bullet-list">
                                                 <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Tokens Sales</span>
+                                                    <span>$20000 Total Giveaway awaiting for you</span>
                                                     <br>
-                                                    <span class="item-content">1 200 000 KP (22%)</span>
+                                                    
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Token Exchange</span>
+                                                    <span>$1000 Goodies and Gifts for 10 Investors</span>
                                                     <br>
-                                                    <span class="item-content">1 BTC = 2200 KP, 1 ETH = 825 KP</span> 
+                                                    
                                                 </li>
                                                 <li class="animated preFadeInUp fadeInUp">
-                                                    <span>Transations</span>
+                                                    <span>Sponsorship for Students </span>
                                                     <br>
-                                                    <span class="item-content">Minimal transaction amount is 1 BTC, 1 ETH, 1 LTC</span>
+                                                    
                                                 </li>
                                             </ul>
                                         </div>
@@ -618,7 +625,7 @@
                 <div class="content-wrapper is-large">
     
                     <!-- Row -->
-                    <div class="columns is-vcentered">
+                    <div class="columns is-vcentered ">
                         <div class="column is-5">
                             <!-- Side feature -->
                             <div class="side-feature-content">
@@ -694,7 +701,7 @@ input[type=number]::-webkit-outer-spin-button {
                 </style>
                 <div class="number-input" style="margin: 15px ;">
   <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); convert();" ></button>
-  <input class="quantity" min="0" name="quantity" value="0" id="convert_in" onchange="convert()" type="number">
+  <input class="quantity step1" min="0" name="quantity" value="0" id="convert_in" onchange="convert()" type="number">
   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); convert();" class="plus"></button>
 </div>
 
@@ -727,7 +734,7 @@ input[type=number]::-webkit-outer-spin-button {
                 <!-- Divider -->
                 <div class="divider is-centered"></div>
                 <!-- Title & subtitle -->
-                <h2 class="title is-light is-semibold has-text-centered is-spaced">Best Offers</h2>
+                <h2 class="title is-light is-semibold has-text-centered is-spaced">Bulk Order</h2>
                 <h4 class="subtitle is-6 is-light has-text-centered is-compact"></h4>
     
                 <!-- Content wrapper -->
@@ -1050,7 +1057,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$25</b> will be deducted from your account to buy <b>5 Paradot Coin.</b></p>
+                                                                    <p><b>$ <?php echo 5 * $peracoin_rate; ?></b> will be deducted from your account to buy <b>5 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1071,7 +1078,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$75</b> will be deducted from your account to buy <b>15 Paradot Coin.</b></p>
+                                                                    <p><b>$ <?php echo 15 * $peracoin_rate; ?></b> will be deducted from your account to buy <b>15 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1092,7 +1099,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$200</b> will be deducted from your account to buy <b>40 Paradot Coin.</b></p>
+                                                                    <p><b>$ <?php echo 45 * $peracoin_rate; ?></b> will be deducted from your account to buy <b>40 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1113,7 +1120,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$300</b> will be deducted from your account to buy <b>60 Paradot Coin.</b></p>
+                                                                    <p><b>$ <?php echo 60 * $peracoin_rate; ?></b> will be deducted from your account to buy <b>60 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1134,7 +1141,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$500</b> will be deducted from your account to buy <b>100 Paradot Coin.</b></p>
+                                                                    <p><b>$ <?php echo 100 * $peracoin_rate; ?></b> will be deducted from your account to buy <b>100 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1155,7 +1162,7 @@ input[type=number]::-webkit-outer-spin-button {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="z-index: 9999;">
-                                                                    <p><b>$1250</b> will be deducted from your account to buy <b>250 Paradot Coin.</b></p>
+                                                                    <p><b>$ <?php echo 250 * $peracoin_rate; ?></b> will be deducted from your account to buy <b>250 Paradot Coin.</b></p>
                                                                     <p>Do you want to proceed??</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="z-index: 9999;">
@@ -1179,6 +1186,151 @@ input[type=number]::-webkit-outer-spin-button {
             var convert_result = price_sql * convert_in;
             document.getElementById('convert_out').value = "$ " + convert_result;
         }
+    </script>
+    <!-- sheperd script  -->
+    <script>
+        const tour = new Shepherd.Tour({
+  defaultStepOptions: {
+    cancelIcon: {
+      enabled: true
+    },
+    classes: 'class-1 class-2',
+    scrollTo: { behavior: 'smooth', block: 'center' }
+  }
+});
+
+tour.addStep({
+  title: '👋🏻Welcome To Perashop',
+  text: `Want to have a tour of perashop ?\
+  Just a short lovely \`Tour\` of digital peracoin shop.`,
+  attachTo: {
+    element: '.hero-example',
+    on: 'top'
+  },
+  buttons: [
+    {
+      action() {
+        return this.cancel();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'No Thanks!'
+    },
+    {
+      action() {
+        return this.next();
+      },
+      text: 'Ohhh yeahh !'
+    }
+  ],
+  id: 'creating'
+});
+
+
+tour.addStep({
+  title: 'You can Buy Peracoin Here !',
+  text: `The amount will be deducted from your total balance.`,
+  attachTo: {
+    element: '.step1',
+    on: 'bottom'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Back'
+    },
+    {
+      action() {
+        return this.next();
+      },
+      text: 'Next'
+    }
+  ],
+  id: 'creating'
+});
+
+
+tour.addStep({
+  title: 'Hold Period',
+  text: `Newly redeemed coins will be on hold for 3 Months and....`,
+  attachTo: {
+    element: '.step2',
+    on: 'bottom'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Back'
+    },
+    {
+      action() {
+        return this.next();
+      },
+      text: 'Next'
+    }
+  ],
+  id: 'creating'
+});
+
+tour.addStep({
+  title: 'nEXT',
+  text: `Creating a Shepherd tour is easy. too!\
+  Just create a \`Tour\` instance, and add as many steps as you want.`,
+  attachTo: {
+    element: '.step3',
+    on: 'bottom'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Back'
+    },
+    {
+      action() {
+        return this.next();
+      },
+      text: 'Next'
+    }
+  ],
+  id: 'creating'
+});
+
+
+tour.addStep({
+  title: 'nEXT',
+  text: `Creating a Shepherd tour is easy. too!\
+  Just create a \`Tour\` instance, and add as many steps as you want.`,
+  attachTo: {
+    element: '.step1',
+    on: 'bottom'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Back'
+    },
+    {
+      action() {
+        return this.next();
+      },
+      text: 'Next'
+    }
+  ],
+  id: 'creating'
+});
+
+tour.start();
     </script>
 
 </body>
