@@ -961,11 +961,13 @@ window.location.href = '../Dashboard/main/index.php';
                 <div class="text sign-in">
                     <h2>
                         <div class="bitcoin">
-                            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
+                            <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
                             </script>
                             <lottie-player src="https://assets10.lottiefiles.com/private_files/lf30_h03e9pog.json"
                                 mode="bounce" background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                loop autoplay></lottie-player>
+                                loop autoplay></lottie-player> -->
+
+
                         </div>
 
                     </h2>
@@ -984,9 +986,9 @@ window.location.href = '../Dashboard/main/index.php';
                 <div class="text sign-up" id="sign_up">
                     <h2>
                         <div class="bitcoin">
-                            <lottie-player src="https://assets10.lottiefiles.com/private_files/lf30_h03e9pog.json"
+                            <!-- <lottie-player src="https://assets10.lottiefiles.com/private_files/lf30_h03e9pog.json"
                                 mode="bounce" background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                loop autoplay></lottie-player>
+                                loop autoplay></lottie-player> -->
 
                             </span>
                         </div>
