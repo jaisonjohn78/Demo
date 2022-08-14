@@ -22,15 +22,166 @@
 
     $price_sql = mysqli_query($con, "SELECT price FROM price WHERE id=1");
     $price_row = mysqli_fetch_assoc($price_sql);
+    // for current price 
     $current_price = $price_row['price'];
 
     $peracoin_rate = $current_price;
+    $msg = "";
+    $msg1 = "";
 
     if(isset($_POST['package1'])) {
-        $package_select = mysqli_query($con, "SELECT * FROM users WHERE id = $id");
+        $user_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_amount_row = mysqli_fetch_assoc($user_select);
+        $current_user_price = $user_amount_row['amount'];
+        $package_amount = 5 * $peracoin_rate; 
+        if($current_user_price >= $package_amount)
+        {
+            $current_amount_sql = floatval($current_user_price) - floatval($package_amount);
+            $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 5 WHERE id = '$id'");
+
+            if($amount_deduct) {
+                $msg = "Sucessfull";
+            } else {
+                $msg = "Unsucessfull";
+            }
+
+        } else {
+            $msg = "Insufficient balance ";
+        }
+    
+    }
+    if(isset($_POST['package2'])) {
+        $user_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_amount_row = mysqli_fetch_assoc($user_select);
+        $current_user_price = $user_amount_row['amount'];
+        $package_amount = 15 * $peracoin_rate; 
+        if($current_user_price >= $package_amount)
+        {
+            $current_amount_sql = floatval($current_user_price) - floatval($package_amount);
+            $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 15 WHERE id = '$id'");
+
+            if($amount_deduct) {
+                $msg = "Sucessfull";
+            } else {
+                $msg = "Unsucessfull";
+            }
+
+        } else {
+            $msg = "Insufficient balance ";
+        }
+    
+    }
+    if(isset($_POST['package3'])) {
+        $user_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_amount_row = mysqli_fetch_assoc($user_select);
+        $current_user_price = $user_amount_row['amount'];
+        $package_amount = 40 * $peracoin_rate; 
+        if($current_user_price >= $package_amount)
+        {
+            $current_amount_sql = floatval($current_user_price) - floatval($package_amount);
+            $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 40 WHERE id = '$id'");
+
+            if($amount_deduct) {
+                $msg = "Sucessfull";
+            } else {
+                $msg = "Unsucessfull";
+            }
+
+        } else {
+            $msg = "Insufficient balance ";
+        }
+    
+    }
+    if(isset($_POST['package4'])) {
+        $user_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_amount_row = mysqli_fetch_assoc($user_select);
+        $current_user_price = $user_amount_row['amount'];
+        $package_amount = 60 * $peracoin_rate; 
+        if($current_user_price >= $package_amount)
+        {
+            $current_amount_sql = floatval($current_user_price) - floatval($package_amount);
+            $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 60 WHERE id = '$id'");
+
+            if($amount_deduct) {
+                $msg = "Sucessfull";
+            } else {
+                $msg = "Unsucessfull";
+            }
+
+        } else {
+            $msg = "Insufficient balance ";
+        }
+    
+    }
+    if(isset($_POST['package5'])) {
+        $user_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_amount_row = mysqli_fetch_assoc($user_select);
+        $current_user_price = $user_amount_row['amount'];
+        $package_amount = 100 * $peracoin_rate; 
+        if($current_user_price >= $package_amount)
+        {
+            $current_amount_sql = floatval($current_user_price) - floatval($package_amount);
+            $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 100 WHERE id = '$id'");
+
+            if($amount_deduct) {
+                $msg = "Sucessfull";
+            } else {
+                $msg = "Unsucessfull";
+            }
+
+        } else {
+            $msg = "Insufficient balance ";
+        }
+    
+    }
+    if(isset($_POST['package6'])) {
+        $user_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_amount_row = mysqli_fetch_assoc($user_select);
+        $current_user_price = $user_amount_row['amount'];
+        $package_amount = 250 * $peracoin_rate; 
+        if($current_user_price >= $package_amount)
+        {
+            $current_amount_sql = floatval($current_user_price) - floatval($package_amount);
+            $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 250 WHERE id = '$id'");
+
+            if($amount_deduct) {
+                $msg = "Sucessfull";
+            } else {
+                $msg = "Unsucessfull";
+            }
+
+        } else {
+            $msg = "Insufficient balance ";
+        }
+    
     }
 
-
+    // single pera coin buy
+    if(isset($_POST['s_submit'])){
+        $total_samaount = $_POST['total_samount'];
+        // user row select 
+        $user_s_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_samount_row = mysqli_fetch_assoc($user_s_select);
+        $current_user_sprice = $user_samount_row['amount'];
+        $peracoin_sql = floatval($total_samaount) / floatval($peracoin_rate);
+        // check if aount is suff 
+        if($current_user_sprice >= $total_samaount)
+        {
+         $current_user_sprice = floatval($current_user_sprice) - floatval($total_samaount);
+         $amount_sdeduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_user_sprice ,`peracoin`= $peracoin_sql WHERE id = '$id'");
+            if($amount_sdeduct){
+                $msg1 = "Sucessfull";
+            }else{
+                $msg1 = "Unsecessfull";
+            }
+        }else{
+            $$msg1 = "insufficient balance";
+        }
+        // if true user data changes 
+        // else infsuf.. msg1  
+  
+        
+    }
     
 ?>
 <!DOCTYPE html>
@@ -699,19 +850,22 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: center;
 }
                 </style>
+                
                 <div class="number-input" style="margin: 15px ;">
   <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); convert();" ></button>
   <input class="quantity step1" min="0" name="quantity" value="0" id="convert_in" onchange="convert()" type="number">
   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); convert();" class="plus"></button>
 </div>
 
-                                <p class="is-light"><label>Total</label><input type="text" id="convert_out"  style="margin: 15px; background: transparent; font-size:larger; font-weight:900; outline: none; border: none;" width="5rem" readonly></p>
+<form method="POST">
+                                <p class="is-light"><label>Total</label><input type="text" id="convert_out" name="total_samount" style="margin: 15px; background: transparent; font-size:larger; font-weight:900; outline: none; border: none;" width="5rem" readonly></p>
                             </div>
                             <a href="#" class="button k-button k-primary raised has-gradient is-bold">
-                                <span class="text">Buy Now</span>
+                                <input type="submit" class="text" value="Buy Now" name="s_submit">
                                 <span class="front-gradient"></span>
                             </a>
                         </div>
+</form>
                         <!-- Featured image -->
                         <div class="column is-7">
                             <img class="side-feature" src="img/illustrations/krypton-app.svg" alt="">
@@ -735,6 +889,7 @@ input[type=number]::-webkit-outer-spin-button {
                 <div class="divider is-centered"></div>
                 <!-- Title & subtitle -->
                 <h2 class="title is-light is-semibold has-text-centered is-spaced">Bulk Order</h2>
+                <h1><?php echo $msg ?></h1>
                 <h4 class="subtitle is-6 is-light has-text-centered is-compact"></h4>
     
                 <!-- Content wrapper -->
@@ -1332,6 +1487,11 @@ tour.addStep({
 
 tour.start();
     </script>
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 
 </body>
 
