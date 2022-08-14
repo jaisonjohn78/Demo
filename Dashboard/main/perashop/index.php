@@ -160,7 +160,7 @@
     if(isset($_POST['s_submit'])){
         $total_samaount = $_POST['total_samount'];
         // user row select 
-        $user_s_select = mysqli_query($con, "SELECT amount FROM users WHERE id = $id");
+        $user_s_select = mysqli_query($con, "SELECT amount FROM users WHERE id = '$id'");
         $user_samount_row = mysqli_fetch_assoc($user_s_select);
         $current_user_sprice = $user_samount_row['amount'];
         $peracoin_sql = floatval($total_samaount) / floatval($peracoin_rate);
@@ -175,7 +175,7 @@
                 $msg1 = "Unsecessfull";
             }
         }else{
-            $$msg1 = "insufficient balance";
+            $msg1 = "insufficient balance";
         }
         // if true user data changes 
         // else infsuf.. msg1  
@@ -785,6 +785,7 @@
                                 <!-- Divider -->
                                 <div class="divider is-long"></div>
                 <h3 class="subtitle is-6 is-light is-compact">Your Total Balance : $<?php echo number_format((float)$user_row['amount'], 2, '.', ''); ?></h3>
+                <h3><?php echo $msg1; ?></h3>
                 
                 <!-- in btn number  -->
                 <style>
@@ -860,10 +861,10 @@ input[type=number]::-webkit-outer-spin-button {
 <form method="POST">
                                 <p class="is-light"><label>Total</label><input type="text" id="convert_out" name="total_samount" style="margin: 15px; background: transparent; font-size:larger; font-weight:900; outline: none; border: none;" width="5rem" readonly></p>
                             </div>
-                            <a href="#" class="button k-button k-primary raised has-gradient is-bold">
-                                <input type="submit" class="text" value="Buy Now" name="s_submit">
+                            
+                                <input type="submit" class="text button k-button k-primary raised has-gradient is-bold" value="Buy Now" name="s_submit">
                                 <span class="front-gradient"></span>
-                            </a>
+                          
                         </div>
 </form>
                         <!-- Featured image -->
