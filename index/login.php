@@ -1000,6 +1000,56 @@ window.location.href = '../Dashboard/main/index.php';
         </div>
         <!-- END CONTENT SECTION -->
     </div>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+        .splash {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100vh;
+            background: transparent;
+            z-index: 99999;
+            color: white;
+            text-align: center;
+            transform: translate(-50%, -10%);
+            font-size: 1.8rem;
+            font-family: 'Space Mono', monospace;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .fadeIn {
+            animation-name: fadeIn;
+            animation-duration: 0.8s;
+            animation-fill-mode: forwards;
+        }
+
+        .splash.display-none {
+            display: none;
+            opacity: 0;
+            z-index: -10;
+
+        }
+    </style>
+    <div class="splash">
+        <h1 class="fadeIn">Welcome To Peraworld !</h1>
+    </div>
+    <script>
+        const splash = document.querySelector('.splash');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                splash.classList.add('display-none');
+            }, 800);
+        });
+    </script>
     <script src="app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
