@@ -29,7 +29,7 @@ body {
   background-image: url('peraspace.gif');
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.9;
+  /* opacity: 0.9; */
 }
 
 .container {

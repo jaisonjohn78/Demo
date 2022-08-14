@@ -222,8 +222,11 @@
                 <li>
                     
         </section>
+
+
+        <!-- social media links  -->
     
-        <section>
+        <!-- <section>
             <div class="roadmap-end">
                 <img src="img/illustrations/roadmap-end.svg" alt="">
             </div>
@@ -273,7 +276,7 @@
                     </a>
                 </div>
             </div>
-        </section>
+        </section> -->
     
     </div>
     <footer class="krypton-footer">

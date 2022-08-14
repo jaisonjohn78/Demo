@@ -3,9 +3,9 @@ include '../../config.php';
 include '../../function.php';
 
 $fetch_chart = mysqli_query($con, "SELECT * FROM peracoin");
-$timestamp = time();
+// $timestamp = time();
 $msg = "";
-
+date_default_timezone_set('Asia/Calcutta');
 if(isset($_POST['price'])) {
   $open = $_POST['open'];
   $high = $_POST['high'];
@@ -14,13 +14,20 @@ if(isset($_POST['price'])) {
 
   $price = $_POST['current'];
 
+  $timestamp = $_POST['timer'];
+  // $date = date("Y-m-d H:i:s", $timestamp);
+  // $timestamp1 = strtotime($date) * 1000;
+
+  $now = DateTime::createFromFormat('U.u', microtime(true));
+  $timestamp1 = $now->format("U.u");
+
   // UPDATE `price` SET `price` = '5' WHERE `price`.`id` = 1; 
-  $insert_chart = mysqli_query($con, "INSERT INTO peracoin (timestamp, open, high, low, close) VALUES ('$timestamp', '$open', '$high', '$low', '$close')");
+  $insert_chart = mysqli_query($con, "INSERT INTO peracoin (timestamp, open, high, low, close) VALUES ('$timestamp1', '$open', '$high', '$low', '$close')");
   if($insert_chart) {
     $msg = "<div style='color: green;'>successfuly inserted</div>";
     
   $data = array(
-    floatval($timestamp),
+    floatval($timestamp1),
     floatval($high),
     floatval($open),
     floatval($close),
@@ -243,7 +250,7 @@ file_put_contents('results.json', $jsonData);
                                           </div>
                                           <input type="text" class="form-control" name="high" aria-label="Amount (to the nearest dollar)" required>
                                           <div class="input-group-append">
-                                            <span class="input-group-text bg-success">High Price</span>
+                                            <span class="input-group-text bg-success">Open Price</span>
                                           </div>
                                         </div>
                                         <div class="input-group mb-3">
@@ -252,7 +259,7 @@ file_put_contents('results.json', $jsonData);
                                           </div>
                                           <input type="text" class="form-control" name="close" aria-label="Amount (to the nearest dollar)" required>
                                           <div class="input-group-append">
-                                            <span class="input-group-text bg-danger">Close Price</span>
+                                            <span class="input-group-text bg-success">High Price</span>
                                           </div>
                                         </div>
 
@@ -264,7 +271,7 @@ file_put_contents('results.json', $jsonData);
                                           </div>
                                           <input type="text" class="form-control" name="low" aria-label="Amount (to the nearest dollar)" required>
                                           <div class="input-group-append">
-                                            <span class="input-group-text bg-success">Open Price</span>
+                                            <span class="input-group-text bg-danger">Low Price</span>
                                           </div>
                                         </div>
 
@@ -274,7 +281,7 @@ file_put_contents('results.json', $jsonData);
                                           </div>
                                           <input type="text" class="form-control" name="open" aria-label="Amount (to the nearest dollar)" required>
                                           <div class="input-group-append">
-                                            <span class="input-group-text bg-danger">low Price</span>
+                                            <span class="input-group-text bg-danger">Close Price</span>
                                           </div>
                                         </div>
 
@@ -290,6 +297,18 @@ file_put_contents('results.json', $jsonData);
                                             <span class="input-group-text bg-info">Current Market Price</span>
                                           </div>
                                         </div>
+
+                                        <div class="input-group mb-3 ">
+                                            <div class="input-group-prepend ms-3">
+                                              <span class="input-group-text">$</span>
+                                          </div>
+                                          <input type="datetime-local" class="form-control" name="timer" >
+                                          <div class="input-group-append">
+                                            <span class="input-group-text bg-info">Time</span>
+                                          </div>
+                                        </div>
+
+
 
 
 
