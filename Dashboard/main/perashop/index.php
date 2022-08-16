@@ -166,12 +166,16 @@
         $current_user_sprice = $user_samount_row['amount'];
         $peracoin_sql = floatval($total_samaount) / floatval($peracoin_rate);
         // check if aount is suff 
-        if($current_user_sprice >= $total_samaount)
+        if($current_user_sprice >= $total_samaount && $current_user_sprice != 0)
         {
-         $current_user_sprice = floatval($current_user_sprice) - floatval($total_samaount);
-         $amount_sdeduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_user_sprice ,`peracoin`= $peracoin_sql WHERE id = '$id'");
+            $current_user_sprice = floatval($current_user_sprice);
+            $total_samaount = floatval($total_samaount);
+        
+         $current_user_sprice = $current_user_sprice - $total_samaount;
+         $amount_sdeduct = mysqli_query($con, "UPDATE `users` SET `amount`= '$current_user_sprice' ,`peracoin`= '$peracoin_sql' WHERE id = '$id'");
             if($amount_sdeduct){
                 $msg1 = "<span style='color:white'>Transaction Sucessfull</span>";
+                // $msg1 = $_POST['total_samount'];
             }else{
                 $msg1 = "<span style='color:white'>Transaction Unsecessfull</span>";
             }
@@ -867,8 +871,8 @@ input[type=number]::-webkit-outer-spin-button {
   <input class="quantity step1" min="0" name="quantity" value="0" id="convert_in" onchange="convert()" type="number">
   <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); convert();" class="plus"></button>
 </div>
-
 <form method="POST">
+
                                 <p class="is-light"><label>Total</label><input type="text" id="convert_out" name="total_samount" style="margin: 15px; background: transparent; font-size:larger; font-weight:900; outline: none; border: none;" width="5rem" readonly></p>
                             </div>
                             
@@ -931,9 +935,9 @@ input[type=number]::-webkit-outer-spin-button {
                                     <!-- Member meta -->
                                     <div class="member-info">
                                         <h4 class="title is-light is-6 is-tight">5 coin</h4>
-                                      <a href="#offers"> <div class="position">$ <?php echo 5 * $peracoin_rate; ?></div>
+                                       <div class="position">$ <?php echo 5 * $peracoin_rate; ?></div>
                                         <p class="description"><button data-toggle="modal" data-target="#exampleModal"><b>BUY</b></button></p>
-                                    </div> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
