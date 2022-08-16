@@ -80,7 +80,7 @@ if(isset($_POST['sign-up']))
             
             $current = mysqli_query($con,"SELECT * FROM `users` WHERE `email` = '$email'");
             $current_user = mysqli_fetch_assoc($current);
-            $refered_to_id= $current_user['id'];
+            $refered_to_id = $current_user['id'];
             $refered_name = $current_user['username'];
             
             $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$referred_from','$refered_name','$reference_code','$today')");
@@ -389,7 +389,7 @@ else{
             $refered_to_id= $current_user['id'];    
             $refered_name = $current_user['username'];
             
-            $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$referred_from','$refered_name','$reference_code_1','$today')");
+            $add = mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$refered_to_id','$refered_name','$referred_from','$reference_code_1','$today')");
 
             
             if($query) {

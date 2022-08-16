@@ -9,8 +9,7 @@ if(!isset($_SESSION["id"])){
 
 $id = $_SESSION['id'];
 
-if(isset($_POST['pera_submit']))
-{
+if(isset($_POST['pera_submit'])) {
     $peracoin = $_POST['peracoin'];
     $user_id = $_POST['user_id'];
     $meta_insert = "UPDATE users set peracoin = $peracoin WHERE id = $user_id";

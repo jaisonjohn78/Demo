@@ -30,9 +30,9 @@ $id = $_SESSION['id'];
                                $result = mysqli_fetch_assoc($result_query);
         $refered_to = $result['username'];
         $total_balance = $result['amount'];
-        $sql1 = mysqli_query($con,"SELECT * from reference WHERE user_id = $id AND reference_id = '$reference_code'");
+        $sql1 = mysqli_query($con,"SELECT * from `reference` WHERE `user_id` = '$id' AND `reference_id` = '$reference_code'");
         if(mysqli_num_rows($sql)){
-            if(mysqli_num_rows($sql1) == 0){
+            if(mysqli_num_rows($sql1) == 0){    
               if($reference_code != $ref_code){
                 mysqli_query($con,"INSERT INTO `reference`(`user_id`,`username`,`refered_to`,`reference_id`,`timestamp`) VALUES ('$id','$username','$refered_to','$reference_code','$today')");
                 $ref_profit = ($total_balance*10)/100;
@@ -352,10 +352,10 @@ window.location.href = "reference.php";
                                         <div class="card-header">
                                             <h1 class="card-title text-dark fw-500">Refered Users</h1>
                                             <form action="" method="post">
-                                                <!-- <button type="submit"  class="btn btn-info btn-lg" name="refresh">
+                                                <button type="submit"  class="btn btn-info btn-lg" name="refresh">
                                                 <span class="glyphicon glyphicon-refresh" ></span> Refresh
-                                            </button> -->
-                                                <!-- <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p> -->
+                                            </button>
+                                                <p style="font-size:10px;color:red;"> Please Refresh For New Content To Update</p>
                                             </form>
                                         </div>
                                         <div class="card-body" style="overflow: scroll;">
@@ -372,7 +372,7 @@ window.location.href = "reference.php";
                                                 <tbody>
                                                     <?php
                                                         // $user_id= $_SESSION["user_id"];
-                                                        $res=mysqli_query($con,"SELECT * FROM reference WHERE user_id = '$id'");                                    // die();
+                                                        $res=mysqli_query($con,"SELECT * FROM reference WHERE `user_id` = '$id'");                                    // die();
                                                         $i=1;
                                                         while($row=mysqli_fetch_assoc($res)){
                                                         
@@ -388,7 +388,7 @@ window.location.href = "reference.php";
                                                                 </i></td>";
                                                                 }
                                                                 else{
-                                                                    echo "<td><h4>-</h4></td>";
+                                                                    echo "<td><h4>--</h4></td>";
                                                                 }
                                                             ?>
 

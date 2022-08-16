@@ -217,6 +217,15 @@
         .navbar-brand {
             display: flex !important;
         }
+        @media (max-width: 767px) {
+        .navbar.is-light.is-dark-mobile, .hero .navbar.is-fixed.is-dark {
+            background: #2d0275 !important;
+            transform: translate(-6%, 40%);
+        }
+        .navbar.is-light.is-dark-mobile#cloneNavbarMenu:not(:hover), .hero .navbar.is-fixed.is-dark#NavbarMenu:not(:hover) {
+            display: none;
+        }
+}
     </style>
 </head>
 
