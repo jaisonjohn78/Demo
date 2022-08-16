@@ -40,13 +40,14 @@
             $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 5 WHERE id = '$id'");
 
             if($amount_deduct) {
-                $msg = "Sucessfull";
+                
+             echo '<span style="color:white;>'.$msg = "Transaction Sucessfull <br> 5 PEC(Peracoin) added to your account".'</span>';
             } else {
-                $msg = "Unsucessfull";
+             echo '<span style="color:white;>'. $msg = "Transaction Unsucessfull".'</span>';
             }
 
         } else {
-            $msg = "Insufficient balance ";
+             echo '<span style="color:white;>'. $msg = "Insufficient balance ".'</span>';
         }
     
     }
@@ -61,13 +62,13 @@
             $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 15 WHERE id = '$id'");
 
             if($amount_deduct) {
-                $msg = "Sucessfull";
+                echo '<span style="color:white;>'.$msg = "Transaction Sucessfull <br> 15 PEC(Peracoin) added to your account".'</span>';
             } else {
-                $msg = "Unsucessfull";
+                echo '<span style="color:white;>'. $msg = "Transaction Unsucessfull".'</span>';
             }
 
         } else {
-            $msg = "Insufficient balance ";
+            echo '<span style="color:white;>'. $msg = "Insufficient balance ".'</span>';
         }
     
     }
@@ -82,13 +83,13 @@
             $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 40 WHERE id = '$id'");
 
             if($amount_deduct) {
-                $msg = "Sucessfull";
+                echo '<span style="color:white;>'.$msg = "Transaction Sucessfull <br> 40 PEC(Peracoin) added to your account".'</span>';
             } else {
-                $msg = "Unsucessfull";
+                echo '<span style="color:white;>'. $msg = "Transaction Unsucessfull".'</span>';
             }
 
         } else {
-            $msg = "Insufficient balance ";
+            echo '<span style="color:white;>'. $msg = "Insufficient balance ".'</span>';
         }
     
     }
@@ -103,13 +104,13 @@
             $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 60 WHERE id = '$id'");
 
             if($amount_deduct) {
-                $msg = "Sucessfull";
+                echo '<span style="color:white;>'.$msg = "Transaction Sucessfull <br> 60 PEC(Peracoin) added to your account".'</span>';
             } else {
-                $msg = "Unsucessfull";
+                echo '<span style="color:white;>'. $msg = "Transaction Unsucessfull".'</span>';
             }
 
         } else {
-            $msg = "Insufficient balance ";
+            echo '<span style="color:white;>'. $msg = "Insufficient balance ".'</span>';
         }
     
     }
@@ -124,13 +125,13 @@
             $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 100 WHERE id = '$id'");
 
             if($amount_deduct) {
-                $msg = "Sucessfull";
+                echo '<span style="color:white;>'.$msg = "Transaction Sucessfull <br> 100 PEC(Peracoin) added to your account".'</span>';
             } else {
-                $msg = "Unsucessfull";
+                echo '<span style="color:white;>'. $msg = "Transaction Unsucessfull".'</span>';
             }
 
         } else {
-            $msg = "Insufficient balance ";
+            echo '<span style="color:white;>'. $msg = "Insufficient balance ".'</span>';
         }
     
     }
@@ -145,13 +146,13 @@
             $amount_deduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_amount_sql ,`peracoin`=peracoin + 250 WHERE id = '$id'");
 
             if($amount_deduct) {
-                $msg = "Sucessfull";
+                echo '<span style="color:white;>'.$msg = "Transaction Sucessfull <br> 250 PEC(Peracoin) added to your account".'</span>';
             } else {
-                $msg = "Unsucessfull";
+                echo '<span style="color:white;>'. $msg = "Transaction Unsucessfull".'</span>';
             }
 
         } else {
-            $msg = "Insufficient balance ";
+            echo '<span style="color:white;>'. $msg = "Insufficient balance".'</span>';
         }
     
     }
@@ -170,12 +171,12 @@
          $current_user_sprice = floatval($current_user_sprice) - floatval($total_samaount);
          $amount_sdeduct = mysqli_query($con, "UPDATE `users` SET `amount`= $current_user_sprice ,`peracoin`= $peracoin_sql WHERE id = '$id'");
             if($amount_sdeduct){
-                $msg1 = "Sucessfull";
+                $msg1 = "<span style='color:white'>Transaction Sucessfull</span>";
             }else{
-                $msg1 = "Unsecessfull";
+                $msg1 = "<span style='color:white'>Transaction Unsecessfull</span>";
             }
         }else{
-            $msg1 = "insufficient balance";
+            $msg1 = "<span style='color:white'>Insufficient balance</span>";
         }
         // if true user data changes 
         // else infsuf.. msg1  
@@ -409,7 +410,7 @@
             <div class="container">
     
                 <div class="has-text-centered">
-                    <a class="button k-button k-secondary raised has-gradient is-fat is-bold rounded">
+                    <a href="#offers" class="button k-button k-secondary raised has-gradient is-fat is-bold rounded">
                         <span class="text">Buy Tokens 30% off</span>
                         <span class="front-gradient"></span>
                     </a>
@@ -547,15 +548,15 @@
                                     'is-active': activeTab === 'tab-1',
                                     '': activeTab != 'tab-1'
                                 }"><a href="javascript:void(0);">ICO</a></div>
-                                <div @click="switchTabs($event)" class="flying-child tab-2" data-tab="tab-2" :class="{
+                                <div @click="switchTabs($event)" class="flying-child tab-2 step4" data-tab="tab-2" :class="{
                                     'is-active': activeTab === 'tab-2',
                                     '': activeTab != 'tab-2'
                                 }"><a href="javascript:void(0);">RATES</a></div>
-                                <div @click="switchTabs($event)" class="flying-child tab-3" data-tab="tab-3" :class="{
+                                <div @click="switchTabs($event)" class="flying-child tab-3 step3" data-tab="tab-3" :class="{
                                     'is-active': activeTab === 'tab-3',
                                     '': activeTab != 'tab-3'
                                 }"><a href="javascript:void(0);">PROFIT</a></div>
-                                <div @click="switchTabs($event)" class="flying-child tab-4" data-tab="tab-4" :class="{
+                                <div @click="switchTabs($event)" class="flying-child tab-4 step5" data-tab="tab-4" :class="{
                                     'is-active': activeTab === 'tab-4',
                                     '': activeTab != 'tab-4'
                                 }"><a href="javascript:void(0);">GIVEAWAYS</a></div>
@@ -890,7 +891,7 @@ input[type=number]::-webkit-outer-spin-button {
                 <div class="divider is-centered"></div>
                 <!-- Title & subtitle -->
                 <h2 class="title is-light is-semibold has-text-centered is-spaced">Bulk Order</h2>
-                <h1><?php echo $msg ?></h1>
+                <center><h1><?php echo $msg ?></h1></center>
                 <h4 class="subtitle is-6 is-light has-text-centered is-compact"></h4>
     
                 <!-- Content wrapper -->
@@ -921,9 +922,9 @@ input[type=number]::-webkit-outer-spin-button {
                                     <!-- Member meta -->
                                     <div class="member-info">
                                         <h4 class="title is-light is-6 is-tight">5 coin</h4>
-                                        <div class="position">$ <?php echo 5 * $peracoin_rate; ?></div>
+                                      <a href="#offers"> <div class="position">$ <?php echo 5 * $peracoin_rate; ?></div>
                                         <p class="description"><button data-toggle="modal" data-target="#exampleModal"><b>BUY</b></button></p>
-                                    </div>
+                                    </div> </a>
                                 </div>
                             </div>
                         </div>
@@ -1375,7 +1376,7 @@ tour.addStep({
       action() {
         return this.next();
       },
-      text: 'Ohhh yeahh !'
+      text: 'SURE!!'
     }
   ],
   id: 'creating'
@@ -1410,7 +1411,7 @@ tour.addStep({
 
 tour.addStep({
   title: 'Hold Period',
-  text: `Newly redeemed coins will be on hold for 3 Months and....`,
+  text: `Newly redeemed coins will be on hold for 3 Months.`,
   attachTo: {
     element: '.step2',
     on: 'bottom'
@@ -1434,12 +1435,11 @@ tour.addStep({
 });
 
 tour.addStep({
-  title: 'nEXT',
-  text: `Creating a Shepherd tour is easy. too!\
-  Just create a \`Tour\` instance, and add as many steps as you want.`,
+  title: 'PROFIT',
+  text: `High Returns and 100% Trusted.`,
   attachTo: {
     element: '.step3',
-    on: 'bottom'
+    on: 'top'
   },
   buttons: [
     {
@@ -1461,11 +1461,10 @@ tour.addStep({
 
 
 tour.addStep({
-  title: 'nEXT',
-  text: `Creating a Shepherd tour is easy. too!\
-  Just create a \`Tour\` instance, and add as many steps as you want.`,
+  title: 'RATES',
+  text: `It will display the peracoin rates.`,
   attachTo: {
-    element: '.step1',
+    element: '.step4',
     on: 'bottom'
   },
   buttons: [
@@ -1480,13 +1479,76 @@ tour.addStep({
       action() {
         return this.next();
       },
-      text: 'Next'
+      text: 'NEXT'
     }
   ],
   id: 'creating'
 });
 
+
+tour.addStep({
+  title: 'GIVEAWAYS',
+  text: `It will display REWARDS & BOUNTIES.`,
+  attachTo: {
+    element: '.step5',
+    on: 'bottom'
+  },
+  buttons: [
+    {
+      action() {
+        return this.back();
+      },
+      classes: 'shepherd-button-secondary',
+      text: 'Back'
+    },
+    {
+      action() {
+        return this.next();
+      },
+      text: 'FINISH'
+    }
+  ],
+  id: 'creating'
+});
+    
+//   function setCookie(cname, cvalue, exdays) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+//   let expires = "expires="+ d.toUTCString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+//   }
+//   function getCookie(cname) {
+//   let name = cname + "=";
+//   let ca = document.cookie.split(';');
+//   for(let i = 0; i < ca.length; i++) {
+//     let c = ca[i];
+//     while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
+
+// function checkCookie() {
+//   let user = getCookie("username");
+//   if (user != "") {
+//     alert("Welcome again " + user);
+//   } else {
+//     user = prompt("Please enter your name:", "");
+//     if (user != "" && user != null) {
+//       setCookie("username", user, 365);
+//      
+//     }
+//   }
+  
+// }
+    
+
 tour.start();
+
     </script>
     <script>
     if ( window.history.replaceState ) {
